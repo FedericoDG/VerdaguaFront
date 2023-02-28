@@ -1,0 +1,130 @@
+import {Button, CardActions, CardContent, Typography, Grid, Box, Paper} from '@mui/material'
+import {DateTime} from 'luxon'
+import {useContext} from 'react'
+import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone'
+
+import formatCurrency from '../../utils/formatCurrency'
+import formatDate from '../../utils/formatDate'
+import appContext from '../../context/AppContext'
+
+const InstallmentCard = ({installment, setInitialValues2, flag, setChecked, checked, idx}) => {
+  const {handleScroll, bottom} = useContext(appContext)
+
+  const today = DateTime.now()
+  const firstExpiration = DateTime.fromISO(installment.fecha_primer_vencimiento)
+
+  const recargo =
+    Number(installment.valor_segundo_vencimiento) - Number(installment.valor_primer_vencimiento)
+
+  return (
+    <Paper
+      component="div"
+      sx={{
+        position: 'relative',
+        m: 1,
+        maxWidth: 360,
+        opacity: installment.estado === 'pagada' && '0.33',
+      }}
+    >
+      {installment.estado === 'pagada' && (
+        <Typography
+          color="secondary"
+          sx={{top: 50, left: 50, position: 'absolute', transform: 'rotate(-23deg)', opacity: 0.6}}
+          variant="h2"
+        >
+          PAGADA
+        </Typography>
+      )}
+      {checked && (
+        <LocalAtmTwoToneIcon
+          color="success"
+          sx={{top: 5, right: 5, position: 'absolute', fontSize: 32, opacity: 0.75}}
+        />
+      )}
+      <CardContent>
+        <Typography align="center" color="text.secondary">
+          {installment.numero === 0 ? 'seña' : `cuota n° ${installment.numero}`}
+        </Typography>
+        <Grid container spacing={1}>
+          <Grid
+            item
+            sx={{
+              opacity: today >= firstExpiration && installment.estado !== 'pagada' ? '0.33' : '1',
+            }}
+            xs={6}
+          >
+            <Typography component="div" variant="button">
+              1er. vencimiento
+            </Typography>
+            <Typography component="div" variant="body1">
+              Fecha: {formatDate(installment.fecha_primer_vencimiento)}
+            </Typography>
+            <Typography component="div" variant="body1">
+              Monto: {formatCurrency(installment.valor_primer_vencimiento)}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            sx={{
+              opacity: today < firstExpiration && installment.estado !== 'pagada' ? '0.33' : '1',
+            }}
+            xs={6}
+          >
+            <Typography component="div" variant="button">
+              2do. vencimiento
+            </Typography>
+            <Typography component="div" variant="body1">
+              Fecha: {formatDate(installment.fecha_segundo_vencimiento)}
+            </Typography>
+            <Typography component="div" variant="body1">
+              Monto: {formatCurrency(installment.valor_segundo_vencimiento)}
+            </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+      <CardActions>
+        <Button
+          fullWidth
+          disabled={flag}
+          size="small"
+          onClick={() => {
+            setChecked(idx)
+            handleScroll(bottom)
+            if (today >= firstExpiration) {
+              setInitialValues2((prev) => ({
+                ...prev,
+                cuota: {id: installment.id, estado: 'pagada'},
+                movimiento: {
+                  ...prev.movimiento,
+                  importe: installment.valor_segundo_vencimiento,
+                },
+                contratoIndividual: {
+                  pago: installment.valor_primer_vencimiento,
+                  recargo,
+                },
+              }))
+            }
+            if (today < firstExpiration) {
+              setInitialValues2((prev) => ({
+                ...prev,
+                cuota: {id: installment.id, estado: 'pagada'},
+                movimiento: {
+                  ...prev.movimiento,
+                  importe: installment.valor_primer_vencimiento,
+                },
+                contratoIndividual: {
+                  pago: installment.valor_primer_vencimiento,
+                  recargo: 0,
+                },
+              }))
+            }
+          }}
+        >
+          Pagar
+        </Button>
+      </CardActions>
+    </Paper>
+  )
+}
+
+export default InstallmentCard
