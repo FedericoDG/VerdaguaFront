@@ -104,7 +104,7 @@ const GeneralContractsForm = ({
           </Grid>
           <Grid item md={6} xs={12}>
             <Stack pb={{xs: 1, md: 0}} spacing={1}>
-              <Grid container marginTop={1}>
+              <Grid container>
                 <Grid item paddingRight={1} xs={4}>
                   <CustomTextField autoComplete="off" label="Grado" name="grado" />
                   <ErrorMessage component={FormError} name="grado" />
