@@ -6,6 +6,7 @@ import {
   esES,
   GridToolbarColumnsButton,
   GridToolbarContainer,
+  GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
 import {useContext, useEffect} from 'react'
@@ -26,6 +27,7 @@ const CustomToolbar = () => (
   <GridToolbarContainer>
     <GridToolbarFilterButton sx={{fontSize: 16}} />
     <GridToolbarColumnsButton sx={{fontSize: 16}} />
+    <GridToolbarExport sx={{fontSize: 16}} />
   </GridToolbarContainer>
 )
 

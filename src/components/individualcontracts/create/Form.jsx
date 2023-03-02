@@ -21,6 +21,7 @@ import CustomSelect from '../../form/CustomSelect'
 import CustomTextField from '../../form/CustomTextField'
 import formatCurrency from '../../../utils/formatCurrency'
 import formatDate from '../../../utils/formatDate'
+import appContext from '../../../context/AppContext'
 import FormError from '../../form/FormError'
 import Spinner from '../../Spinner'
 import useCreateIndividualContract from '../../../hooks/useCreateIndividualContract'
@@ -29,14 +30,11 @@ import installments from './installments'
 import SharesTable from './SharesTable'
 import SuggestedPrice from './SuggestedPrice'
 import validationSchemaGeneralContract, {validationSchemaValue} from './validationSchema'
-import appContext from '../../../context/AppContext'
 
 const IndividualContractsForm = ({
   generalContractCodes,
-  id,
   initialValues,
   passengerCodes,
-  setCode,
   setInitialValues,
   setSearchParams,
   step02,
@@ -62,14 +60,6 @@ const IndividualContractsForm = ({
     setValor,
     setCuotas,
   } = useCreateIndividualContract()
-
-  /*   useEffect(() => {
-    if (id) {
-      setCode(id)
-    } else {
-      setCode('') // OJO ACA2
-    }
-  }, [id]) */
 
   const resetForms = () => {
     setInitialValues({

@@ -32,6 +32,7 @@ const Payments = () => {
       recargo: 0,
     },
     destinatario: '',
+    DNI: '',
     domicilio: '',
   })
 
@@ -90,6 +91,7 @@ const Payments = () => {
         recargo: 0,
       },
       destinatario: '',
+      DNI: '',
       domicilio: '',
     })
     setInitialValues({

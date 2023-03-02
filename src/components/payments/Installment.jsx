@@ -1,4 +1,4 @@
-import {Button, CardActions, CardContent, Typography, Grid, Box, Paper} from '@mui/material'
+import {Button, CardActions, CardContent, Typography, Grid, Paper} from '@mui/material'
 import {DateTime} from 'luxon'
 import {useContext} from 'react'
 import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone'
@@ -7,7 +7,15 @@ import formatCurrency from '../../utils/formatCurrency'
 import formatDate from '../../utils/formatDate'
 import appContext from '../../context/AppContext'
 
-const InstallmentCard = ({installment, setInitialValues2, flag, setChecked, checked, idx}) => {
+const InstallmentCard = ({
+  installment,
+  setInitialValues2,
+  flag,
+  setChecked,
+  checked,
+  idx,
+  installments,
+}) => {
   const {handleScroll, bottom} = useContext(appContext)
 
   const today = DateTime.now()
@@ -15,6 +23,28 @@ const InstallmentCard = ({installment, setInitialValues2, flag, setChecked, chec
 
   const recargo =
     Number(installment.valor_segundo_vencimiento) - Number(installment.valor_primer_vencimiento)
+
+  let info = `pago de cuota n° ${installment.numero} de ${installments}. Saldo: ${formatCurrency(
+    Number(installment.contrato_individual.valor_contrato) -
+      Number(installment.contrato_individual.pagos) -
+      Number(installment.valor_primer_vencimiento)
+  )}. Contrato Individual: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
+    installment.contrato_individual.pasajero.nombre
+  } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
+    installment.contrato_individual.pasajero.documento
+  }`
+
+  if (idx === 0) {
+    info = `pago de seña. Saldo: ${formatCurrency(
+      Number(installment.contrato_individual.valor_contrato) -
+        Number(installment.contrato_individual.pagos) -
+        Number(installment.valor_primer_vencimiento)
+    )}. Contrato Individual: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
+      installment.contrato_individual.pasajero.nombre
+    } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
+      installment.contrato_individual.pasajero.documento
+    }`
+  }
 
   return (
     <Paper
@@ -97,11 +127,15 @@ const InstallmentCard = ({installment, setInitialValues2, flag, setChecked, chec
                 movimiento: {
                   ...prev.movimiento,
                   importe: installment.valor_segundo_vencimiento,
+                  info,
                 },
                 contratoIndividual: {
                   pago: installment.valor_primer_vencimiento,
                   recargo,
                 },
+                destinatario: `${installment.contrato_individual.pasajero.responsable.nombre} ${installment.contrato_individual.pasajero.responsable.apellido}`,
+                DNI: `${installment.contrato_individual.pasajero.responsable.documento}`,
+                domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.ciudad})`,
               }))
             }
             if (today < firstExpiration) {
@@ -111,11 +145,15 @@ const InstallmentCard = ({installment, setInitialValues2, flag, setChecked, chec
                 movimiento: {
                   ...prev.movimiento,
                   importe: installment.valor_primer_vencimiento,
+                  info,
                 },
                 contratoIndividual: {
                   pago: installment.valor_primer_vencimiento,
                   recargo: 0,
                 },
+                destinatario: `${installment.contrato_individual.pasajero.responsable.nombre} ${installment.contrato_individual.pasajero.responsable.apellido}`,
+                DNI: `${installment.contrato_individual.pasajero.responsable.documento}`,
+                domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.ciudad})`,
               }))
             }
           }}

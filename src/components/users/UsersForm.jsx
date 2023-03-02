@@ -1,20 +1,11 @@
 import {Button, Grid, Stack} from '@mui/material'
 import {ErrorMessage, Form, Formik} from 'formik'
-// import AddIcon from '@mui/icons-material/Add'
-// import {Link} from 'react-router-dom'
-// import styled from '@emotion/styled'
 
 import CustomSelect from '../form/CustomSelect'
 import CustomTextField from '../form/CustomTextField'
 import FormError from '../form/FormError'
 
 import validationSchema from './validationSchema'
-
-/* const LinkStyled = styled(Link)`
-  display: grid;
-  place-items: center;
-  color: inherit;
-` */
 
 const UsersForm = ({initialValues, setInitialValues, roles, postUser, putUser}) => {
   const resetValues = {
@@ -59,6 +50,7 @@ const UsersForm = ({initialValues, setInitialValues, roles, postUser, putUser}) 
               <CustomTextField label="Contraseña" name="password" />
               <ErrorMessage component={FormError} name="password" />
               <CustomSelect label="Rol del usuario" name="id_rol" options={roles.map((el) => el)} />
+              <ErrorMessage component={FormError} name="id_rol" />
             </Stack>
           </Grid>
         </Grid>

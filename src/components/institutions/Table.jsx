@@ -5,6 +5,7 @@ import {
   esES,
   GridToolbarColumnsButton,
   GridToolbarContainer,
+  GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
 import {useContext, useEffect} from 'react'
@@ -13,17 +14,18 @@ import DriveFileRenameOutlineTwoToneIcon from '@mui/icons-material/DriveFileRena
 import ContentPasteSearchTwoToneIcon from '@mui/icons-material/ContentPasteSearchTwoTone'
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'
 
+import appContext from '../../context/AppContext'
 import DeleteDialog from '../DeleteDialog'
 import useInstitutionsComponents from '../../hooks/useInstitutionsComponents'
 import Spinner from '../Spinner'
 
 import Modal from './Modal'
-import appContext from '../../context/AppContext'
 
 const CustomToolbar = () => (
   <GridToolbarContainer>
     <GridToolbarFilterButton sx={{fontSize: 16}} />
     <GridToolbarColumnsButton sx={{fontSize: 16}} />
+    <GridToolbarExport sx={{fontSize: 16}} />
   </GridToolbarContainer>
 )
 

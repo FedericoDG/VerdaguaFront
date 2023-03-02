@@ -37,7 +37,9 @@ const Responsibles = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Responsable</Typography>
+          <Typography sx={{marginBottom: 1}} variant="h6">
+            Responsable
+          </Typography>
           <Form
             initialValues={initialValues}
             responsible={responsible}

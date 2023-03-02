@@ -27,10 +27,18 @@ const GeneralContractsForm = ({
   const {postGeneralContract, putGeneralContract, resetValues} = useGeneralContractsComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
+    const valuesToUpperCase = {
+      ...value,
+      descripcion: value.descripcion.toUpperCase(),
+      grado: value.grado.toUpperCase(),
+      division: value.division.toUpperCase(),
+      turno: value.turno.toUpperCase(),
+    }
+
     if (initialValues?.id) {
-      putGeneralContract({...value, id_institucion: value.institucion.id})
+      putGeneralContract({...valuesToUpperCase, id_institucion: value.institucion.id})
     } else {
-      postGeneralContract({...value, id_institucion: value.institucion.id})
+      postGeneralContract({...valuesToUpperCase, id_institucion: value.institucion.id})
     }
     setInitialValues(resetValues)
     resetForm()
@@ -74,27 +82,27 @@ const GeneralContractsForm = ({
                 name="estado"
                 options={states}
               />
+              <Grid container>
+                <Grid item paddingRight={1} xs={6}>
+                  <CustomTextField
+                    autoComplete="off"
+                    label="Valor del contrato"
+                    name="valor_contrato"
+                  />
+                  <ErrorMessage component={FormError} name="valor_contrato" />
+                </Grid>
+                <Grid item xs={6}>
+                  <CustomTextField
+                    autoComplete="off"
+                    label="Cupo de pasajeros"
+                    name="asientos_totales"
+                  />
+                  <ErrorMessage component={FormError} name="asientos_totales" />
+                </Grid>
+              </Grid>
             </Stack>
           </Grid>
           <Grid item md={6} xs={12}>
-            <Grid container>
-              <Grid item paddingRight={1} xs={6}>
-                <CustomTextField
-                  autoComplete="off"
-                  label="Valor del contrato"
-                  name="valor_contrato"
-                />
-                <ErrorMessage component={FormError} name="valor_contrato" />
-              </Grid>
-              <Grid item xs={6}>
-                <CustomTextField
-                  autoComplete="off"
-                  label="Cupo de pasajeros"
-                  name="asientos_totales"
-                />
-                <ErrorMessage component={FormError} name="asientos_totales" />
-              </Grid>
-            </Grid>
             <Stack pb={{xs: 1, md: 0}} spacing={1}>
               <Grid container marginTop={1}>
                 <Grid item paddingRight={1} xs={4}>
@@ -120,6 +128,8 @@ const GeneralContractsForm = ({
                   variant: 'outlined',
                 }}
               />
+              <CustomTextField autoComplete="off" label="Enlace al Contrato" name="contract_url" />
+              <ErrorMessage component={FormError} name="contract_url" />
             </Stack>
           </Grid>
         </Grid>

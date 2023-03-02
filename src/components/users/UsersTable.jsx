@@ -6,6 +6,7 @@ import {
   esES,
   GridToolbarFilterButton,
   GridToolbarColumnsButton,
+  GridToolbarExport,
 } from '@mui/x-data-grid'
 import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone'
 import DriveFileRenameOutlineTwoToneIcon from '@mui/icons-material/DriveFileRenameOutlineTwoTone'
@@ -14,8 +15,10 @@ const CustomToolbar = () => (
   <GridToolbarContainer>
     <GridToolbarFilterButton sx={{fontSize: 16}} />
     <GridToolbarColumnsButton sx={{fontSize: 16}} />
+    <GridToolbarExport sx={{fontSize: 16}} />
   </GridToolbarContainer>
 )
+const calculaAlto = (largo) => 165 + 45 * Math.min(largo, 10)
 
 const UsersTable = ({data, setInitialValues, deleteUser}) => {
   const columns = [
@@ -86,7 +89,7 @@ const UsersTable = ({data, setInitialValues, deleteUser}) => {
   ]
 
   return (
-    <div style={{height: 565, width: '100%'}}>
+    <div style={{height: calculaAlto(data.length), width: '100%'}}>
       <DataGrid
         disableColumnMenu
         disableSelectionOnClick

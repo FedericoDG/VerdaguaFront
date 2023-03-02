@@ -17,7 +17,7 @@ const useResponsiblesComponents = () => {
   const [openModal, setOpenModal] = useState(false)
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
   const [activeData, setActiveData] = useState({})
-  const [field, setField] = useState('documento')
+  const [field, setField] = useState('apellido')
   const [document, setDocument] = useState(null)
   const [lastname, setLastname] = useState(null)
   const [all, setAll] = useState(null)

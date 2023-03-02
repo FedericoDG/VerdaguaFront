@@ -23,6 +23,7 @@ export const validationSchema2 = Yup.object({
     recargo: Yup.string().required('El contrato es requerido.'),
   }),
   destinatario: Yup.string().required('El destinatario es requerido.'),
+  DNI: Yup.string().required('El documento es requerido.'),
   domicilio: Yup.string(),
 })
 

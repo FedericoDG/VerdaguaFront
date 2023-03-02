@@ -14,10 +14,21 @@ const ResponsiblesForm = ({responsible, initialValues, setInitialValues}) => {
   const {postResponsible, putResponsible, resetValues} = useResponsiblesComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
+    const valuesToUpperCase = {
+      ...value,
+      nombre: value.nombre.toUpperCase(),
+      apellido: value.apellido.toUpperCase(),
+      ciudad: value.ciudad.toUpperCase(),
+      email: value.email.toLowerCase(),
+      provincia: value.provincia.toUpperCase(),
+      direccion: value.direccion.toUpperCase(),
+      info: value.info.toUpperCase(),
+    }
+
     if (initialValues?.id) {
-      putResponsible(value)
+      putResponsible(valuesToUpperCase)
     } else {
-      postResponsible(value)
+      postResponsible(valuesToUpperCase)
     }
     setInitialValues(resetValues)
     resetForm()
@@ -60,6 +71,7 @@ const ResponsiblesForm = ({responsible, initialValues, setInitialValues}) => {
                 name="fecha_nac"
               />
             </Stack>
+            <ErrorMessage component={FormError} name="fecha_nac" />
           </Grid>
           <Grid item md={4} xs={12}>
             <Stack pb={{xs: 1, md: 0}} spacing={1}>

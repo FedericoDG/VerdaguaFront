@@ -9,6 +9,7 @@ import useGetIndividualContracts, {
   useDeleteIndividualContract,
   useGetIndividualContractByCode,
   useGetIndividualContractByDocument,
+  useGetIndividualContractByLastname,
   useGetIndividualContractList,
   useNewImplements,
   usePutIndividualContract,
@@ -19,10 +20,11 @@ const useIndividualContractsComponents = () => {
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
   const [activeData, setActiveData] = useState({})
-  const [field, setField] = useState('documento')
+  const [field, setField] = useState('apellido')
   const [code, setCode] = useState(null)
   const [constractsList, setContractsList] = useState(null)
   const [document, setDocument] = useState(null)
+  const [apellido, setApellido] = useState(null)
   const [all, setAll] = useState(null)
 
   const resetValues = {
@@ -88,6 +90,9 @@ const useIndividualContractsComponents = () => {
   const {data: dataByDocument = [], isFetching: isFetchingDocument} =
     useGetIndividualContractByDocument(document, onSuccess, onError)
 
+  const {data: dataByLastname = [], isFetching: isFetchingLastname} =
+    useGetIndividualContractByLastname(apellido, onSuccess, onError)
+
   const {data: allData = [], isFetching: isFetchingAll} = useGetIndividualContracts(
     all,
     onSuccess,
@@ -105,14 +110,22 @@ const useIndividualContractsComponents = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault()
 
+    if (field === 'apellido') {
+      setAll(null) // OJO ACA2
+      setDocument(null) // OJO ACA2
+      setCode(null) // OJO ACA2
+      setApellido(e.target.elements.query.value)
+    }
     if (field === 'codigo') {
       setAll(null) // OJO ACA2
       setDocument(null) // OJO ACA2
+      setApellido(null) // OJO ACA2
       setCode(e.target.elements.query.value)
     }
     if (field === 'documento') {
       setAll(null) // OJO ACA2
       setCode(null) // OJO ACA2
+      setApellido(null) // OJO ACA2
       setDocument(e.target.elements.query.value)
     }
     e.target.elements.query.value = ''
@@ -121,14 +134,19 @@ const useIndividualContractsComponents = () => {
   return {
     activeData,
     allData,
-    dataArray: [...allData, ...dataByCode, ...dataByDocument, ...dataByList],
+    dataArray: [...allData, ...dataByCode, ...dataByDocument, ...dataByLastname, ...dataByList],
     dataByCode,
     field,
     handleCloseDeleteDialog,
     handleDelete,
     handleOpenDeleteDialog,
     handleSearchSubmit,
-    isFetching: isFetchingAll || isFetchingByCode || isFetchingDocument || isFetchingList,
+    isFetching:
+      isFetchingAll ||
+      isFetchingByCode ||
+      isFetchingDocument ||
+      isFetchingLastname ||
+      isFetchingList,
     code,
     openDeleteDialog,
     putIndividualContract,
@@ -140,6 +158,8 @@ const useIndividualContractsComponents = () => {
     newImplements,
     list,
     setContractsList,
+    setDocument,
+    setApellido,
   }
 }
 

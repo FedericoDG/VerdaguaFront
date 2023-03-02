@@ -65,6 +65,8 @@ const GeneratePayment = ({initialValues2, setInitialValues2, setShowBill, form2R
                   <Stack pb={{xs: 1, md: 0}} spacing={1}>
                     <CustomTextField autoComplete="off" label="Destinatario" name="destinatario" />
                     <ErrorMessage component={FormError} name="destinatario" />
+                    <CustomTextField autoComplete="off" label="DNI" name="DNI" />
+                    <ErrorMessage component={FormError} name="DNI" />
                     <CustomTextField autoComplete="off" label="Domicilio" name="domicilio" />
                     <ErrorMessage component={FormError} name="domicilio" />
                   </Stack>
@@ -72,10 +74,11 @@ const GeneratePayment = ({initialValues2, setInitialValues2, setShowBill, form2R
                 <Grid item xs={6}>
                   <Stack direction="row" pb={{xs: 1, md: 0}} spacing={1}>
                     <CustomTextField
+                      disabled
                       multiline
                       autoComplete="off"
                       label="Concepto"
-                      minRows={3}
+                      minRows={5}
                       name="movimiento.info"
                     />
                     <ErrorMessage component={FormError} name="movimiento.info" />

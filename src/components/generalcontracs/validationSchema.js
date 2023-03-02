@@ -16,6 +16,7 @@ const validationSchema = Yup.object({
     label: Yup.string().required('La institución es requerida.'),
     id: Yup.string().required('La institución es requerida.'),
   }),
+  contract_url: Yup.string(),
   estado: Yup.string().required('El estado es requerido.'),
 })
 

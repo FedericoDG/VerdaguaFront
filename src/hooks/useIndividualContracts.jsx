@@ -10,6 +10,8 @@ const getIndividualContractByCode = (code) =>
   getRequest(`/contracts/individual/search?code=${code}`)
 const getIndividualContractByDocument = (document) =>
   getRequest(`/contracts/individual/search?document=${document}`)
+const getIndividualContractByLastname = (lastname) =>
+  getRequest(`/contracts/individual/search?lastname=${lastname}`)
 const getIndividualContractList = (list) => getRequest(`/contracts/individual/search?list=${list}`)
 const getInstallments = (id) => getRequest(`/contracts/individual/installments/${id}`)
 const createIndividualContract = (contract) => postRequest('/contracts/individual/', contract)
@@ -73,6 +75,16 @@ export const useGetIndividualContractByCode = (code, onSuccess, onError) =>
 export const useGetIndividualContractByDocument = (document, onSuccess, onError) =>
   useQuery(['individualContracts', document], () => getIndividualContractByDocument(document), {
     enabled: !!document,
+    retry: 1,
+    refetchOnWindowFocus: false,
+    onSuccess,
+    onError,
+    select: (data) => data.data,
+  })
+
+export const useGetIndividualContractByLastname = (lastname, onSuccess, onError) =>
+  useQuery(['individualContracts', lastname], () => getIndividualContractByLastname(lastname), {
+    enabled: !!lastname,
     retry: 1,
     refetchOnWindowFocus: false,
     onSuccess,

@@ -6,15 +6,17 @@ import {
   esES,
   GridToolbarColumnsButton,
   GridToolbarContainer,
+  GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
 import {useContext, useEffect} from 'react'
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone'
 import DriveFileRenameOutlineTwoToneIcon from '@mui/icons-material/DriveFileRenameOutlineTwoTone'
 import ContentPasteSearchTwoToneIcon from '@mui/icons-material/ContentPasteSearchTwoTone'
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'
+import AttachFileIcon from '@mui/icons-material/AttachFile'
 
 import appContext from '../../context/AppContext'
 import DeleteDialog from '../DeleteDialog'
@@ -28,6 +30,7 @@ const CustomToolbar = () => (
   <GridToolbarContainer>
     <GridToolbarFilterButton sx={{fontSize: 16}} />
     <GridToolbarColumnsButton sx={{fontSize: 16}} />
+    <GridToolbarExport sx={{fontSize: 16}} />
   </GridToolbarContainer>
 )
 
@@ -158,7 +161,7 @@ const Table = ({generalContract, setInitialValues}) => {
       headerName: 'Acciones',
       align: 'center',
       headerAlign: 'center',
-      width: 200,
+      width: 260,
       sortable: false,
       renderCell: (obj) => (
         <>
@@ -201,6 +204,35 @@ const Table = ({generalContract, setInitialValues}) => {
             </span>
           </Tooltip>
 
+          <Tooltip title="Ver PDF del Contrato">
+            <span>
+              {obj.row.contract_url ? (
+                <Link sx={{color: 'inherit'}} target="_blank" to={obj.row.contract_url} disabled>
+                  <Button
+                    disableElevation
+                    color="inherit"
+                    sx={{minWidth: 0}}
+                    type="submit"
+                    variant="text"
+                  >
+                    <AttachFileIcon sx={{fontSize: 32}} />
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  disableElevation
+                  disabled
+                  color="inherit"
+                  sx={{minWidth: 0}}
+                  type="submit"
+                  variant="text"
+                >
+                  <AttachFileIcon sx={{fontSize: 32}} />
+                </Button>
+              )}
+            </span>
+          </Tooltip>
+
           <Tooltip title="Editar contrato general">
             <span>
               <Button
@@ -217,6 +249,7 @@ const Table = ({generalContract, setInitialValues}) => {
                       id: obj.row.institucion.id,
                       label: `${obj.row.institucion.nombre} - ${obj.row.institucion.direccion}, ${obj.row.institucion.localidad}`,
                     },
+                    contract_url: obj.row.contract_url || '',
                   })
                   handleScroll(top)
                 }}

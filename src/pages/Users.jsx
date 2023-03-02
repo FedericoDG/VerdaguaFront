@@ -38,7 +38,9 @@ const Users = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Usuario</Typography>
+          <Typography sx={{marginBottom: 1}} variant="h6">
+            Usuario
+          </Typography>
 
           {!roles ? (
             <Spinner height={251} />

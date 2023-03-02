@@ -15,10 +15,17 @@ const PassengersForm = ({initialValues, setInitialValues, passenger, responsible
   const {postPassenger, putPassenger, resetValues} = usePassengersComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
+    const valuesToUpperCase = {
+      ...value,
+      nombre: value.nombre.toUpperCase(),
+      apellido: value.apellido.toUpperCase(),
+      obs_medicas: value.obs_medicas.toUpperCase(),
+    }
+
     if (initialValues?.id) {
-      putPassenger({...value, documento_responsable: value.documento_responsable?.id})
+      putPassenger({...valuesToUpperCase, documento_responsable: value.documento_responsable?.id})
     } else {
-      postPassenger({...value, documento_responsable: value.documento_responsable?.id})
+      postPassenger({...valuesToUpperCase, documento_responsable: value.documento_responsable?.id})
     }
     setInitialValues(resetValues)
     resetForm()
@@ -66,6 +73,7 @@ const PassengersForm = ({initialValues, setInitialValues, passenger, responsible
                 label="Fecha de Nacimiento"
                 name="fecha_nac"
               />
+              <ErrorMessage component={FormError} name="fecha_nac" />
             </Stack>
           </Grid>
           <Grid item md={6} xs={12}>

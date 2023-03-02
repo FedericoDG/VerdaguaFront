@@ -41,6 +41,8 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
 
   const today = new Date()
 
+  const splitInfo = initialValues2.movimiento.info.split('.')
+
   return (
     <>
       <Box alignItems="center" display="flex" my={2}>
@@ -70,6 +72,14 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
               <Typography align="center" sx={{display: 'block'}} variant="button">
                 Agencia de Turismo S.R.L.
               </Typography>
+              <Stack direction="row" display="flex" justifyContent="center">
+                <Typography align="center" sx={{display: 'block', marginRight: 1}} variant="button">
+                  CUIT: 30-28126367-7
+                </Typography>
+                <Typography align="center" sx={{display: 'block', marginLeft: 1}} variant="button">
+                  LEGAJO: 123456
+                </Typography>
+              </Stack>
               <Typography align="center" sx={{display: 'block'}} variant="button">
                 San Martín 158 - Córdoba, Córdoba
               </Typography>
@@ -83,7 +93,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
                 <Typography variant="h5">RECIBO</Typography>
                 <Typography variant="h6">N° 123456789</Typography>
                 <Box>
-                  <Typography align="right" variant="body1" sx={{marginTop: 8}}>
+                  <Typography align="right" sx={{marginTop: 8}} variant="body1">
                     FECHA: {formatDate(today)}
                   </Typography>
                 </Box>
@@ -92,16 +102,19 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
           </Grid>
         </Grid>
         <div style={{marginTop: ' 16px', marginBottom: ' 16px'}}>
-          <Typography variant="h6" sx={{fontSize: 18}}>
+          <Typography sx={{fontSize: 18}} variant="h6">
             Señor/es: {initialValues2.destinatario}
           </Typography>
-          <Typography variant="h6" sx={{fontSize: 18}}>
+          <Typography sx={{fontSize: 18}} variant="h6">
+            DNI: {initialValues2.DNI}
+          </Typography>
+          <Typography sx={{fontSize: 18}} variant="h6">
             Domicilio: {initialValues2.domicilio}
           </Typography>
         </div>
         <div style={{border: '1px solid #888888', padding: '16px'}}>
           <div style={{minHeight: '250px'}}>
-            <Typography variant="body1" sx={{fontSize: 18}}>
+            <Typography sx={{fontSize: 18}} variant="body1">
               Recibí la suma de: {formatCurrency(initialValues2.movimiento.importe)} (
               {NumeroALetras(initialValues2.movimiento.importe, {
                 plural: 'PESOS',
@@ -109,10 +122,20 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
                 centPlural: 'CENTAVOS',
                 centSingular: 'CENTAVO',
               })}
-              ), en concepto de {initialValues2.movimiento.info}.
+              ), en concepto de {splitInfo[0].toString()}.
+            </Typography>
+            <Typography sx={{fontSize: 18}} variant="body1">
+              {splitInfo[1].toString()}
+              {splitInfo[2].toString()}.
+            </Typography>
+            <Typography sx={{fontSize: 18}} variant="body1">
+              {splitInfo[3].toString()}
+            </Typography>
+            <Typography sx={{fontSize: 18}} variant="body1">
+              {splitInfo[4].toString()}
             </Typography>
           </div>
-          <Typography variant="body1" sx={{fontSize: 18}}>
+          <Typography sx={{fontSize: 18}} variant="body1">
             Forma de pago: {initialValues2.movimiento.forma_pago}
           </Typography>
         </div>

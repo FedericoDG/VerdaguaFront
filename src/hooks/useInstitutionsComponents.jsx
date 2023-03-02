@@ -43,7 +43,7 @@ const useInstitutionsComponents = () => {
       code = 'warning'
     }
 
-    enqueueSnackbar(`Responsables recuperados: ${res.length}`, {
+    enqueueSnackbar(`Instituciones recuperadas: ${res.length}`, {
       variant: code,
       autoHideDuration: 3000,
       anchorOrigin: {

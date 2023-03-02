@@ -15,17 +15,16 @@ import {
 } from '@mui/material'
 import {DateTime} from 'luxon'
 import {nanoid} from 'nanoid'
+import {useNavigate} from 'react-router-dom'
+import {useQueryClient} from 'react-query'
 import {useRef} from 'react'
+import {useSnackbar} from 'notistack'
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone'
 import ReactToPrint from 'react-to-print'
 
 import formatCurrency from '../../../utils/formatCurrency'
 import formatDate from '../../../utils/formatDate'
-import useListIndividualContract from '../../../hooks/useListIndividualContract'
 import {usePostIndividualContract} from '../../../hooks/useIndividualContracts'
-import {useSnackbar} from 'notistack'
-import {useQueryClient} from 'react-query'
-import {useNavigate} from 'react-router-dom'
 
 const SharesTable = ({
   contratoGeneral,

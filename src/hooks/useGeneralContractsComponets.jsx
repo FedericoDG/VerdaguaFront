@@ -43,6 +43,7 @@ const useGeneralContractsComponents = () => {
     division: '',
     turno: '',
     institucion: '',
+    contract_url: '',
     estado: 'vigente',
   }
 

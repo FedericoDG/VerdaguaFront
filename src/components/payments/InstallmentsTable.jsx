@@ -28,6 +28,7 @@ const InstallmentsTable = ({installments, isFetchingInstallments, setInitialValu
               flag={idx !== findOne}
               idx={idx}
               installment={installment}
+              installments={installments.length}
               setChecked={setChecked}
               setInitialValues2={setInitialValues2}
             />

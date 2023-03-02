@@ -12,10 +12,17 @@ const InstitutionForm = ({initialValues, institution, setInitialValues}) => {
   const {postInstitution, putInstitution, resetValues} = useInstitutionsComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
+    const valuesToUpperCase = {
+      ...value,
+      nombre: value.nombre.toUpperCase(),
+      direccion: value.direccion.toUpperCase(),
+      localidad: value.localidad.toUpperCase(),
+    }
+
     if (initialValues?.id) {
-      putInstitution(value)
+      putInstitution(valuesToUpperCase)
     } else {
-      postInstitution(value)
+      postInstitution(valuesToUpperCase)
     }
     setInitialValues(resetValues)
     resetForm()

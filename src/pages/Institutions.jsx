@@ -31,7 +31,9 @@ const Institutions = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Institución</Typography>
+          <Typography sx={{marginBottom: 1}} variant="h6">
+            Institución
+          </Typography>
           {id && !institution ? (
             <Spinner height={187} />
           ) : (

@@ -19,6 +19,7 @@ const GeneralContracts = () => {
     division: '',
     turno: '',
     institucion: '',
+    contract_url: '',
     estado: 'vigente',
   })
 
@@ -39,7 +40,9 @@ const GeneralContracts = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Contrato General</Typography>
+          <Typography sx={{marginBottom: 1}} variant="h6">
+            Contrato General
+          </Typography>
 
           {!institutionCodes || (id && !generalContract) ? (
             <Spinner height={251} />

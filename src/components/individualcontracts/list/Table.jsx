@@ -17,6 +17,7 @@ import {
   esES,
   GridToolbarColumnsButton,
   GridToolbarContainer,
+  GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
 import {useContext, useEffect} from 'react'
@@ -41,6 +42,7 @@ const CustomToolbar = () => (
   <GridToolbarContainer>
     <GridToolbarFilterButton sx={{fontSize: 16}} />
     <GridToolbarColumnsButton sx={{fontSize: 16}} />
+    <GridToolbarExport sx={{fontSize: 16}} />
   </GridToolbarContainer>
 )
 
@@ -71,6 +73,8 @@ const Table = ({
     setCode,
     list,
     setContractsList,
+    setDocument,
+    setApellido,
   } = useIndividualContractsComponents()
 
   useEffect(() => {
@@ -320,6 +324,7 @@ const Table = ({
               value={field}
               onChange={(e) => setField(e.target.value)}
             >
+              <MenuItem value="apellido">apellido</MenuItem>
               <MenuItem value="documento">documento</MenuItem>
               <MenuItem value="codigo">código contrato</MenuItem>
             </Select>
@@ -344,6 +349,8 @@ const Table = ({
               variant="contained"
               onClick={() => {
                 setCode(null) // OJO ACA2
+                setDocument(null) // OJO ACA2
+                setApellido(null) // OJO ACA2
                 setAll('all')
                 setContractsList(null)
               }}

@@ -36,7 +36,9 @@ const Passengers = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography variant="h6">Pasajero</Typography>
+          <Typography sx={{marginBottom: 1}} variant="h6">
+            Pasajero
+          </Typography>
           {!responsibleDocuments || (id && !passenger) ? (
             <Spinner height={315} />
           ) : (

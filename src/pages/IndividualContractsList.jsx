@@ -66,7 +66,7 @@ const IndividualContractsList = () => {
             flexDirection: 'column',
           }}
         >
-          <Typography mb={2} variant="h6">
+          <Typography mb={2} sx={{marginBottom: 1}} variant="h6">
             Contratos Individuales
           </Typography>
           <Table
