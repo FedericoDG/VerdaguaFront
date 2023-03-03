@@ -33,6 +33,7 @@ const GeneralContractsForm = ({
       grado: value.grado.toUpperCase(),
       division: value.division.toUpperCase(),
       turno: value.turno.toUpperCase(),
+      contract_url: value.contract_url.toLowerCase(),
     }
 
     if (initialValues?.id) {

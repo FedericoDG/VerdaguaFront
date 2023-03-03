@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 import {Avatar, Box, Button, Grid, Stack, Typography} from '@mui/material'
-import {ErrorMessage, Formik, Form} from 'formik'
-import {useContext} from 'react'
+import {ErrorMessage, Formik, Form, useFormikContext} from 'formik'
+import {useContext, useEffect, useState} from 'react'
 
 import appContext from '../../context/AppContext'
 import CustomTextField from '../form/CustomTextField'
@@ -12,8 +13,35 @@ import {validationSchema2} from './validationSchema'
 const operation = [{id: 'ingreso'}, {id: 'egreso'}]
 const type = [{id: 'efectivo'}, {id: 'debito'}, {id: 'credito'}, {id: 'transferencia'}]
 
+const CheckOperationTypes = ({setDisableDiscount, setDisableCharge}) => {
+  const {values} = useFormikContext()
+
+  useEffect(() => {
+    if (Number(values.movimiento.recargo) > 0) {
+      return setDisableDiscount(true)
+    }
+    if (Number(values.movimiento.descuento) > 0) {
+      return setDisableCharge(true)
+    }
+
+    setDisableDiscount(false)
+
+    return setDisableCharge(false)
+  }, [values])
+
+  return null
+}
+
 const GeneratePayment = ({initialValues2, setInitialValues2, setShowBill, form2Ref, hardReset}) => {
-  const {bottom, handleScroll} = useContext(appContext)
+  const {
+    bottom,
+    handleScroll,
+    user: {id_rol},
+  } = useContext(appContext)
+
+  const [disableDiscount, setDisableDiscount] = useState(false)
+  const [disableCharge, setDisableCharge] = useState(false)
+
   const handleFormSubmit = (obj) => {
     setInitialValues2(obj)
     setShowBill(true)
@@ -58,6 +86,35 @@ const GeneratePayment = ({initialValues2, setInitialValues2, setShowBill, form2R
                 <CustomSelect label="Forma de pago" name="movimiento.forma_pago" options={type} />
                 <ErrorMessage component={FormError} name="movimiento.forma_pago" />
               </Stack>
+            </Grid>
+            <Grid item md={12} xs={12}>
+              <Stack direction="row" pb={{xs: 1, md: 0}} spacing={1}>
+                <CustomTextField
+                  autoComplete="off"
+                  disabled={id_rol > 2 || disableCharge}
+                  label="Recargo a aplicar (en pesos)"
+                  name="movimiento.recargo"
+                />
+                <ErrorMessage component={FormError} name="movimiento.recargo" />
+                <CustomTextField
+                  autoComplete="off"
+                  disabled={id_rol > 2 || disableDiscount}
+                  label="Descuento a aplicar (en pesos)"
+                  name="movimiento.descuento"
+                />
+                <ErrorMessage component={FormError} name="movimiento.descuento" />
+                <CustomTextField
+                  autoComplete="off"
+                  disabled={id_rol > 2}
+                  label="Descripción Recargo/Descuento"
+                  name="movimiento.diferencia_descripcion"
+                />
+                <ErrorMessage component={FormError} name="movimiento.diferencia_descripcion" />
+              </Stack>
+              <CheckOperationTypes
+                setDisableCharge={setDisableCharge}
+                setDisableDiscount={setDisableDiscount}
+              />
             </Grid>
             <Grid item md={12} xs={12}>
               <Grid container spacing={1}>

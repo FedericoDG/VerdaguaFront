@@ -95,7 +95,7 @@ const Table = ({data, isFetching}) => {
               color="error"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 100, color: '#000000'}}
+              sx={{minWidth: 100, color: '#ffffff'}}
             />
           )}
         </div>

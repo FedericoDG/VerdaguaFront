@@ -70,18 +70,18 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
             <Box sx={{borderWidth: 2, borderColor: '#0000', borderStyle: 'solid'}}>
               <img alt="logo" src={logo} style={{display: 'block', margin: 'auto'}} />
               <Typography align="center" sx={{display: 'block'}} variant="button">
-                Agencia de Turismo S.R.L.
+                Stella M. Romano y Asoc. S.R.L.
               </Typography>
               <Stack direction="row" display="flex" justifyContent="center">
                 <Typography align="center" sx={{display: 'block', marginRight: 1}} variant="button">
-                  CUIT: 30-28126367-7
+                  CUIT: 30-70990854-1
                 </Typography>
                 <Typography align="center" sx={{display: 'block', marginLeft: 1}} variant="button">
-                  LEGAJO: 123456
+                  LEGAJO: 13.149
                 </Typography>
               </Stack>
               <Typography align="center" sx={{display: 'block'}} variant="button">
-                San Martín 158 - Córdoba, Córdoba
+                Alberdi 1008 - Posadas, Misiones
               </Typography>
             </Box>
           </Grid>
@@ -90,7 +90,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
               <Box
                 sx={{borderWidth: 2, borderColor: '#0000', borderStyle: 'solid', paddingLeft: 5}}
               >
-                <Typography variant="h5">RECIBO</Typography>
+                <Typography variant="h5">RECIBO DE PAGO</Typography>
                 <Typography variant="h6">N° 123456789</Typography>
                 <Box>
                   <Typography align="right" sx={{marginTop: 8}} variant="body1">
@@ -115,13 +115,24 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
         <div style={{border: '1px solid #888888', padding: '16px'}}>
           <div style={{minHeight: '250px'}}>
             <Typography sx={{fontSize: 18}} variant="body1">
-              Recibí la suma de: {formatCurrency(initialValues2.movimiento.importe)} (
-              {NumeroALetras(initialValues2.movimiento.importe, {
-                plural: 'PESOS',
-                singular: 'PESO',
-                centPlural: 'CENTAVOS',
-                centSingular: 'CENTAVO',
-              })}
+              Recibí la suma de:{' '}
+              {formatCurrency(
+                Number(initialValues2.movimiento.importe) +
+                  Number(initialValues2.movimiento.recargo) -
+                  Number(initialValues2.movimiento.descuento)
+              )}{' '}
+              (
+              {NumeroALetras(
+                Number(initialValues2.movimiento.importe) +
+                  Number(initialValues2.movimiento.recargo) -
+                  Number(initialValues2.movimiento.descuento),
+                {
+                  plural: 'PESOS',
+                  singular: 'PESO',
+                  centPlural: 'CENTAVOS',
+                  centSingular: 'CENTAVO',
+                }
+              )}
               ), en concepto de {splitInfo[0].toString()}.
             </Typography>
             <Typography sx={{fontSize: 18}} variant="body1">
@@ -142,9 +153,64 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
         <Grid container justifyContent="space-between" style={{borderBottom: '1px solid black'}}>
           <Grid item style={{borderRight: '1px solid black'}} xs={6}>
             <Box sx={{borderWidth: 2, borderColor: '#0000', borderStyle: 'solid'}}>
-              <Typography sx={{marginTop: 9}} variant="h5">
-                Total: {formatCurrency(initialValues2.movimiento.importe)}
-              </Typography>
+              <Stack direction="row" display="flex" justifyContent="space-between" mx={1}>
+                <Typography sx={{marginTop: 1}} variant="body1">
+                  SubTotal:
+                </Typography>
+                <Typography sx={{marginTop: 1}} variant="body1">
+                  {formatCurrency(Number(initialValues2.movimiento.importe))}
+                </Typography>
+              </Stack>
+              {Number(initialValues2.movimiento.recargo) > 0 && (
+                <>
+                  <Stack direction="row" display="flex" justifyContent="space-between" mx={1}>
+                    <Typography sx={{marginTop: 1}} variant="body1">
+                      Recargo:
+                    </Typography>
+                    <Typography sx={{marginTop: 1}} variant="body1">
+                      {formatCurrency(Number(initialValues2.movimiento.recargo))}
+                    </Typography>
+                  </Stack>
+                  <Typography
+                    align="right"
+                    sx={{marginTop: 1, marginRight: 1, display: 'block'}}
+                    variant="caption"
+                  >
+                    {initialValues2.movimiento.diferencia_descripcion}
+                  </Typography>
+                </>
+              )}
+              {Number(initialValues2.movimiento.descuento) > 0 && (
+                <>
+                  <Stack direction="row" display="flex" justifyContent="space-between" mx={1}>
+                    <Typography sx={{marginTop: 1}} variant="body1">
+                      Descuento:
+                    </Typography>
+                    <Typography sx={{marginTop: 1}} variant="body1">
+                      {formatCurrency(Number(initialValues2.movimiento.descuento * -1))}
+                    </Typography>
+                  </Stack>
+                  <Typography
+                    align="right"
+                    sx={{marginTop: 1, marginRight: 1, display: 'block'}}
+                    variant="caption"
+                  >
+                    {initialValues2.movimiento.diferencia_descripcion}
+                  </Typography>
+                </>
+              )}
+              <Stack direction="row" display="flex" justifyContent="space-between" mx={1}>
+                <Typography sx={{marginTop: 1}} variant="h6">
+                  TOTAL:
+                </Typography>
+                <Typography sx={{marginTop: 1}} variant="h6">
+                  {formatCurrency(
+                    Number(initialValues2.movimiento.importe) +
+                      Number(initialValues2.movimiento.recargo) -
+                      Number(initialValues2.movimiento.descuento)
+                  )}
+                </Typography>
+              </Stack>
             </Box>
           </Grid>
           <Grid item style={{paddingLeft: '16px'}} xs={6}>

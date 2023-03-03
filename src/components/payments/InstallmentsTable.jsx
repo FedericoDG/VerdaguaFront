@@ -6,7 +6,12 @@ import Spinner from '../Spinner'
 
 import InstallmentCard from './Installment'
 
-const InstallmentsTable = ({installments, isFetchingInstallments, setInitialValues2}) => {
+const InstallmentsTable = ({
+  installments,
+  isFetchingInstallments,
+  setInitialValues2,
+  initialValues2,
+}) => {
   const findOne = installments?.findIndex((el) => el.estado === 'pendiente')
   const [checked, setChecked] = useState(null)
 
@@ -31,6 +36,7 @@ const InstallmentsTable = ({installments, isFetchingInstallments, setInitialValu
               installments={installments.length}
               setChecked={setChecked}
               setInitialValues2={setInitialValues2}
+              initialValues2={initialValues2}
             />
           ))}
       </Grid>
