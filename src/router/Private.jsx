@@ -1,4 +1,4 @@
-import {lazy, Suspense} from 'react'
+// import {lazy, Suspense} from 'react'
 import {Routes, Route} from 'react-router-dom'
 
 import Balance from '../pages/Balance'
@@ -11,6 +11,7 @@ import Passengers from '../pages/Passengers'
 import Payments from '../pages/Payments'
 import Responsibles from '../pages/Responsibles'
 import Users from '../pages/Users'
+import Settings from '../pages/Settings'
 
 /* const GeneralContracts = lazy(() => import('../pages/GeneralContracts'))
 const Home = lazy(() => import('../pages/Home'))
@@ -35,6 +36,7 @@ const Private = () => (
     <Route element={<Payments />} path="/payments" />
     <Route element={<Responsibles />} path="/responsible-seniors" />
     <Route element={<Users />} path="/users" />
+    <Route element={<Settings />} path="/settings" />
   </Routes>
   /*  </Suspense> */
 )

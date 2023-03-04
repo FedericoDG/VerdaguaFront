@@ -4,12 +4,12 @@ import {useSnackbar} from 'notistack'
 import {getRequest, putRequest} from '../services/httpRequest'
 
 const getSettings = () => getRequest('/settings')
-const editSettings = (responsible) =>
-  putRequest(`/contracts/general/${responsible.id}`, responsible)
+const editSettings = (settings) => putRequest(`/settings/`, settings)
 
 // GET SETTINGES
-const useGetSettings = (all, onSuccess, onError) =>
+const useGetSettings = (onSuccess, onError) =>
   useQuery(['settings'], () => getSettings(), {
+    refetchOnWindowFocus: false,
     onSuccess,
     onError,
     select: (data) => data.data,

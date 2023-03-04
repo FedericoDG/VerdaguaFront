@@ -154,7 +154,7 @@ export const adminListItems = (
 export const superListItems = (
   <NavLink
     style={({isActive}) => (isActive ? styles.active : styles.inactive)}
-    to="/dashboard/tour-packages"
+    to="/dashboard/settings"
   >
     <ListItemButton>
       <ListItemIcon>

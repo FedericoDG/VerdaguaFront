@@ -24,7 +24,7 @@ const AppProvider = ({children}) => {
   }, [user])
 
   useEffect(() => {
-    if (user.logged) {
+    if (user.logged && user.rol.name !== 'passenger') {
       getRequest('/settings/').then((res) => {
         dispatchSettings(loginSettingsAction(res.data))
       })
@@ -34,6 +34,7 @@ const AppProvider = ({children}) => {
   const toggleDrawer = () => {
     setOpen(!open)
   }
+
   const handleScroll = (ref) => {
     setTimeout(() => {
       ref.current?.scrollIntoView({behavior: 'smooth'})

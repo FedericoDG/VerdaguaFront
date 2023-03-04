@@ -9,6 +9,7 @@ import styled from '@emotion/styled'
 import {logoutAction} from '../context/actions/auth'
 import {logoutSettingsAction} from '../context/actions/settings'
 import appContext from '../context/AppContext'
+import {useNavigate} from 'react-router-dom'
 
 const drawerWidth = 260
 
@@ -36,7 +37,10 @@ const Navbar = ({open, toggleDrawer}) => {
 
   const {enqueueSnackbar} = useSnackbar()
 
+  const navigate = useNavigate()
+
   const logout = () => {
+    navigate('/backoffice')
     dispatch(logoutAction())
     dispatchSettings(logoutSettingsAction())
 

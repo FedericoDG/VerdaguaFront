@@ -29,10 +29,10 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
   })
 
   const fede = () => {
-    setDisabled(false)
+    handlePrint()
     setTimeout(() => {
-      handlePrint()
-    }, 1000)
+      setDisabled(false)
+    }, 2000)
   }
 
   const onSuccess = (res) => {
