@@ -29,6 +29,7 @@ const Payments = () => {
       descuento: '0',
       recargo: '0',
       diferencia_descripcion: '',
+      info_tarjeta_transferencia: '',
     },
     contratoIndividual: {
       pago: 0,
@@ -91,6 +92,7 @@ const Payments = () => {
         descuento: '0',
         recargo: '0',
         diferencia_descripcion: '',
+        info_tarjeta_transferencia: '',
       },
       contratoIndividual: {
         pago: 0,

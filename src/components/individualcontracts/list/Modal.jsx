@@ -200,6 +200,7 @@ const Modal = ({activeData, handleClose, open}) => {
                       <TableCell align="center">Fecha 1er. Venc.</TableCell>
                       <TableCell align="center">Valor 2do. Venc.</TableCell>
                       <TableCell align="center">Fecha 2do. Venc.</TableCell>
+                      <TableCell align="center">Fecha PAGO</TableCell>
                     </TableRow>
                   </TableHead>
                   {installments.map((row, idx) => (
@@ -226,6 +227,11 @@ const Modal = ({activeData, handleClose, open}) => {
                         <TableCell align="center">
                           {formatDate(row.fecha_segundo_vencimiento)}
                         </TableCell>
+                        {row.estado === 'pagada' ? (
+                          <TableCell align="center">{formatDate(row.updated_at)}</TableCell>
+                        ) : (
+                          <TableCell align="center">---</TableCell>
+                        )}
                       </TableRow>
                     </TableBody>
                   ))}

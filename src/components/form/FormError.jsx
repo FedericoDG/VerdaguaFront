@@ -6,8 +6,8 @@ const style = {
   letterSpacing: '0.03333em',
   lineHeight: '1.66',
   marginBottom: '0',
-  marginLeft: '14px',
-  marginRight: '14px',
+  marginLeft: '0',
+  marginRight: '0',
   marginTop: '3px',
   texAlign: 'left',
 }

@@ -29,23 +29,25 @@ const TableBig = ({data, isFetching}) => {
       headerName: 'Fecha',
       align: 'center',
       headerAlign: 'center',
-      width: 120,
-      renderCell: ({row}) => <Typography>{formatDate(row.created_at)}</Typography>,
+      width: 80,
+      renderCell: ({row}) => (
+        <Typography variant="caption">{formatDate(row.created_at)}</Typography>
+      ),
     },
     {
       field: 'importe',
       headerName: 'Importe',
       align: 'right',
       headerAlign: 'right',
-      width: 120,
-      renderCell: ({row}) => <Typography>{row.importe}</Typography>,
+      width: 80,
+      renderCell: ({row}) => <Typography variant="caption">{row.importe}</Typography>,
     },
     {
       field: 'forma_pago',
       headerName: 'Tipo',
       align: 'center',
       headerAlign: 'center',
-      width: 120,
+      width: 65,
       renderCell: ({row}) => (
         <div>
           {row.forma_pago === 'efectivo' ? (
@@ -53,7 +55,7 @@ const TableBig = ({data, isFetching}) => {
               color="success"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 100, color: '#000000'}}
+              sx={{minWidth: 65, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'debito' ? (
@@ -61,7 +63,7 @@ const TableBig = ({data, isFetching}) => {
               color="primary"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 100, color: '#000000'}}
+              sx={{minWidth: 65, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'credito' ? (
@@ -69,7 +71,7 @@ const TableBig = ({data, isFetching}) => {
               color="secondary"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 100, color: '#000000'}}
+              sx={{minWidth: 65, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'transferencia' ? (
@@ -77,15 +79,15 @@ const TableBig = ({data, isFetching}) => {
               color="info"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 100, color: '#000000'}}
+              sx={{minWidth: 65, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'mercadopago' ? (
             <Chip
               color="warning"
-              label={row.forma_pago}
+              label="MP"
               size="small"
-              sx={{minWidth: 100, color: '#000000'}}
+              sx={{minWidth: 65, color: '#000000'}}
               variant="outlined"
             />
           ) : (
@@ -93,7 +95,7 @@ const TableBig = ({data, isFetching}) => {
               color="error"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 100, color: '#ffffff'}}
+              sx={{minWidth: 65, color: '#ffffff'}}
             />
           )}
         </div>
@@ -106,6 +108,7 @@ const TableBig = ({data, isFetching}) => {
       flex: 1,
       align: 'left',
       headerAlign: 'left',
+      renderCell: ({row}) => <Typography variant="caption">{row.info}</Typography>,
     },
   ]
 
@@ -130,7 +133,6 @@ const TableBig = ({data, isFetching}) => {
           }}
         >
           <DataGrid
-            disableColumnMenu
             disableSelectionOnClick
             columns={columns}
             components={{

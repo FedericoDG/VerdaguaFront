@@ -30,7 +30,7 @@ const Dashboard = ({children}) => {
             <span ref={top} id="top" style={{color: 'transparent'}} />
             {children}
           </Grid>
-          <Copyright sx={{pt: 4}} />
+          <Copyright />
         </Container>
       </Box>
     </Box>

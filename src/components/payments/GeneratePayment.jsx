@@ -68,55 +68,6 @@ const GeneratePayment = ({initialValues2, setInitialValues2, setShowBill, form2R
         <Form style={{width: '100%'}}>
           <Grid container spacing={1}>
             <Grid item md={12} xs={12}>
-              <Stack direction="row" pb={{xs: 1, md: 0}} spacing={1}>
-                <CustomTextField
-                  disabled
-                  autoComplete="off"
-                  label="Importe"
-                  name="movimiento.importe"
-                />
-                <ErrorMessage component={FormError} name="movimiento.importe" />
-                <CustomSelect
-                  disabled
-                  label="Tipo de operación"
-                  name="movimiento.tipo"
-                  options={operation}
-                />
-                <ErrorMessage component={FormError} name="movimiento.tipo" />
-                <CustomSelect label="Forma de pago" name="movimiento.forma_pago" options={type} />
-                <ErrorMessage component={FormError} name="movimiento.forma_pago" />
-              </Stack>
-            </Grid>
-            <Grid item md={12} xs={12}>
-              <Stack direction="row" pb={{xs: 1, md: 0}} spacing={1}>
-                <CustomTextField
-                  autoComplete="off"
-                  disabled={id_rol > 2 || disableCharge}
-                  label="Recargo a aplicar (en pesos)"
-                  name="movimiento.recargo"
-                />
-                <ErrorMessage component={FormError} name="movimiento.recargo" />
-                <CustomTextField
-                  autoComplete="off"
-                  disabled={id_rol > 2 || disableDiscount}
-                  label="Descuento a aplicar (en pesos)"
-                  name="movimiento.descuento"
-                />
-                <ErrorMessage component={FormError} name="movimiento.descuento" />
-                <CustomTextField
-                  autoComplete="off"
-                  disabled={id_rol > 2}
-                  label="Descripción Recargo/Descuento"
-                  name="movimiento.diferencia_descripcion"
-                />
-                <ErrorMessage component={FormError} name="movimiento.diferencia_descripcion" />
-              </Stack>
-              <CheckOperationTypes
-                setDisableCharge={setDisableCharge}
-                setDisableDiscount={setDisableDiscount}
-              />
-            </Grid>
-            <Grid item md={12} xs={12}>
               <Grid container spacing={1}>
                 <Grid item xs={6}>
                   <Stack pb={{xs: 1, md: 0}} spacing={1}>
@@ -142,6 +93,72 @@ const GeneratePayment = ({initialValues2, setInitialValues2, setShowBill, form2R
                   </Stack>
                 </Grid>
               </Grid>
+            </Grid>
+            <Grid item md={12} sx={{marginTop: 3}} xs={12}>
+              <fieldset style={{padding: '16px'}}>
+                <legend>Información de la transacción</legend>
+                <Stack direction="row" pb={{xs: 1, md: 0}} spacing={1}>
+                  <CustomTextField
+                    disabled
+                    autoComplete="off"
+                    label="Importe"
+                    name="movimiento.importe"
+                  />
+                  <ErrorMessage component={FormError} name="movimiento.importe" />
+                  <CustomSelect
+                    disabled
+                    label="Tipo de operación"
+                    name="movimiento.tipo"
+                    options={operation}
+                  />
+                  <ErrorMessage component={FormError} name="movimiento.tipo" />
+                  <CustomSelect label="Forma de pago" name="movimiento.forma_pago" options={type} />
+                  <ErrorMessage component={FormError} name="movimiento.forma_pago" />
+                </Stack>
+                <Stack direction="row" marginTop={1} pb={{xs: 1, md: 0}} spacing={1}>
+                  <CustomTextField
+                    autoComplete="off"
+                    label="Información sobre la tarjeta/transferencia"
+                    name="movimiento.info_tarjeta_transferencia"
+                  />
+                  <ErrorMessage
+                    component={FormError}
+                    name="movimiento.info_tarjeta_transferencia"
+                  />
+                </Stack>
+              </fieldset>
+            </Grid>
+            <Grid item md={12} sx={{marginTop: 3}} xs={12}>
+              <fieldset style={{padding: '16px'}}>
+                <legend>Recargo/Descuento</legend>
+                <Stack direction="row" pb={{xs: 1, md: 0}} spacing={1}>
+                  <CustomTextField
+                    autoComplete="off"
+                    disabled={id_rol > 2 || disableCharge}
+                    label="Recargo a aplicar (en pesos)"
+                    name="movimiento.recargo"
+                  />
+                  <ErrorMessage component={FormError} name="movimiento.recargo" />
+                  <CustomTextField
+                    autoComplete="off"
+                    disabled={id_rol > 2 || disableDiscount}
+                    label="Descuento a aplicar (en pesos)"
+                    name="movimiento.descuento"
+                  />
+                  <ErrorMessage component={FormError} name="movimiento.descuento" />
+                  <CustomTextField
+                    autoComplete="off"
+                    disabled={id_rol > 2}
+                    label="Descripción Recargo/Descuento"
+                    name="movimiento.diferencia_descripcion"
+                  />
+                  <ErrorMessage component={FormError} name="movimiento.diferencia_descripcion" />
+                </Stack>
+                <CheckOperationTypes
+                  setDisableCharge={setDisableCharge}
+                  setDisableDiscount={setDisableDiscount}
+                />
+              </fieldset>
             </Grid>
           </Grid>
           <Grid container mt={1} spacing={1}>

@@ -25,11 +25,11 @@ const InstallmentCard = ({
   const recargo =
     Number(installment.valor_segundo_vencimiento) - Number(installment.valor_primer_vencimiento)
 
-  let info = `pago de cuota n° ${installment.numero} de ${installments}. Saldo: ${formatCurrency(
+  let info = `pago de cuota ${installment.numero} de ${installments}. Saldo: ${formatCurrency(
     Number(installment.contrato_individual.valor_contrato) -
       Number(installment.contrato_individual.pagos) -
       Number(installment.valor_primer_vencimiento)
-  )}. Contrato Individual: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
+  )}. Contrato: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
     installment.contrato_individual.pasajero.nombre
   } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
     installment.contrato_individual.pasajero.documento
@@ -40,7 +40,7 @@ const InstallmentCard = ({
       Number(installment.contrato_individual.valor_contrato) -
         Number(installment.contrato_individual.pagos) -
         Number(installment.valor_primer_vencimiento)
-    )}. Contrato Individual: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
+    )}. Contrato: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
       installment.contrato_individual.pasajero.nombre
     } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
       installment.contrato_individual.pasajero.documento
@@ -74,7 +74,7 @@ const InstallmentCard = ({
       )}
       <CardContent>
         <Typography align="center" color="text.secondary">
-          {installment.numero === 0 ? 'seña' : `cuota n° ${installment.numero}`}
+          {installment.numero === 0 ? 'seña' : `cuota ${installment.numero}`}
         </Typography>
         <Grid container spacing={1}>
           <Grid

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
@@ -15,14 +16,22 @@ export const validationSchema2 = Yup.object({
   movimiento: Yup.object().shape({
     importe: Yup.string().required('El movimiento es requerido.'),
     tipo: Yup.string().required('El movimiento es requerido.'),
-    forma_pago: Yup.string().required('El movimiento es requerido.'),
+    forma_pago: Yup.string().required('La forma de pago es requerida.'),
     info: Yup.string().required('El movimiento es requerido.'),
+    recargo: Yup.string().matches(/^[0-9]+$/, 'Sólo se aceptan números.'),
     descuento: Yup.string().matches(
       /^[0-9]+$/,
       'Sólo se aceptan números. No incluya el signo - (menos).'
     ),
-    recargo: Yup.string().matches(/^[0-9]+$/, 'Sólo se aceptan números.'),
-    diferencia_descripcion: Yup.string(),
+    diferencia_descripcion: Yup.string().when(['recargo', 'descuento'], {
+      is: (recargo, descuento) => Number(recargo) > 0 || Number(descuento) > 0,
+      then: () => Yup.string().required('La descripción sobre el recargo/descuento es requerida.'),
+    }),
+    info_tarjeta_transferencia: Yup.string().when('forma_pago', {
+      is: (forma_pago) => ['debito', 'credito', 'transferencia'].includes(forma_pago),
+      then: () =>
+        Yup.string().required('Los detalles sobre la tarjeta/transferencia son requeridos'),
+    }),
   }),
   contratoIndividual: Yup.object().shape({
     pago: Yup.string().required('El contrato es requerido.'),

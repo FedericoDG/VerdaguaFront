@@ -2,6 +2,7 @@ import {Grid, Paper, Typography} from '@mui/material'
 import {useState} from 'react'
 import {useSnackbar} from 'notistack'
 
+import {formatENDate} from '../utils/formatDate'
 import ChargeForm from '../components/balance/FormCharge'
 import Dashboard from '../components/Dashboard'
 import Form from '../components/balance/Form'
@@ -10,11 +11,12 @@ import Table from '../components/balance/Table'
 import TableBig from '../components/balance/TableBig'
 import useGetBalance, {usePostBalance} from '../hooks/useBalance'
 import Spinner from '../components/Spinner'
+import Chart from '../components/balance/Graph'
 
 const Balance = () => {
   const [initialValues, setInitialValues] = useState({
-    desde: '',
-    hasta: '',
+    desde: formatENDate(new Date()),
+    hasta: formatENDate(new Date()),
     info: '',
   })
   const [initialValues2, setInitialValues2] = useState({
@@ -110,7 +112,9 @@ const Balance = () => {
       {allData?.movements && (
         <>
           <Resume allData={allData} />
-          <Grid item xs={8}>
+          <div style={{flex: 1}} />
+          <Chart allData={allData} />
+          <Grid item xs={12}>
             <Paper
               sx={{
                 p: 2,

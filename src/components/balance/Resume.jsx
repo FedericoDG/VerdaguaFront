@@ -3,7 +3,7 @@ import {Box, Divider, Grid, Paper, Stack, Typography} from '@mui/material'
 import {formatTwoDigits} from '../../utils/formatCurrency'
 
 const Resume = ({allData}) => (
-  <Grid item xs={4}>
+  <Grid item xs={5}>
     <Paper
       elevation={0}
       sx={{
@@ -13,7 +13,7 @@ const Resume = ({allData}) => (
         flexDirection: 'column',
       }}
     >
-      <Stack direction="row" display="flex" justifyContent="space-between">
+      <Stack direction="row" display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="button">Total Ingresos:</Typography>
         <Typography variant="h6">{allData.totalIncomes}</Typography>
       </Stack>
