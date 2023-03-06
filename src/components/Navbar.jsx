@@ -1,4 +1,5 @@
-import {Button, Chip, IconButton, Toolbar, Typography} from '@mui/material'
+import {Button, IconButton, Toolbar, Typography} from '@mui/material'
+import {useNavigate} from 'react-router-dom'
 import {useContext} from 'react'
 import {useSnackbar} from 'notistack'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -9,7 +10,6 @@ import styled from '@emotion/styled'
 import {logoutAction} from '../context/actions/auth'
 import {logoutSettingsAction} from '../context/actions/settings'
 import appContext from '../context/AppContext'
-import {useNavigate} from 'react-router-dom'
 
 const drawerWidth = 260
 
