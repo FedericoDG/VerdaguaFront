@@ -40,7 +40,7 @@ const Navbar = ({open, toggleDrawer}) => {
   const navigate = useNavigate()
 
   const logout = () => {
-    navigate('/backoffice')
+    navigate('/admin')
     dispatch(logoutAction())
     dispatchSettings(logoutSettingsAction())
 
