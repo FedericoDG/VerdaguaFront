@@ -12,6 +12,7 @@ const useGetBalance = (dates, onSuccess, onError) =>
   useQuery(['balance', dates], () => getBalance(dates), {
     enabled: !!dates,
     retry: 1,
+    cacheTime: 1,
     refetchOnWindowFocus: false,
     onSuccess,
     onError,

@@ -63,7 +63,7 @@ const Balance = () => {
     })
   }
 
-  const {data: allData = [], isFetching} = useGetBalance(all, onSuccess, onError)
+  const {data: allData = [], isFetching, refetch} = useGetBalance(all, onSuccess, onError)
   const {mutate: postBalance, isFetching: isFetchingPost} = usePostBalance()
 
   return (
@@ -105,9 +105,11 @@ const Balance = () => {
             <Spinner height={122} />
           ) : (
             <Form
+              all={all}
               initialValues={initialValues}
               setAll={setAll}
               setInitialValues={setInitialValues}
+              refetch={refetch}
             />
           )}
         </Paper>

@@ -1,5 +1,5 @@
 import LoginForm from '../components/loginpassengers/Login'
-import imgLogin from '../assets/login.webp'
+import imgLogin from '../assets/login.jpg'
 
 import styles from './login.module.css'
 

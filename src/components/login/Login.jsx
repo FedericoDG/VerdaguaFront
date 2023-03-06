@@ -67,7 +67,7 @@ const SignIn = () => {
           }}
         >
           <Typography color="primary" component="h1" variant="h2">
-            Tourism Agency
+            Acceso
           </Typography>
           <Box sx={{mt: 1}}>
             <Form style={{width: '100%'}}>

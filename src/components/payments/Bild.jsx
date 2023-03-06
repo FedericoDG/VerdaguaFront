@@ -127,7 +127,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
           </Typography>
         </div>
         <div style={{border: '1px solid #888888', padding: '16px'}}>
-          <div style={{minHeight: '250px'}}>
+          <div style={{minHeight: '175px'}}>
             <Stack direction="row" display="flex">
               <Typography sx={{fontSize: 16}} variant="body1">
                 Recibí la suma de:
@@ -139,7 +139,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
                     Number(initialValues2.movimiento.recargo) -
                     Number(initialValues2.movimiento.descuento)
                 )}{' '}
-                (
+                ({' '}
                 {NumeroALetras(
                   Number(initialValues2.movimiento.importe) +
                     Number(initialValues2.movimiento.recargo) -
@@ -151,15 +151,14 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
                     centSingular: 'centavo',
                   }
                 )}
-                )
-              </Typography>
-              <Typography sx={{fontSize: 16}} variant="body1">
-                , en concepto de {splitInfo[0].toString()}.
+                ).
               </Typography>
             </Stack>
             <Typography sx={{fontSize: 16}} variant="body1">
-              {splitInfo[1].toString()}
-              {splitInfo[2].toString()}.
+              {`Concepto: ${splitInfo[0].toString()}.`}
+            </Typography>
+            <Typography sx={{fontSize: 16}} variant="body1">
+              {`${splitInfo[1].toString()} ${splitInfo[2].toString()}.`}
             </Typography>
             <Typography sx={{fontSize: 16}} variant="body1">
               {splitInfo[3].toString()}

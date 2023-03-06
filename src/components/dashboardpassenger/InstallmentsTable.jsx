@@ -27,12 +27,12 @@ const InstallmentsTable = ({installments, description}) => {
       {success && (
         <Alert severity="success">
           <AlertTitle>Pago Aceptado</AlertTitle>
-          <strong>MercadoPago aceptó tu pago</strong>
+          <strong>MercadoPago aceptó tu pago.</strong>
         </Alert>
       )}
       {pending && (
         <Alert severity="warning">
-          <AlertTitle>Procesando pago</AlertTitle>
+          <AlertTitle>Procesando pago...</AlertTitle>
           <strong>
             MercadoPago aún está procesando tu pago. Te sugerimos esperar a que termine de hacerlo.
           </strong>
@@ -40,13 +40,15 @@ const InstallmentsTable = ({installments, description}) => {
       )}
       {failure && (
         <Alert severity="error">
-          <AlertTitle>Pago rechazado</AlertTitle>
-          <strong>MercadoPago rechazó tu tarjeta. Puedes intentar con otro medio de pago.</strong>
+          <AlertTitle>Pago Rechazado</AlertTitle>
+          <strong>
+            MercadoPago rechazó tu pago. Intenta más tarde o prueba con otro método de pago.
+          </strong>
         </Alert>
       )}
       <Box alignItems="center" display="flex" my={2}>
         <Typography mx={2} variant="h6">
-          Seleccionar Cuota a pagar
+          Seleccionar la cuota a pagar
         </Typography>
       </Box>
       <Grid container justifyContent="space-between">

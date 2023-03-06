@@ -6,6 +6,7 @@ import {
   Divider,
   Grid,
   IconButton,
+  Link,
   Paper,
   Stack,
   Toolbar,
@@ -20,8 +21,12 @@ import {
 } from '../hooks/useIndividualContracts'
 import {logoutAction} from '../context/actions/auth'
 import appContext from '../context/AppContext'
+import Copyright from '../components/footer/CopyrightVerdagua'
 import InstallmentsTable from '../components/dashboardpassenger/InstallmentsTable'
 import formatCurrency from '../utils/formatCurrency'
+import Spinner from '../components/Spinner'
+
+import logo from '../assets/logo.png'
 
 const DashboardPassenger = () => {
   const {user, dispatch} = useContext(appContext)
@@ -43,7 +48,7 @@ const DashboardPassenger = () => {
     !installments ||
     installments.length === 0
   )
-    return <p>Cargando...</p>
+    return <Spinner height="100vh" />
 
   return (
     <Grid item xs={12}>
@@ -61,50 +66,90 @@ const DashboardPassenger = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      {/*  */}
       <Container maxWidth="lg" sx={{mt: 4, mb: 4}}>
         <Grid container spacing={3}>
           <Grid item md={4} xs={12}>
             <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
-              <Stack
-                direction="row"
-                display="flex"
-                justifyContent="space-between"
-                sx={{marginBottom: 3}}
-              >
-                <Typography variant="button">
-                  {user.nombre} {user.apellido}
+              <Stack>
+                <img
+                  alt="logo"
+                  src={logo}
+                  style={{display: 'block', margin: 'auto', marginBottom: '16px'}}
+                />
+                <Typography variant="caption">Pasajero:</Typography>
+                <Stack
+                  direction="row"
+                  display="flex"
+                  justifyContent="space-between"
+                  sx={{marginBottom: 1}}
+                >
+                  <Typography variant="button">
+                    {user.nombre} {user.apellido}
+                  </Typography>
+                  <Typography variant="button">DNI: {user.documento}</Typography>
+                </Stack>
+                <Typography variant="caption">Responsable:</Typography>
+                <Stack
+                  direction="row"
+                  display="flex"
+                  justifyContent="space-between"
+                  sx={{marginBottom: 3}}
+                >
+                  <Typography variant="button">
+                    {contratoIndividual[0].pasajero.responsable.nombre}{' '}
+                    {contratoIndividual[0].pasajero.responsable.apellido}
+                  </Typography>
+                  <Typography variant="button">
+                    DNI: {contratoIndividual[0].pasajero.responsable.documento}
+                  </Typography>
+                </Stack>
+                <Stack direction="row" display="flex" justifyContent="space-between">
+                  <Typography variant="button">Código Contrato:</Typography>
+                  <Typography variant="button">{contratoIndividual[0].cod_contrato}</Typography>
+                </Stack>
+                <Typography sx={{marginBottom: 1}} variant="body2">
+                  Descripción: {contratoIndividual[0].contrato_general.descripcion}
                 </Typography>
-                <Typography variant="button">DNI: {user.documento}</Typography>
-              </Stack>
-              <Stack direction="row" display="flex" justifyContent="space-between">
-                <Typography variant="button">Código Contrato:</Typography>
-                <Typography variant="button">{contratoIndividual[0].cod_contrato}</Typography>
-              </Stack>
-              <Typography variant="body2" sx={{marginBottom: 3}}>
-                Descripción: {contratoIndividual[0].contrato_general.descripcion}
-              </Typography>
-              <Stack direction="row" display="flex" justifyContent="space-between">
-                <Typography variant="button">Valor del contrato:</Typography>
-                <Typography variant="button">
-                  {formatCurrency(contratoIndividual[0].valor_contrato)}
-                </Typography>
-              </Stack>
-              <Stack direction="row" display="flex" justifyContent="space-between">
-                <Typography variant="button">Pagos:</Typography>
-                <Typography variant="button">
-                  {formatCurrency(contratoIndividual[0].pagos)}
-                </Typography>
-              </Stack>
-              <Divider />
-              <Stack direction="row" display="flex" justifyContent="space-between">
-                <Typography variant="button">Saldo:</Typography>
-                <Typography variant="button">
-                  {formatCurrency(
-                    Number(contratoIndividual[0].valor_contrato) -
-                      Number(contratoIndividual[0].pagos)
-                  )}
-                </Typography>
+                <Stack
+                  direction="row"
+                  display="flex"
+                  justifyContent="space-between"
+                  sx={{marginBottom: 3}}
+                >
+                  <Typography variant="button">Descargar contrato</Typography>
+                  <Typography variant="button">
+                    {/* <Link href={contratoIndividual[0].contrato_general.contract_url} target="_blank" rel="noopener noreferrer">Descargar</Link> */}
+                    <Link
+                      href="https://drive.google.com/file/d/1SwcIcPijg0jSjLMAc86gDZV_iDmrKUih/view"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Descargar
+                    </Link>
+                  </Typography>
+                </Stack>
+                <Stack direction="row" display="flex" justifyContent="space-between">
+                  <Typography variant="button">Valor del contrato:</Typography>
+                  <Typography variant="button">
+                    {formatCurrency(contratoIndividual[0].valor_contrato)}
+                  </Typography>
+                </Stack>
+                <Stack direction="row" display="flex" justifyContent="space-between">
+                  <Typography variant="button">Pagos:</Typography>
+                  <Typography variant="button">
+                    {formatCurrency(contratoIndividual[0].pagos)}
+                  </Typography>
+                </Stack>
+                <Divider />
+                <Stack direction="row" display="flex" justifyContent="space-between">
+                  <Typography variant="button">Saldo:</Typography>
+                  <Typography variant="button">
+                    {formatCurrency(
+                      Number(contratoIndividual[0].valor_contrato) -
+                        Number(contratoIndividual[0].pagos)
+                    )}
+                  </Typography>
+                </Stack>
               </Stack>
             </Paper>
           </Grid>
@@ -117,7 +162,9 @@ const DashboardPassenger = () => {
             </Paper>
           </Grid>
         </Grid>
-        {/*  <Copyright /> */}
+        <Grid item xs={12}>
+          <Copyright />
+        </Grid>
       </Container>
     </Grid>
   )

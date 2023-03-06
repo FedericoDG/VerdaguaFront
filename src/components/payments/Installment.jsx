@@ -25,7 +25,7 @@ const InstallmentCard = ({
   const recargo =
     Number(installment.valor_segundo_vencimiento) - Number(installment.valor_primer_vencimiento)
 
-  let info = `pago de cuota ${installment.numero} de ${installments}. Saldo: ${formatCurrency(
+  let info = `Pago de cuota ${installment.numero} de ${installments}. Saldo: ${formatCurrency(
     Number(installment.contrato_individual.valor_contrato) -
       Number(installment.contrato_individual.pagos) -
       Number(installment.valor_primer_vencimiento)
@@ -36,7 +36,7 @@ const InstallmentCard = ({
   }`
 
   if (idx === 0) {
-    info = `pago de seña. Saldo: ${formatCurrency(
+    info = `Pago de seña. Saldo: ${formatCurrency(
       Number(installment.contrato_individual.valor_contrato) -
         Number(installment.contrato_individual.pagos) -
         Number(installment.valor_primer_vencimiento)
