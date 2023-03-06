@@ -19,11 +19,11 @@ const Copyright = (props) => {
         align="center"
         color="text.secondary"
         sx={{marginRight: '4px'}}
-        variant="body2"
+        variant="caption"
       >
         Desarrollado por Federico González -
       </Typography>
-      <Typography ref={bottom} align="center" color="text.secondary" variant="body2">
+      <Typography ref={bottom} align="center" color="text.secondary" variant="caption">
         <a href="mailto:fede@nazgul.com.ar" target="_top">
           fede@nazgul.com.ar
         </a>
