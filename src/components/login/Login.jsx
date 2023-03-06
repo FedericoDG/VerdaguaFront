@@ -1,6 +1,6 @@
 import {Button, Stack, Box, Typography, Container} from '@mui/material'
 import {Formik, Form, ErrorMessage} from 'formik'
-import {useContext} from 'react'
+import {useContext, useState} from 'react'
 import {useSnackbar} from 'notistack'
 
 import {loginAction} from '../../context/actions/auth'
@@ -13,13 +13,18 @@ import localStorage from '../../utils/localStorage'
 import validationSchemaLogin from './validationSchema'
 
 const SignIn = () => {
+  const [fetching, setFetching] = useState(false)
   const {dispatch} = useContext(appContext)
 
   const {enqueueSnackbar} = useSnackbar()
 
   const login = async (body) => {
     try {
+      setFetching(true)
+
       const {user, token} = await postRequest('/auth/login', body)
+
+      setFetching(false)
 
       localStorage.write('user', {...user, logged: true})
       localStorage.write('token', token)
@@ -34,6 +39,7 @@ const SignIn = () => {
         },
       })
     } catch (error) {
+      setFetching(false)
       enqueueSnackbar(error.response.data.msg, {
         variant: 'error',
         autoHideDuration: 2000,
@@ -83,7 +89,7 @@ const SignIn = () => {
                 />
                 <ErrorMessage component={FormError} name="password" />
                 <Button
-                  /* disabled={} */
+                  disabled={fetching}
                   sx={{paddingY: '12px'}}
                   type="submit"
                   variant="contained"
