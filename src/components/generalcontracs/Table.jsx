@@ -196,7 +196,7 @@ const Table = ({generalContract, setInitialValues}) => {
                 type="submit"
                 variant="text"
                 onClick={() => {
-                  navigate(`/dashboard/individual-contracts?id=${obj.row.id}`)
+                  navigate(`/dashboard/individual-contracts-create?id=${obj.row.id}`)
                 }}
               >
                 <AddCircleTwoToneIcon sx={{fontSize: 32}} />
@@ -207,7 +207,7 @@ const Table = ({generalContract, setInitialValues}) => {
           <Tooltip title="Ver PDF del Contrato">
             <span>
               {obj.row.contract_url ? (
-                <Link sx={{color: 'inherit'}} target="_blank" to={obj.row.contract_url} disabled>
+                <Link disabled sx={{color: 'inherit'}} target="_blank" to={obj.row.contract_url}>
                   <Button
                     disableElevation
                     color="inherit"

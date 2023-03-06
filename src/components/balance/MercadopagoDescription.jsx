@@ -12,12 +12,10 @@ import {useGetMPOrder} from '../../hooks/UseMercadopago'
 const MercadopagoDescription = ({open, order, setOpen, setOrder}) => {
   const {data} = useGetMPOrder(order)
 
-  console.log(order)
-
   return (
     <div>
       {data && (
-        <Dialog open={open} maxWidth="lg">
+        <Dialog maxWidth="lg" open={open}>
           <DialogTitle>Detalle orden Mercadopago</DialogTitle>
           <DialogContent>
             <DialogContentText>

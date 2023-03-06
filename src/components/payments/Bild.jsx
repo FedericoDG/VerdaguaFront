@@ -47,7 +47,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
     })
     hardReset()
     setTimeout(() => {
-      navigate(`/dashboard/individual-contracts-list?id=${initialValues.contratoIndividual.id}`)
+      navigate(`/dashboard/individual-contracts?id=${initialValues.contratoIndividual.id}`)
     }, 3000)
   }
 

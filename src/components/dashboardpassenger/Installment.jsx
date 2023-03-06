@@ -122,7 +122,6 @@ const InstallmentCard = ({checked, description, flag, installment, installments}
             disabled={flag || !initPoint}
             size="small"
             variant="contained"
-            onClick={() => console.log(installment)}
           >
             Pagar con mercadopago
           </Button>
