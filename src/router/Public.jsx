@@ -5,7 +5,7 @@ import LoginPassengers from '../pages/LoginPassengers'
 
 const Public = () => (
   <Routes>
-    <Route element={<Login />} path="/backoffice" />
+    <Route element={<Login />} path="/admin" />
     <Route element={<LoginPassengers />} path="/*" />
   </Routes>
 )

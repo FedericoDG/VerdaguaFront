@@ -17,7 +17,7 @@ const AppRouter = () => (
             <DashboardPassenger />
           </MercadoPagoRoutes>
         }
-        path="/mercadopago/*"
+        path="/panel/*"
       />
       <Route
         element={
