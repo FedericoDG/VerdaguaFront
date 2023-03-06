@@ -1,38 +1,47 @@
 import {Button, CardActions, CardContent, Typography, Grid, Paper} from '@mui/material'
 import {DateTime} from 'luxon'
 import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone'
+import {useEffect, useState} from 'react'
 
 import formatCurrency from '../../utils/formatCurrency'
 import formatDate from '../../utils/formatDate'
+import usePostMercadopago from '../../hooks/UseMercadopago'
 
-const InstallmentCard = ({checked, flag, idx, installment, installments, setChecked}) => {
+const InstallmentCard = ({checked, description, flag, installment, installments}) => {
+  const [initPoint, setInitPoint] = useState(null)
+
+  const onSuccess = (res) => {
+    setInitPoint(res.data.body.init_point)
+  }
+
+  const {mutate: postMercadopago} = usePostMercadopago(onSuccess)
+
   const today = DateTime.now()
   const firstExpiration = DateTime.fromISO(installment.fecha_primer_vencimiento)
 
-  /* const recargo =
-    Number(installment.valor_segundo_vencimiento) - Number(installment.valor_primer_vencimiento)
+  useEffect(() => {
+    if (flag) return
+    const items = []
+    let item = {
+      id: installment.id,
+      quantity: 1,
+      unit_price: Number(installment.valor_segundo_vencimiento),
+      title: description,
+      currency_id: 'ARS',
+    }
 
-  let info = `pago de cuota ${installment.numero} de ${installments}. Saldo: ${formatCurrency(
-    Number(installment.contrato_individual.valor_contrato) -
-      Number(installment.contrato_individual.pagos) -
-      Number(installment.valor_primer_vencimiento)
-  )}. Contrato: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
-    installment.contrato_individual.pasajero.nombre
-  } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
-    installment.contrato_individual.pasajero.documento
-  }`
-
-  if (idx === 0) {
-    info = `pago de seña. Saldo: ${formatCurrency(
-      Number(installment.contrato_individual.valor_contrato) -
-        Number(installment.contrato_individual.pagos) -
-        Number(installment.valor_primer_vencimiento)
-    )}. Contrato: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
-      installment.contrato_individual.pasajero.nombre
-    } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
-      installment.contrato_individual.pasajero.documento
-    }`
-  } */
+    if (today >= firstExpiration) {
+      items.push(item)
+    } else {
+      item = {...item, unit_price: Number(installment.valor_primer_vencimiento)}
+      items.push(item)
+    }
+    postMercadopago({
+      items,
+      id_contrato_individual: installment.id_contrato_individual,
+      installments,
+    })
+  }, [])
 
   return (
     <Paper
@@ -46,8 +55,8 @@ const InstallmentCard = ({checked, flag, idx, installment, installments, setChec
     >
       {installment.estado === 'pagada' && (
         <Typography
-          color="success"
-          sx={{top: 50, left: 50, position: 'absolute', transform: 'rotate(-23deg)', opacity: 0.6}}
+          color="#7BC47F"
+          sx={{top: 50, left: 50, position: 'absolute', transform: 'rotate(-23deg)', opacity: 0.75}}
           variant="h2"
         >
           PAGADA
@@ -101,61 +110,22 @@ const InstallmentCard = ({checked, flag, idx, installment, installments, setChec
         </Grid>
       </CardContent>
       <CardActions>
-        <Button
-          fullWidth
-          disabled={flag}
-          size="small"
-          onClick={() => console.log(installment)}
-          /* onClick={() => {
-            setChecked(idx)
-            if (today >= firstExpiration) {
-              setInitialValues2((prev) => ({
-                ...prev,
-                cod_contrato: installment.contrato_individual.cod_contrato,
-                cuota: {id: installment.id, estado: 'pagada'},
-                movimiento: {
-                  ...prev.movimiento,
-                  importe:
-                    Number(installment.valor_segundo_vencimiento) +
-                    Number(initialValues2.movimiento.recargo) -
-                    Number(initialValues2.movimiento.descuento),
-                  info,
-                },
-                contratoIndividual: {
-                  pago: installment.valor_primer_vencimiento,
-                  recargo,
-                },
-                destinatario: `${installment.contrato_individual.pasajero.responsable.nombre} ${installment.contrato_individual.pasajero.responsable.apellido}`,
-                DNI: `${installment.contrato_individual.pasajero.responsable.documento}`,
-                domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.ciudad})`,
-              }))
-            }
-            if (today < firstExpiration) {
-              setInitialValues2((prev) => ({
-                ...prev,
-                cod_contrato: installment.contrato_individual.cod_contrato,
-                cuota: {id: installment.id, estado: 'pagada'},
-                movimiento: {
-                  ...prev.movimiento,
-                  importe:
-                    Number(installment.valor_segundo_vencimiento) +
-                    Number(initialValues2.movimiento.recargo) -
-                    Number(initialValues2.movimiento.descuento),
-                  info,
-                },
-                contratoIndividual: {
-                  pago: installment.valor_primer_vencimiento,
-                  recargo: 0,
-                },
-                destinatario: `${installment.contrato_individual.pasajero.responsable.nombre} ${installment.contrato_individual.pasajero.responsable.apellido}`,
-                DNI: `${installment.contrato_individual.pasajero.responsable.documento}`,
-                domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.ciudad})`,
-              }))
-            }
-          }} */
+        <a
+          href={initPoint}
+          rel="noopener noreferrer"
+          style={{color: 'unset', textDecoration: 'none', width: '100%'}}
         >
-          Pagar
-        </Button>
+          <Button
+            fullWidth
+            color="success"
+            disabled={flag || !initPoint}
+            size="small"
+            variant="contained"
+            onClick={() => console.log(installment)}
+          >
+            Pagar
+          </Button>
+        </a>
       </CardActions>
     </Paper>
   )

@@ -34,7 +34,7 @@ const InstallmentsTable = ({
               idx={idx}
               initialValues2={initialValues2}
               installment={installment}
-              installments={installments.length}
+              installments={installments.length - 1}
               setChecked={setChecked}
               setInitialValues2={setInitialValues2}
             />

@@ -151,7 +151,7 @@ const InstallmentCard = ({
                 movimiento: {
                   ...prev.movimiento,
                   importe:
-                    Number(installment.valor_segundo_vencimiento) +
+                    Number(installment.valor_primer_vencimiento) +
                     Number(initialValues2.movimiento.recargo) -
                     Number(initialValues2.movimiento.descuento),
                   info,

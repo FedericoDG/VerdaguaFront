@@ -47,7 +47,7 @@ const TableBig = ({data, isFetching}) => {
       headerName: 'Tipo',
       align: 'center',
       headerAlign: 'center',
-      width: 65,
+      width: 100,
       renderCell: ({row}) => (
         <div>
           {row.forma_pago === 'efectivo' ? (
@@ -55,7 +55,7 @@ const TableBig = ({data, isFetching}) => {
               color="success"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 65, color: '#000000'}}
+              sx={{minWidth: 100, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'debito' ? (
@@ -63,7 +63,7 @@ const TableBig = ({data, isFetching}) => {
               color="primary"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 65, color: '#000000'}}
+              sx={{minWidth: 100, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'credito' ? (
@@ -71,7 +71,7 @@ const TableBig = ({data, isFetching}) => {
               color="secondary"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 65, color: '#000000'}}
+              sx={{minWidth: 100, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'transferencia' ? (
@@ -79,15 +79,15 @@ const TableBig = ({data, isFetching}) => {
               color="info"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 65, color: '#000000'}}
+              sx={{minWidth: 100, color: '#000000'}}
               variant="outlined"
             />
           ) : row.forma_pago === 'mercadopago' ? (
             <Chip
               color="warning"
-              label="MP"
+              label={row.forma_pago}
               size="small"
-              sx={{minWidth: 65, color: '#000000'}}
+              sx={{minWidth: 100, color: '#000000'}}
               variant="outlined"
             />
           ) : (
@@ -95,7 +95,7 @@ const TableBig = ({data, isFetching}) => {
               color="error"
               label={row.forma_pago}
               size="small"
-              sx={{minWidth: 65, color: '#ffffff'}}
+              sx={{minWidth: 100, color: '#ffffff'}}
             />
           )}
         </div>
@@ -124,7 +124,7 @@ const TableBig = ({data, isFetching}) => {
       }}
     >
       {isFetching || !data ? (
-        <Spinner height={165} />
+        <Spinner height={1100} />
       ) : (
         <div
           style={{

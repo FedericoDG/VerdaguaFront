@@ -1,4 +1,5 @@
 import {Grid, Paper, Typography} from '@mui/material'
+import {DateTime} from 'luxon'
 import {useState} from 'react'
 import {useSnackbar} from 'notistack'
 
@@ -14,9 +15,11 @@ import Spinner from '../components/Spinner'
 import Chart from '../components/balance/Graph'
 
 const Balance = () => {
+  const now = DateTime.now().plus({hours: -3})
+
   const [initialValues, setInitialValues] = useState({
-    desde: formatENDate(new Date()),
-    hasta: formatENDate(new Date()),
+    desde: formatENDate(now),
+    hasta: formatENDate(now),
     info: '',
   })
   const [initialValues2, setInitialValues2] = useState({

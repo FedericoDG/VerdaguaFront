@@ -165,7 +165,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
               {splitInfo[3].toString()}
             </Typography>
             <Typography sx={{fontSize: 16}} variant="body1">
-              {splitInfo[4].toString()}
+              {splitInfo[4]?.toString()}
             </Typography>
           </div>
           <Typography sx={{fontSize: 16, fontWeight: '500'}} variant="body1">
@@ -188,6 +188,9 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
                   {formatCurrency(Number(initialValues2.movimiento.importe))}
                 </Typography>
               </Stack>
+              {(!initialValues2.movimiento.recargo || !initialValues2.movimiento.descuento) && (
+                <div style={{marginTop: '24px'}} />
+              )}
               {Number(initialValues2.movimiento.recargo) > 0 && (
                 <>
                   <Stack direction="row" display="flex" justifyContent="space-between" mx={1}>
@@ -240,9 +243,9 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
               </Stack>
             </Box>
           </Grid>
-          <Grid item style={{paddingLeft: '16px'}} xs={6}>
+          <Grid item style={{paddingLeft: '32px'}} xs={6}>
             <Box sx={{borderWidth: 2, borderColor: '#0000', borderStyle: 'solid'}}>
-              <Typography sx={{marginTop: 5}} variant="body1">
+              <Typography sx={{marginTop: 4}} variant="body1">
                 Firma: . . . . . . . . . . . . . . . . . . . . . . . . . . . .
               </Typography>
               <Typography sx={{marginTop: 2}} variant="body1">
