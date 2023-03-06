@@ -58,7 +58,7 @@ const DashboardPassenger = () => {
           <Toolbar>
             <IconButton color="inherit" edge="start" size="large" sx={{mr: 2}} />
             <Typography component="div" sx={{flexGrow: 1}} variant="h6">
-              ¡Hola, {user.nombre}!
+              Hola, {user.nombre}
             </Typography>
             <Button color="inherit" onClick={logout}>
               Salir
@@ -118,14 +118,20 @@ const DashboardPassenger = () => {
                 >
                   <Typography variant="button">Descargar contrato</Typography>
                   <Typography variant="button">
-                    {/* <Link href={contratoIndividual[0].contrato_general.contract_url} target="_blank" rel="noopener noreferrer">Descargar</Link> */}
                     <Link
-                      href="https://drive.google.com/file/d/1SwcIcPijg0jSjLMAc86gDZV_iDmrKUih/view"
+                      href={contratoIndividual[0].contrato_general.contract_url}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
                       Descargar
                     </Link>
+                    {/* <Link
+                      href="https://drive.google.com/file/d/1SwcIcPijg0jSjLMAc86gDZV_iDmrKUih/view"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Descargar
+                    </Link> */}
                   </Typography>
                 </Stack>
                 <Stack direction="row" display="flex" justifyContent="space-between">
