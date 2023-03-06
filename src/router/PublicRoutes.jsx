@@ -12,7 +12,7 @@ const PublicRoutes = ({children}) => {
     user?.rol?.name === 'user' ? (
     <Navigate to="/dashboard" />
   ) : user?.rol?.name === 'passenger' ? (
-    <Navigate to="/mercadopago" />
+    <Navigate to="/panel" />
   ) : (
     children
   )
