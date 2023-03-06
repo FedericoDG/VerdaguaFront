@@ -26,7 +26,8 @@ const InstallmentCard = ({checked, description, flag, installment, installments}
       id: installment.id,
       quantity: 1,
       unit_price: Number(installment.valor_segundo_vencimiento),
-      title: description,
+      title: `Cuota ${installment.numero} de ${installments} - Verdagua Viajes`,
+      description,
       currency_id: 'ARS',
     }
 

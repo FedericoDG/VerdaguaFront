@@ -107,9 +107,9 @@ const Balance = () => {
             <Form
               all={all}
               initialValues={initialValues}
+              refetch={refetch}
               setAll={setAll}
               setInitialValues={setInitialValues}
-              refetch={refetch}
             />
           )}
         </Paper>

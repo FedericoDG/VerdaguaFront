@@ -1,9 +1,21 @@
-import {useMutation} from 'react-query'
+import {useMutation, useQuery} from 'react-query'
 import {useSnackbar} from 'notistack'
 
-import {postRequest} from '../services/httpRequest'
+import {getRequest, postRequest} from '../services/httpRequest'
 
 const portMercadopago = (items) => postRequest('/mercadopago/', items)
+const getMPOrder = (id) => getRequest(`/mercadopago/${id}`)
+
+// GET ORDER
+export const useGetMPOrder = (id, onSuccess, onError) =>
+  useQuery(['MPOrder', id], () => getMPOrder(id), {
+    enabled: !!id,
+    retry: 1,
+    refetchOnWindowFocus: false,
+    onSuccess,
+    onError,
+    select: (data) => data.data,
+  })
 
 // MUTATION POST
 const usePostMercadopago = (onSuccess) => {

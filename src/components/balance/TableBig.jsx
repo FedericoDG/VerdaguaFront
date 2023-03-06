@@ -8,9 +8,12 @@ import {
   GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
+import {useState} from 'react'
 
-import Spinner from '../Spinner'
 import formatDate from '../../utils/formatDate'
+import Spinner from '../Spinner'
+
+import MercadopagoDescription from './MercadopagoDescription'
 
 const CustomToolbar = () => (
   <GridToolbarContainer>
@@ -23,6 +26,9 @@ const CustomToolbar = () => (
 const calculaAlto = (largo) => 165 + 40 * Math.min(largo, 10)
 
 const TableBig = ({data, isFetching}) => {
+  const [open, setOpen] = useState(false)
+  const [order, setOrder] = useState(null)
+
   const columns = [
     {
       field: 'created_at',
@@ -89,6 +95,12 @@ const TableBig = ({data, isFetching}) => {
               size="small"
               sx={{minWidth: 100, color: '#000000'}}
               variant="outlined"
+              onClick={() => {
+                const mpCode = row.info.split(' ').at(-1)
+
+                setOrder(mpCode)
+                setOpen(true)
+              }}
             />
           ) : (
             <Chip
@@ -113,41 +125,45 @@ const TableBig = ({data, isFetching}) => {
   ]
 
   return (
-    <Paper
-      component="div"
-      elevation={0}
-      sx={{
-        marginY: 2,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-    >
-      {isFetching || !data ? (
-        <Spinner height={1100} />
-      ) : (
-        <div
-          style={{
-            height: calculaAlto(data.length),
-            width: '100%',
-          }}
-        >
-          <DataGrid
-            disableSelectionOnClick
-            columns={columns}
-            components={{
-              Toolbar: CustomToolbar,
+    <>
+      <Paper
+        component="div"
+        elevation={0}
+        sx={{
+          marginY: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        {isFetching || !data ? (
+          <Spinner height={1100} />
+        ) : (
+          <div
+            style={{
+              height: calculaAlto(data.length),
+              width: '100%',
             }}
-            density="standard"
-            getRowHeight={() => 40}
-            localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-            pageSize={10}
-            rows={data}
-            rowsPerPageOptions={[10]}
-          />
-        </div>
-      )}
-    </Paper>
+          >
+            <DataGrid
+              disableSelectionOnClick
+              columns={columns}
+              components={{
+                Toolbar: CustomToolbar,
+              }}
+              density="standard"
+              getRowHeight={() => 40}
+              localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+              pageSize={10}
+              rows={data}
+              rowsPerPageOptions={[10]}
+            />
+          </div>
+        )}
+      </Paper>
+
+      <MercadopagoDescription open={open} order={order} setOpen={setOpen} setOrder={setOrder} />
+    </>
   )
 }
 

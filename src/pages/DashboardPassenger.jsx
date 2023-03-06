@@ -156,7 +156,7 @@ const DashboardPassenger = () => {
           <Grid item md={8} xs={12}>
             <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
               <InstallmentsTable
-                description={contratoIndividual[0].contrato_general.descripcion}
+                description={`Contrato Individual: ${contratoIndividual[0].cod_contrato}`}
                 installments={installments}
               />
             </Paper>
