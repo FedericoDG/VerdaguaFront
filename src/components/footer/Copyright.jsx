@@ -21,7 +21,7 @@ const Copyright = (props) => {
         sx={{marginRight: '4px'}}
         variant="body2"
       >
-        Desarrolado por Federico González -
+        Desarrollado por Federico González -
       </Typography>
       <Typography ref={bottom} align="center" color="text.secondary" variant="body2">
         <a href="mailto:fede@nazgul.com.ar" target="_top">

@@ -65,7 +65,7 @@ const SettingsForm = ({settings}) => {
               <ErrorMessage component={FormError} name="porcentaje_recargo_segundo_vencimiento" />
               <CustomTextField
                 autoComplete="off"
-                label="Access Token de preducción de Mercadopago"
+                label="Access Token de producción de Mercadopago"
                 name="access_token_produccion"
               />
               <ErrorMessage component={FormError} name="access_token_produccion" />

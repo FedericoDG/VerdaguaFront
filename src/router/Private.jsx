@@ -29,8 +29,8 @@ const Private = () => (
     <Route element={<Balance />} path="/balance" />
     <Route element={<GeneralContracts />} path="/general-contracts" />
     <Route element={<Home />} path="/" />
-    <Route element={<IndividualContracts />} path="/individual-contracts" />
-    <Route element={<IndividualContractsList />} path="/individual-contracts-list" />
+    <Route element={<IndividualContracts />} path="/individual-contracts-create" />
+    <Route element={<IndividualContractsList />} path="/individual-contracts" />
     <Route element={<Institutions />} path="/institutions" />
     <Route element={<Passengers />} path="/passengers" />
     <Route element={<Payments />} path="/payments" />

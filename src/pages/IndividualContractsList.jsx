@@ -1,6 +1,9 @@
-import {Grid, Paper, Typography} from '@mui/material'
+import {Button, Grid, Paper, Stack, Typography} from '@mui/material'
 import {useContext, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import {useSnackbar} from 'notistack'
+import AttachMoneyTwoToneIcon from '@mui/icons-material/AttachMoneyTwoTone'
+import PostAddTwoToneIcon from '@mui/icons-material/PostAddTwoTone'
 
 import Dashboard from '../components/Dashboard'
 import Form from '../components/individualcontracts/list/Form'
@@ -18,6 +21,8 @@ const IndividualContractsList = () => {
   const [showRecalc, setShowRecalc] = useState(null) // OJO ACA2
 
   const {enqueueSnackbar} = useSnackbar()
+
+  const navigate = useNavigate()
 
   const onSuccess = (res) => {
     let code
@@ -66,8 +71,30 @@ const IndividualContractsList = () => {
             flexDirection: 'column',
           }}
         >
+          <Stack direction="row" display="flex" justifyContent="flex-end">
+            <Button
+              color="secondary"
+              startIcon={<AttachMoneyTwoToneIcon />}
+              sx={{paddingY: '12px', mb: 2, width: 300, mx: 2}}
+              type="button"
+              variant="contained"
+              onClick={() => navigate('/dashboard/payments')}
+            >
+              Cargar un Pago
+            </Button>
+            <Button
+              color="success"
+              startIcon={<PostAddTwoToneIcon />}
+              sx={{paddingY: '12px', mb: 2, width: 300}}
+              type="button"
+              variant="contained"
+              onClick={() => navigate('/dashboard/individual-contracts-create')}
+            >
+              Crear Contrato Individual
+            </Button>
+          </Stack>
           <Typography mb={2} sx={{marginBottom: 1}} variant="h6">
-            Contratos Individuales
+            Buscar Contrato Individual
           </Typography>
           <Table
             handleCloseModal={handleCloseModal}

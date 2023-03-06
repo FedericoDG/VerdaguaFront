@@ -73,18 +73,18 @@ export const mainListItems = (
     </NavLink>
     <NavLink
       style={({isActive}) => (isActive ? styles.active : styles.inactive)}
-      to="/dashboard/individual-contracts-list"
+      to="/dashboard/individual-contracts"
     >
       <ListItemButton>
         <ListItemIcon>
           <TaskIcon />
         </ListItemIcon>
-        <ListItemText primary="Contratos individuales" secondary="Listar/Editar" />
+        <ListItemText primary="Contratos individuales" secondary="Crear/Editar/Listar" />
       </ListItemButton>
     </NavLink>
-    <NavLink
+    {/*  <NavLink
       style={({isActive}) => (isActive ? styles.active : styles.inactive)}
-      to="/dashboard/individual-contracts"
+      to="/dashboard/individual-contracts-create"
     >
       <ListItemButton>
         <ListItemIcon>
@@ -92,7 +92,7 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Contratos individuales" secondary="Crear" />
       </ListItemButton>
-    </NavLink>
+    </NavLink> 
     <Divider />
     <NavLink
       style={({isActive}) => (isActive ? styles.active : styles.inactive)}
@@ -104,7 +104,7 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Cargar un Pago" />
       </ListItemButton>
-    </NavLink>
+    </NavLink> */}
   </>
 )
 
