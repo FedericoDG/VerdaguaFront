@@ -39,6 +39,7 @@ const TableBig = ({data, isFetching}) => {
       renderCell: ({row}) => (
         <Typography variant="caption">{formatDate(row.created_at)}</Typography>
       ),
+      valueGetter: ({row}) => formatDate(row.created_at),
     },
     {
       field: 'importe',

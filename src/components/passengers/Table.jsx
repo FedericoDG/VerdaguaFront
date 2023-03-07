@@ -97,6 +97,7 @@ const Table = ({passenger, setInitialValues}) => {
       headerAlign: 'center',
       width: 100,
       renderCell: ({row}) => <div>{formatDate(row.fecha_nac)}</div>,
+      valueGetter: ({row}) => formatDate(row.fecha_nac),
     },
     {
       field: 'obs_medicas',

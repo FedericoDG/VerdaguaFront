@@ -86,6 +86,7 @@ const Table = ({responsible, setInitialValues}) => {
       width: 50,
       flex: 1,
       renderCell: ({row}) => <div>{formatDate(row.fecha_nac)}</div>,
+      valueGetter: ({row}) => formatDate(row.fecha_nac),
     },
     {
       field: 'telefono',

@@ -141,6 +141,7 @@ const Table = ({generalContract, setInitialValues}) => {
       renderCell: ({row}) => (
         <Typography variant="caption">{formatDate(row.fecha_viaje)}</Typography>
       ),
+      valueGetter: ({row}) => formatDate(row.fecha_viaje),
     },
     {
       field: 'asientos_totales',
