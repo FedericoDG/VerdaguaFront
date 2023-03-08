@@ -126,10 +126,10 @@ const Payments = () => {
         >
           {!passengerCodes ? (
             <Spinner height={275} />
-          ) : passengerCodes.length === 0 ? (
+          ) : passengerCodes?.length === 0 ? (
             <>
               <Typography align="center" color="GrayText" variant="h6">
-                No se encontraron Contratos Individuales
+                No se encontraron Contratos Individuales VIGENTES
               </Typography>
               <Typography align="center" variant="button">
                 No es posible crear un pago

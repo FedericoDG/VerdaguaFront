@@ -1,6 +1,6 @@
 import {Grid, Paper, Typography} from '@mui/material'
 import {useSearchParams} from 'react-router-dom'
-import {useRef, useState} from 'react'
+import {useState} from 'react'
 
 import {useGetResponsibleDocuments} from '../hooks/useResponsibles'
 import {useGetPassengerById} from '../hooks/usePassengers'
@@ -19,7 +19,7 @@ const Passengers = () => {
     documento_responsable: '',
   })
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get('passenger')
 
   const {data: responsibleDocuments} = useGetResponsibleDocuments()

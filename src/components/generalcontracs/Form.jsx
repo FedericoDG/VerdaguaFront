@@ -128,7 +128,13 @@ const GeneralContractsForm = ({
                   variant: 'outlined',
                 }}
               />
-              <CustomTextField autoComplete="off" label="Enlace al Contrato" name="contract_url" />
+              <CustomTextField
+                multiline
+                autoComplete="off"
+                label="Programa"
+                minRows={3}
+                name="contract_url"
+              />
               <ErrorMessage component={FormError} name="contract_url" />
             </Stack>
           </Grid>

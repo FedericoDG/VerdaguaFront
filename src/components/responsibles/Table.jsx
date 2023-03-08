@@ -174,7 +174,6 @@ const Table = ({responsible, setInitialValues}) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          // width: 550,
         }}
       >
         <div>

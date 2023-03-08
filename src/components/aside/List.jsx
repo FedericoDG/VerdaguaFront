@@ -10,11 +10,9 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 import SettingsIcon from '@mui/icons-material/Settings'
 import TaskIcon from '@mui/icons-material/Task'
-import NoteAddIcon from '@mui/icons-material/NoteAdd'
 
 const styles = {
   active: {
@@ -82,29 +80,6 @@ export const mainListItems = (
         <ListItemText primary="Contratos individuales" secondary="Crear/Editar/Listar" />
       </ListItemButton>
     </NavLink>
-    {/*  <NavLink
-      style={({isActive}) => (isActive ? styles.active : styles.inactive)}
-      to="/dashboard/individual-contracts-create"
-    >
-      <ListItemButton>
-        <ListItemIcon>
-          <NoteAddIcon />
-        </ListItemIcon>
-        <ListItemText primary="Contratos individuales" secondary="Crear" />
-      </ListItemButton>
-    </NavLink> 
-    <Divider />
-    <NavLink
-      style={({isActive}) => (isActive ? styles.active : styles.inactive)}
-      to="/dashboard/payments"
-    >
-      <ListItemButton>
-        <ListItemIcon>
-          <MonetizationOnIcon />
-        </ListItemIcon>
-        <ListItemText primary="Cargar un Pago" />
-      </ListItemButton>
-    </NavLink> */}
   </>
 )
 
@@ -137,6 +112,16 @@ export const adminListItems = (
         <ListItemText primary="Caja/Balance" />
       </ListItemButton>
     </NavLink>
+  </>
+)
+
+export const superListItems = (
+  <>
+    <ListSubheader inset component="div">
+      <Typography color="error" sx={{fontWeight: 'bold'}} variant="caption">
+        SUPER ADMINISTRADOR
+      </Typography>
+    </ListSubheader>
     <NavLink
       style={({isActive}) => (isActive ? styles.active : styles.inactive)}
       to="/dashboard/users"
@@ -148,19 +133,16 @@ export const adminListItems = (
         <ListItemText primary="Usuarios" />
       </ListItemButton>
     </NavLink>
+    <NavLink
+      style={({isActive}) => (isActive ? styles.active : styles.inactive)}
+      to="/dashboard/settings"
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <SettingsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Parámetros del sitio" />
+      </ListItemButton>
+    </NavLink>
   </>
-)
-
-export const superListItems = (
-  <NavLink
-    style={({isActive}) => (isActive ? styles.active : styles.inactive)}
-    to="/dashboard/settings"
-  >
-    <ListItemButton>
-      <ListItemIcon>
-        <SettingsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Parámetros del sitio" />
-    </ListItemButton>
-  </NavLink>
 )

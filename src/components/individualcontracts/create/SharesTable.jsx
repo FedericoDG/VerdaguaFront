@@ -90,9 +90,15 @@ const SharesTable = ({
       },
     })
     handleCancel()
-    setTimeout(() => {
-      navigate(`/dashboard/payments?id=${res.data.id}`)
-    }, 3000)
+    if (res.data.redirectToPay === 'true') {
+      setTimeout(() => {
+        navigate(`/dashboard/payments?id=${res.data.id}`)
+      }, 3000)
+    } else {
+      setTimeout(() => {
+        navigate(`/dashboard/individual-contracts?id=${res.data.id}`)
+      }, 3000)
+    }
   }
 
   const {mutate: postIndividualContract} = usePostIndividualContract(onSuccess)
@@ -117,50 +123,58 @@ const SharesTable = ({
           Crear Contrato Individual
         </Typography>
       </Box>
-      <div ref={componentRef}>
-        <Grid container alignItems="center" gap={1} justifyContent="right" spacing={0}>
-          <Grid>
-            <Typography align="right" color="inherit" variant="h6">
-              Código del contrato:
-            </Typography>
+      {cuotas > 12 ? (
+        <Typography align="center" color="error" variant="h2">
+          PASAJERO LIBERADO
+        </Typography>
+      ) : (
+        <div ref={componentRef}>
+          <Grid container alignItems="center" gap={1} justifyContent="right" spacing={0}>
+            <Grid>
+              <Typography align="right" color="inherit" variant="h6">
+                Código del contrato:
+              </Typography>
+            </Grid>
+            <Grid>
+              <Typography align="right" color="primary" variant="h5">
+                {codigo}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid>
-            <Typography align="right" color="primary" variant="h5">
-              {codigo}
-            </Typography>
-          </Grid>
-        </Grid>
-        <TableContainer sx={{backgroundColor: '#f7f7f7'}}>
-          <Table size="small" sx={{minWidth: 650}}>
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Cuota</TableCell>
-                <TableCell align="center">Fecha primer vencimiento</TableCell>
-                <TableCell align="center">Valor primer vencimiento</TableCell>
-                <TableCell align="center">Fecha segundo vencimiento</TableCell>
-                <TableCell align="center">Valor segundo vencimiento</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sharesArray.map((row, idx) => (
-                <TableRow key={nanoid()} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                  <TableCell align="center" component="th" scope="row">
-                    {idx === 0 ? 'seña' : row.numero}
-                  </TableCell>
-                  <TableCell align="center">{formatDate(row.fecha_primer_vencimiento)}</TableCell>
-                  <TableCell align="center">
-                    {formatCurrency(row.valor_primer_vencimiento)}
-                  </TableCell>
-                  <TableCell align="center">{formatDate(row.fecha_segundo_vencimiento)}</TableCell>
-                  <TableCell align="center">
-                    {formatCurrency(row.valor_segundo_vencimiento)}
-                  </TableCell>
+          <TableContainer sx={{backgroundColor: '#f7f7f7'}}>
+            <Table size="small" sx={{minWidth: 650}}>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">Cuota</TableCell>
+                  <TableCell align="center">Fecha primer vencimiento</TableCell>
+                  <TableCell align="center">Valor primer vencimiento</TableCell>
+                  <TableCell align="center">Fecha segundo vencimiento</TableCell>
+                  <TableCell align="center">Valor segundo vencimiento</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
+              </TableHead>
+              <TableBody>
+                {sharesArray.map((row, idx) => (
+                  <TableRow key={nanoid()} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                    <TableCell align="center" component="th" scope="row">
+                      {idx === 0 ? 'seña' : row.numero}
+                    </TableCell>
+                    <TableCell align="center">{formatDate(row.fecha_primer_vencimiento)}</TableCell>
+                    <TableCell align="center">
+                      {formatCurrency(row.valor_primer_vencimiento)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {formatDate(row.fecha_segundo_vencimiento)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {formatCurrency(row.valor_segundo_vencimiento)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+      )}
       <Grid container gap={2} justifyContent="center">
         <Grid>
           <ReactToPrint
@@ -169,6 +183,7 @@ const SharesTable = ({
               <Button
                 ref={sendButton}
                 color="primary"
+                disabled={cuotas > 12}
                 startIcon={<LocalPrintshopTwoToneIcon />}
                 sx={{paddingY: '12px', m: '16px auto', width: 300}}
                 type="reset"

@@ -153,7 +153,6 @@ const Table = ({institution, setInitialValues}) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          // width: 550,
         }}
       >
         <div>
@@ -188,7 +187,7 @@ const Table = ({institution, setInitialValues}) => {
               sx={{marginX: 1}}
               variant="contained"
               onClick={() => {
-                setName(null) // OJO ACA2
+                setName(null)
                 setAll('all')
               }}
             >

@@ -25,10 +25,15 @@ const validationSchema = Yup.object({
     .matches(/^[0-9]+$/, 'Sólo se aceptan números')
     .min(1, 'Mínimo 1 dígito')
     .max(2, 'Máximo 2 dígitos')
-    .required('Porcentaje de recargo por segundo vencimiento" es requerido.'),
+    .required('Porcentaje de recargo por segundo vencimiento es requerido.'),
   access_token_produccion: Yup.string().required(
     'Access Token de preducción de Mercadopago es requerido.'
   ),
+  ticket: Yup.string()
+    .matches(/^[0-9]+$/, 'Sólo se aceptan números')
+    .min(1, 'Mínimo 1 dígito')
+    .max(7, 'Máximo 7 dígitos')
+    .required('El número del siguiente ticket es requerido.'),
 })
 
 export default validationSchema

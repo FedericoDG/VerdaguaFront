@@ -13,8 +13,8 @@ import {
   Typography,
 } from '@mui/material'
 import {ErrorMessage, Form, Formik} from 'formik'
-import {useContext, useEffect} from 'react'
 import {nanoid} from 'nanoid'
+import {useContext, useEffect} from 'react'
 import TaskAltSharpIcon from '@mui/icons-material/TaskAltSharp'
 
 import {useRecalculate} from '../../../hooks/useIndividualContracts'
@@ -126,7 +126,7 @@ const Recalc = ({
                 variant="outlined"
                 onClick={() => {
                   setInitialValues(resetValues)
-                  setShowRecalc(null) // OJO ACA2
+                  setShowRecalc(null)
                   handleScroll(top)
                 }}
               >

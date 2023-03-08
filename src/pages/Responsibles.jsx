@@ -22,7 +22,7 @@ const Responsibles = () => {
     info: '',
   })
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get('id')
 
   const {data: responsible} = UseGetResponsibleById(id)

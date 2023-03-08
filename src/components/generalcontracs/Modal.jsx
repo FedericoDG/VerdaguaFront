@@ -26,11 +26,11 @@ import formatDate from '../../utils/formatDate'
 import formatCurrency from '../../utils/formatCurrency'
 
 const Modal = ({activeData, handleClose, open}) => {
-  const {data: generalContracts} = UseGetGeneralContractById(activeData.id)
+  const {data: generalContract} = UseGetGeneralContractById(activeData.id)
 
   const navigate = useNavigate()
 
-  if (!generalContracts?.id) return null
+  if (!generalContract?.generalContract) return null
 
   return (
     <div>
@@ -76,19 +76,27 @@ const Modal = ({activeData, handleClose, open}) => {
               <TableBody>
                 <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                   <TableCell align="center" component="th" scope="row">
-                    {generalContracts.cod_contrato}
+                    {generalContract.generalContract.cod_contrato}
                   </TableCell>
-                  <TableCell align="center">{generalContracts.estado}</TableCell>
-                  <TableCell align="center">{generalContracts.descripcion}</TableCell>
-                  <TableCell align="center">{formatDate(generalContracts.fecha_viaje)}</TableCell>
+                  <TableCell align="center">{generalContract.generalContract.estado}</TableCell>
                   <TableCell align="center">
-                    {formatCurrency(generalContracts.valor_contrato)}
+                    {generalContract.generalContract.descripcion}
                   </TableCell>
-                  <TableCell align="center">{generalContracts.asientos_totales}</TableCell>
-                  <TableCell align="center">{generalContracts.asientos_ocupados}</TableCell>
-                  <TableCell align="center">{generalContracts.grado}</TableCell>
-                  <TableCell align="center">{generalContracts.division}</TableCell>
-                  <TableCell align="center">{generalContracts.turno}</TableCell>
+                  <TableCell align="center">
+                    {formatDate(generalContract.generalContract.fecha_viaje)}
+                  </TableCell>
+                  <TableCell align="center">
+                    {formatCurrency(generalContract.generalContract.valor_contrato)}
+                  </TableCell>
+                  <TableCell align="center">
+                    {generalContract.generalContract.asientos_totales}
+                  </TableCell>
+                  <TableCell align="center">
+                    {generalContract.generalContract.asientos_ocupados}
+                  </TableCell>
+                  <TableCell align="center">{generalContract.generalContract.grado}</TableCell>
+                  <TableCell align="center">{generalContract.generalContract.division}</TableCell>
+                  <TableCell align="center">{generalContract.generalContract.turno}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -119,15 +127,23 @@ const Modal = ({activeData, handleClose, open}) => {
               <TableBody>
                 <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                   <TableCell align="center" component="th" scope="row">
-                    {generalContracts.institucion.nombre}
+                    {generalContract.generalContract.institucion.nombre}
                   </TableCell>
-                  <TableCell align="center">{generalContracts.institucion.direccion}</TableCell>
-                  <TableCell align="center">{generalContracts.institucion.localidad}</TableCell>
-                  <TableCell align="center">{generalContracts.institucion.telefono}</TableCell>
+                  <TableCell align="center">
+                    {generalContract.generalContract.institucion.direccion}
+                  </TableCell>
+                  <TableCell align="center">
+                    {generalContract.generalContract.institucion.localidad}
+                  </TableCell>
+                  <TableCell align="center">
+                    {generalContract.generalContract.institucion.telefono}
+                  </TableCell>
                   <TableCell align="center">
                     <Button
                       onClick={() =>
-                        navigate(`/dashboard/institutions?id=${generalContracts.institucion.id}`)
+                        navigate(
+                          `/dashboard/institutions?id=${generalContract.generalContract.institucion.id}`
+                        )
                       }
                     >
                       <Typography variant="caption">Ir a institución</Typography>
@@ -138,10 +154,10 @@ const Modal = ({activeData, handleClose, open}) => {
             </Table>
           </TableContainer>
 
-          {generalContracts.contratos_individuales?.length > 0 && (
+          {generalContract.generalContract.contratos_individuales?.length > 0 && (
             <Box>
               <Typography variant="button">Contratos Individuales</Typography>
-              {generalContracts.contratos_individuales.map((el) => (
+              {generalContract.generalContract.contratos_individuales.map((el) => (
                 <Accordion key={nanoid()}>
                   <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     {el.cod_contrato}
@@ -209,7 +225,6 @@ const Modal = ({activeData, handleClose, open}) => {
           )}
         </DialogContent>
         <DialogActions>
-          {/* <Button onClick={handleClose}>Disagree</Button> */}
           <Button autoFocus onClick={handleClose}>
             Cerrar
           </Button>

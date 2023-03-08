@@ -11,7 +11,6 @@ const deleteUser = (id) => deleteRequest(`/users/${id}`)
 // GET USERS
 const useGetUsers = () =>
   useQuery(['users'], getUsers, {
-    // select: (data) => data.data,
     select: (data) => data.data.map((el) => ({...el, rolename: el.rol.name})),
   })
 

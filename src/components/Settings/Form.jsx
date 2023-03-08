@@ -10,9 +10,8 @@ import validationSchema from './validationSchema'
 const SettingsForm = ({settings}) => {
   const {mutate: putSettings} = usePutSettings()
 
-  const handleFormSubmit = async (value, {resetForm}) => {
+  const handleFormSubmit = async (value) => {
     putSettings(value)
-    // resetForm()
   }
 
   return (
@@ -47,6 +46,8 @@ const SettingsForm = ({settings}) => {
                 name="porcentaje_senia"
               />
               <ErrorMessage component={FormError} name="porcentaje_senia" />
+              <CustomTextField autoComplete="off" label="N° del siguiente ticket" name="ticket" />
+              <ErrorMessage component={FormError} name="ticket" />
             </Stack>
           </Grid>
           <Grid item md={6} xs={12}>

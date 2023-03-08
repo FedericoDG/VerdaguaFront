@@ -219,7 +219,6 @@ const Modal = ({activeData, handleClose, open}) => {
         )}
       </DialogContent>
       <DialogActions>
-        {/* <Button onClick={handleClose}>Disagree</Button> */}
         <Button autoFocus onClick={handleClose}>
           Cerrar
         </Button>

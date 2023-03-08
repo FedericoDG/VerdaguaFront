@@ -1,6 +1,6 @@
 import {Box, Divider, Grid, Paper, Stack, Typography} from '@mui/material'
 
-import {formatTwoDigits} from '../../utils/formatCurrency'
+import formatCurrency, {formatTwoDigits} from '../../utils/formatCurrency'
 
 const Resume = ({allData}) => (
   <Grid item xs={5}>
@@ -15,7 +15,7 @@ const Resume = ({allData}) => (
     >
       <Stack direction="row" display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="button">Total Ingresos:</Typography>
-        <Typography variant="h6">{allData.totalIncomes}</Typography>
+        <Typography variant="h6">{formatCurrency(allData.totalIncomes)}</Typography>
       </Stack>
       <Divider />
       <Box sx={{display: 'flex', flexDirection: 'column'}}>
@@ -32,7 +32,7 @@ const Resume = ({allData}) => (
           </span>
           <span style={{width: '30%'}}>
             <Typography align="right" sx={{display: 'block'}} variant="overline">
-              {allData.cash}
+              {formatCurrency(allData.cash)}
             </Typography>
           </span>
         </Stack>
@@ -49,7 +49,7 @@ const Resume = ({allData}) => (
           </span>
           <span style={{width: '30%'}}>
             <Typography align="right" sx={{display: 'block'}} variant="overline">
-              {allData.debit}
+              {formatCurrency(allData.debit)}
             </Typography>
           </span>
         </Stack>
@@ -68,7 +68,7 @@ const Resume = ({allData}) => (
           </span>
           <span style={{width: '30%'}}>
             <Typography align="right" sx={{display: 'block'}} variant="overline">
-              {allData.credit}
+              {formatCurrency(allData.credit)}
             </Typography>
           </span>
         </Stack>
@@ -87,7 +87,7 @@ const Resume = ({allData}) => (
           </span>
           <span style={{width: '30%'}}>
             <Typography align="right" sx={{display: 'block'}} variant="overline">
-              {allData.transference}
+              {formatCurrency(allData.transference)}
             </Typography>
           </span>
         </Stack>
@@ -106,7 +106,7 @@ const Resume = ({allData}) => (
           </span>
           <span style={{width: '30%'}}>
             <Typography align="right" sx={{display: 'block'}} variant="overline">
-              {allData.mercadopago}
+              {formatCurrency(allData.mercadopago)}
             </Typography>
           </span>
         </Stack>
@@ -124,7 +124,7 @@ const Resume = ({allData}) => (
       }}
     >
       <Typography variant="button">Total Egresos:</Typography>
-      <Typography variant="h6">{allData.totalOutcomes}</Typography>
+      <Typography variant="h6">{formatCurrency(allData.totalOutcomes)}</Typography>
     </Paper>
     <Paper
       sx={{
@@ -139,7 +139,7 @@ const Resume = ({allData}) => (
     >
       <Typography variant="button">Resultado:</Typography>
       <Typography variant="h6">
-        {Number(allData.totalIncomes) + Number(allData.totalOutcomes)}
+        {formatCurrency(Number(allData.totalIncomes) + Number(allData.totalOutcomes))}
       </Typography>
     </Paper>
   </Grid>

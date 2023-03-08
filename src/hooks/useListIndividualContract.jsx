@@ -1,7 +1,7 @@
 import {useSearchParams} from 'react-router-dom'
 import {useState} from 'react'
 
-import {useGetIndividualContactById, usePostIndividualContract} from './useIndividualContracts'
+import {useGetIndividualContactById} from './useIndividualContracts'
 
 const useListIndividualContract = () => {
   const [initialValues, setInitialValues] = useState({
@@ -14,7 +14,7 @@ const useListIndividualContract = () => {
     nuevo_valor: '',
   })
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get('id')
 
   const [showEditState, setShowEditState] = useState(false)

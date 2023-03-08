@@ -13,6 +13,7 @@ const ChargeForm = ({all, initialValues, refetch, setInitialValues, setAll}) => 
     setAll({desde, hasta, info})
     setInitialValues({desde, hasta, info})
     if (all) refetch()
+    console.log(new Date())
   }
 
   return (

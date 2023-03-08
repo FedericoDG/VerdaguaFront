@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-nested-ternary */
 import {Chip, Paper, Typography} from '@mui/material'
 import {
@@ -8,8 +9,9 @@ import {
   GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
-import {useState} from 'react'
+import {useContext, useState} from 'react'
 
+import appContext from '../../context/AppContext'
 import formatDate from '../../utils/formatDate'
 import Spinner from '../Spinner'
 
@@ -26,6 +28,10 @@ const CustomToolbar = () => (
 const calculaAlto = (largo) => 165 + 40 * Math.min(largo, 10)
 
 const TableBig = ({data, isFetching}) => {
+  const {
+    user: {id_rol},
+  } = useContext(appContext)
+
   const [open, setOpen] = useState(false)
   const [order, setOrder] = useState(null)
 
@@ -125,6 +131,22 @@ const TableBig = ({data, isFetching}) => {
     },
   ]
 
+  if (id_rol === 1) {
+    columns.push({
+      field: 'usuario.apellido',
+      headerName: 'Usuario',
+      width: 180,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: ({row}) => (
+        <Typography variant="caption">
+          {row.usuario.apellido}, {row.usuario.nombre}
+        </Typography>
+      ),
+      valueGetter: ({row}) => `${row.usuario.apellido}, ${row.usuario.nombre}`,
+    })
+  }
+
   return (
     <>
       <Paper
@@ -147,6 +169,7 @@ const TableBig = ({data, isFetching}) => {
             }}
           >
             <DataGrid
+              disableColumnMenu
               disableSelectionOnClick
               columns={columns}
               components={{

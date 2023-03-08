@@ -49,7 +49,9 @@ const useGeneralContractsComponents = () => {
 
   const {enqueueSnackbar} = useSnackbar()
 
-  const handleOpenModal = () => setOpenModal(true)
+  const handleOpenModal = () => {
+    setOpenModal(true)
+  }
   const handleCloseModal = () => setOpenModal(false)
   const handleOpenDeleteDialog = () => setOpenDeleteDialog(true)
   const handleCloseDeleteDialog = () => setOpenDeleteDialog(false)
@@ -121,7 +123,7 @@ const useGeneralContractsComponents = () => {
               size="small"
               onClick={() =>
                 navigate(
-                  `/dashboard/individual-contracts-list?list=${JSON.stringify(
+                  `/dashboard/individual-contracts?list=${JSON.stringify(
                     error.response.data.valids
                   )}`
                 )
@@ -152,13 +154,13 @@ const useGeneralContractsComponents = () => {
     e.preventDefault()
 
     if (field === 'code') {
-      setAll(null) // OJO ACA2
-      setName(null) // OJO ACA2
+      setAll(null)
+      setName(null)
       setCode(e.target.elements.query.value)
     }
     if (field === 'name') {
-      setAll(null) // OJO ACA2
-      setCode(null) // OJO ACA2
+      setAll(null)
+      setCode(null)
       setName(e.target.elements.query.value)
     }
 

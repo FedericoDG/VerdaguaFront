@@ -98,13 +98,13 @@ const usePassengersComponents = () => {
     e.preventDefault()
 
     if (field === 'documento') {
-      setLastname(null) // OJO ACA2
-      setAll(null) // OJO ACA2
+      setLastname(null)
+      setAll(null)
       setDocument(e.target.elements.query.value)
     }
     if (field === 'apellido') {
-      setDocument(null) // OJO ACA2
-      setAll(null) // OJO ACA2
+      setDocument(null)
+      setAll(null)
       setLastname(e.target.elements.query.value)
     }
     e.target.elements.query.value = ''

@@ -144,7 +144,6 @@ const Table = ({
       align: 'left',
       headerAlign: 'center',
       width: 200,
-      // valueFormatter: ({value}) => value.nombre,
       renderCell: ({row}) => (
         <div>
           <Grid>

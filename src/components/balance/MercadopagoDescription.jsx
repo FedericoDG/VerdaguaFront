@@ -1,11 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material'
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@mui/material'
 
 import {useGetMPOrder} from '../../hooks/UseMercadopago'
 
@@ -18,9 +11,7 @@ const MercadopagoDescription = ({open, order, setOpen, setOrder}) => {
         <Dialog maxWidth="lg" open={open}>
           <DialogTitle>Detalle orden Mercadopago</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              <pre>{JSON.stringify(data, null, 2)}</pre>
-            </DialogContentText>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
           </DialogContent>
           <DialogActions>
             <Button

@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-/* eslint-disable no-plusplus */
 /* eslint-disable react/no-unstable-nested-components */
 import {Avatar, Box, Button, Grid, Stack, Typography} from '@mui/material'
 import {useNavigate} from 'react-router-dom'
@@ -9,14 +8,18 @@ import {useSnackbar} from 'notistack'
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone'
 import {useReactToPrint} from 'react-to-print'
 
+import {useGetTicket} from '../../hooks/useSettings'
 import formatCurrency from '../../utils/formatCurrency'
 import formatDate from '../../utils/formatDate'
 import logo from '../../assets/logo.png'
 import NumeroALetras from '../../utils/numberToString'
 import useCreatePay from '../../hooks/useInstallments'
+import Spinner from '../Spinner'
 
 const Bill = ({hardReset, initialValues, initialValues2}) => {
   const [disabled, setDisabled] = useState(true)
+
+  const {data} = useGetTicket()
 
   const componentRef = useRef()
 
@@ -56,6 +59,8 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
   const today = new Date()
 
   const splitInfo = initialValues2.movimiento.info.split('.')
+
+  if (!data) return <Spinner />
 
   return (
     <>
@@ -105,7 +110,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
                 sx={{borderWidth: 2, borderColor: '#0000', borderStyle: 'solid', paddingLeft: 5}}
               >
                 <Typography variant="h5">RECIBO DE PAGO</Typography>
-                <Typography variant="h6">N° 123456789</Typography>
+                <Typography variant="h6">N° {data.ticket.toString().padStart(6, '0')}</Typography>
                 <Box>
                   <Typography align="right" sx={{marginTop: 8}} variant="body1">
                     FECHA: {formatDate(today)}
@@ -275,7 +280,11 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
             type="button"
             variant="contained"
             onClick={() => {
-              const body = {id: initialValues.contratoIndividual.id, ...initialValues2}
+              const body = {
+                id: initialValues.contratoIndividual.id,
+                ...initialValues2,
+                ticket: data.ticket,
+              }
 
               createPay(body)
             }}

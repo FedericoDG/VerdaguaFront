@@ -7,13 +7,13 @@ import InstallmentCard from './Installment'
 
 const InstallmentsTable = ({installments, description}) => {
   const findOne = installments?.findIndex((el) => el.estado === 'pendiente')
-  const [checked, setChecked] = useState(null)
+  const [checked] = useState(null)
 
   const [success, setSuccess] = useState(false)
   const [pending, setPending] = useState(false)
   const [failure, setFailure] = useState(false)
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const feedback = searchParams.get('feedback')
 
   useEffect(() => {
@@ -46,24 +46,34 @@ const InstallmentsTable = ({installments, description}) => {
           </strong>
         </Alert>
       )}
-      <Box alignItems="center" display="flex" my={2}>
-        <Typography mx={2} variant="h6">
-          Seleccionar la cuota a pagar
-        </Typography>
-      </Box>
-      <Grid container justifyContent="space-between">
-        {installments &&
-          installments.map((installment, idx) => (
-            <InstallmentCard
-              key={nanoid()}
-              checked={idx === checked}
-              description={description}
-              flag={idx !== findOne}
-              installment={installment}
-              installments={installments.length - 1}
-            />
-          ))}
-      </Grid>
+      {installments.length === 0 ? (
+        <Box alignItems="center" display="flex" my={2}>
+          <Typography mx={2} variant="h6">
+            PASAJERO LIBERADO, NO HAY CUOTAS
+          </Typography>
+        </Box>
+      ) : (
+        <>
+          <Box alignItems="center" display="flex" my={2}>
+            <Typography mx={2} variant="h6">
+              Seleccionar la cuota a pagar
+            </Typography>
+          </Box>
+          <Grid container justifyContent="space-between">
+            {installments &&
+              installments.map((installment, idx) => (
+                <InstallmentCard
+                  key={nanoid()}
+                  checked={idx === checked}
+                  description={description}
+                  flag={idx !== findOne}
+                  installment={installment}
+                  installments={installments.length - 1}
+                />
+              ))}
+          </Grid>
+        </>
+      )}
     </div>
   )
 }

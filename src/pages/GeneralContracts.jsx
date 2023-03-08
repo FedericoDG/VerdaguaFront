@@ -23,7 +23,7 @@ const GeneralContracts = () => {
     estado: 'vigente',
   })
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get('id')
 
   const {data: generalContract} = UseGetGeneralContractById(id)

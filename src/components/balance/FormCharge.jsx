@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import {Button, Grid, Stack} from '@mui/material'
 import {ErrorMessage, Form, Formik, useFormikContext} from 'formik'
 import {useEffect, useState} from 'react'

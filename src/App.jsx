@@ -5,7 +5,7 @@ import {SnackbarProvider} from 'notistack'
 
 import AppProvider from './context/AppProvider'
 import AppRouter from './router/AppRouter'
-import dark from './themes/dark'
+import light from './themes/light'
 
 const queryClient = new QueryClient()
 
@@ -13,7 +13,7 @@ const App = () => (
   <AppProvider>
     <QueryClientProvider client={queryClient}>
       <SnackbarProvider maxSnack={3}>
-        <ThemeProvider theme={dark}>
+        <ThemeProvider theme={light}>
           <CssBaseline />
           <AppRouter />
         </ThemeProvider>

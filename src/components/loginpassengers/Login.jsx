@@ -2,6 +2,7 @@ import {Button, Stack, Box, Typography, Container} from '@mui/material'
 import {Formik, Form, ErrorMessage} from 'formik'
 import {useContext, useState} from 'react'
 import {useSnackbar} from 'notistack'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import {loginAction} from '../../context/actions/auth'
 import {postRequest} from '../../services/httpRequest'
@@ -14,6 +15,7 @@ import validationSchemaLogin from './validationSchema'
 
 const SignIn = () => {
   const [fetching, setFetching] = useState(false)
+  const [disabled, setDisabled] = useState(true)
   const {dispatch} = useContext(appContext)
 
   const {enqueueSnackbar} = useSnackbar()
@@ -75,28 +77,29 @@ const SignIn = () => {
           <Typography color="primary" component="h1" variant="h3">
             Acceso Pasajeros
           </Typography>
-          <Typography color="inherit" component="h1" variant="button">
-            Tu código de contrato luce de la siguente forma:
-          </Typography>
-          <Typography color="inherit" component="h1" variant="h6">
-            AJR-321/52652411
-          </Typography>
           <Box sx={{mt: 1}}>
             <Form style={{width: '100%'}}>
               <Stack p={1} spacing={1}>
                 <CustomTextField
-                  label="Código de Contrato"
+                  label="DNI del pasajero"
                   name="cod_contrato"
                   style={{width: 360}}
                 />
                 <ErrorMessage component={FormError} name="cod_contrato" />
+                <div style={{margin: '16px auto'}}>
+                  <ReCAPTCHA
+                    sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
+                    size="normal"
+                    onChange={() => setDisabled(false)}
+                  />
+                </div>
                 <Button
-                  disabled={fetching}
+                  disabled={fetching || disabled}
                   sx={{paddingY: '12px'}}
                   type="submit"
                   variant="contained"
                 >
-                  Ingresar
+                  {fetching ? 'Ingresando...' : 'Ingresar'}
                 </Button>
               </Stack>
             </Form>

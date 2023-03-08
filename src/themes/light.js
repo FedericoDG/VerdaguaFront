@@ -25,6 +25,6 @@ const themeOptions = {
   },
 }
 
-const dark = createTheme(themeOptions)
+const light = createTheme(themeOptions)
 
-export default dark
+export default light

@@ -29,22 +29,14 @@ const InstallmentCard = ({
     Number(installment.contrato_individual.valor_contrato) -
       Number(installment.contrato_individual.pagos) -
       Number(installment.valor_primer_vencimiento)
-  )}. Contrato: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
-    installment.contrato_individual.pasajero.nombre
-  } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
-    installment.contrato_individual.pasajero.documento
-  }`
+  )}. Contrato: ${installment.contrato_individual.cod_contrato}.`
 
   if (idx === 0) {
     info = `Pago de seña. Saldo: ${formatCurrency(
       Number(installment.contrato_individual.valor_contrato) -
         Number(installment.contrato_individual.pagos) -
         Number(installment.valor_primer_vencimiento)
-    )}. Contrato: ${installment.contrato_individual.cod_contrato}. Pasajero: ${
-      installment.contrato_individual.pasajero.nombre
-    } ${installment.contrato_individual.pasajero.apellido}, DNI: ${
-      installment.contrato_individual.pasajero.documento
-    }`
+    )}. Contrato: ${installment.contrato_individual.cod_contrato}.`
   }
 
   return (

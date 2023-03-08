@@ -3,7 +3,7 @@ import {useContext} from 'react'
 
 import appContext from '../../context/AppContext'
 
-const Copyright = (props) => {
+const Copyright = () => {
   const {bottom} = useContext(appContext)
 
   return (

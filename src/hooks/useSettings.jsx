@@ -4,11 +4,20 @@ import {useSnackbar} from 'notistack'
 import {getRequest, putRequest} from '../services/httpRequest'
 
 const getSettings = () => getRequest('/settings')
+const getTicket = () => getRequest('/settings/ticket')
 const editSettings = (settings) => putRequest(`/settings/`, settings)
 
 // GET SETTINGES
 const useGetSettings = (onSuccess, onError) =>
   useQuery(['settings'], () => getSettings(), {
+    refetchOnWindowFocus: false,
+    onSuccess,
+    onError,
+    select: (data) => data.data,
+  })
+
+export const useGetTicket = (onSuccess, onError) =>
+  useQuery(['settings'], () => getTicket(), {
     refetchOnWindowFocus: false,
     onSuccess,
     onError,

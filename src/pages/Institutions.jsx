@@ -16,7 +16,7 @@ const Institutions = () => {
     localidad: '',
   })
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const id = searchParams.get('id')
 
   const {data: institution} = useGetInstitutionById(id)

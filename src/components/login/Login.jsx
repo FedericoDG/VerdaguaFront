@@ -94,7 +94,7 @@ const SignIn = () => {
                   type="submit"
                   variant="contained"
                 >
-                  Ingresar
+                  {fetching ? 'Ingresando...' : 'Ingresar'}
                 </Button>
               </Stack>
             </Form>

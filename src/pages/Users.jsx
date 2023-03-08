@@ -1,16 +1,25 @@
+/* eslint-disable camelcase */
+import {Navigate} from 'react-router-dom'
 import {Typography} from '@mui/material'
-import {useState} from 'react'
+import {useContext, useState} from 'react'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 
 import useGetUsers, {useDeleteUser, usePostUser, usePutUser} from '../hooks/useUsers'
+import appContext from '../context/AppContext'
 import Dashboard from '../components/Dashboard'
+import Spinner from '../components/Spinner'
 import useGetRoles from '../hooks/useRoles'
 import UsersForm from '../components/users/UsersForm'
 import UsersTable from '../components/users/UsersTable'
-import Spinner from '../components/Spinner'
 
 const Users = () => {
+  const {
+    user: {id_rol},
+  } = useContext(appContext)
+
+  if (id_rol > 1) return <Navigate replace to="/dashboard/" />
+
   const [initialValues, setInitialValues] = useState({
     nombre: '',
     apellido: '',

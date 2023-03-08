@@ -22,11 +22,10 @@ import {
 import {logoutAction} from '../context/actions/auth'
 import appContext from '../context/AppContext'
 import Copyright from '../components/footer/CopyrightVerdagua'
-import InstallmentsTable from '../components/dashboardpassenger/InstallmentsTable'
 import formatCurrency from '../utils/formatCurrency'
-import Spinner from '../components/Spinner'
-
+import InstallmentsTable from '../components/dashboardpassenger/InstallmentsTable'
 import logo from '../assets/logo.png'
+import Spinner from '../components/Spinner'
 
 const DashboardPassenger = () => {
   const {user, dispatch} = useContext(appContext)
@@ -42,17 +41,11 @@ const DashboardPassenger = () => {
     dispatch(logoutAction())
   }
 
-  if (
-    !contratoIndividual ||
-    contratoIndividual.length === 0 ||
-    !installments ||
-    installments.length === 0
-  )
+  if (!contratoIndividual || contratoIndividual.length === 0 || !installments)
     return <Spinner height="100vh" />
 
   return (
     <Grid item xs={12}>
-      {/*  */}
       <Box sx={{flexGrow: 1}}>
         <AppBar position="static">
           <Toolbar>
@@ -116,7 +109,7 @@ const DashboardPassenger = () => {
                   justifyContent="space-between"
                   sx={{marginBottom: 3}}
                 >
-                  <Typography variant="button">Descargar contrato</Typography>
+                  <Typography variant="button">Programa</Typography>
                   <Typography variant="button">
                     <Link
                       href={contratoIndividual[0].contrato_general.contract_url}
@@ -125,13 +118,6 @@ const DashboardPassenger = () => {
                     >
                       Descargar
                     </Link>
-                    {/* <Link
-                      href="https://drive.google.com/file/d/1SwcIcPijg0jSjLMAc86gDZV_iDmrKUih/view"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      Descargar
-                    </Link> */}
                   </Typography>
                 </Stack>
                 <Stack direction="row" display="flex" justifyContent="space-between">

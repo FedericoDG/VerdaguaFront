@@ -1,12 +1,22 @@
+/* eslint-disable camelcase */
 import {Grid, Paper, Typography} from '@mui/material'
+import {Navigate} from 'react-router-dom'
+import {useContext} from 'react'
 import {useSnackbar} from 'notistack'
 
+import appContext from '../context/AppContext'
 import Dashboard from '../components/Dashboard'
 import Form from '../components/Settings/Form'
 import Spinner from '../components/Spinner'
 import useGetSettings from '../hooks/useSettings'
 
 const Settings = () => {
+  const {
+    user: {id_rol},
+  } = useContext(appContext)
+
+  if (id_rol > 1) return <Navigate replace to="/dashboard/" />
+
   const {enqueueSnackbar} = useSnackbar()
 
   const onSuccess = (res) => {

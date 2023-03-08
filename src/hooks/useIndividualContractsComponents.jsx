@@ -36,8 +36,8 @@ const useIndividualContractsComponents = () => {
     nuevo_valor: '',
   }
 
-  const [searchParams, setSearchParams] = useSearchParams()
-  const list = searchParams.get('list') // OJO ACA3
+  const [searchParams] = useSearchParams()
+  const list = searchParams.get('list')
 
   const {enqueueSnackbar} = useSnackbar()
 
@@ -111,21 +111,21 @@ const useIndividualContractsComponents = () => {
     e.preventDefault()
 
     if (field === 'apellido') {
-      setAll(null) // OJO ACA2
-      setDocument(null) // OJO ACA2
-      setCode(null) // OJO ACA2
+      setAll(null)
+      setDocument(null)
+      setCode(null)
       setApellido(e.target.elements.query.value)
     }
     if (field === 'codigo') {
-      setAll(null) // OJO ACA2
-      setDocument(null) // OJO ACA2
-      setApellido(null) // OJO ACA2
+      setAll(null)
+      setDocument(null)
+      setApellido(null)
       setCode(e.target.elements.query.value)
     }
     if (field === 'documento') {
-      setAll(null) // OJO ACA2
-      setCode(null) // OJO ACA2
-      setApellido(null) // OJO ACA2
+      setAll(null)
+      setCode(null)
+      setApellido(null)
       setDocument(e.target.elements.query.value)
     }
     e.target.elements.query.value = ''

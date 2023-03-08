@@ -9,14 +9,16 @@ import {
   GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
+import {Link, useNavigate} from 'react-router-dom'
 import {useContext, useEffect} from 'react'
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone'
-import {Link, useNavigate} from 'react-router-dom'
-import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone'
-import DriveFileRenameOutlineTwoToneIcon from '@mui/icons-material/DriveFileRenameOutlineTwoTone'
-import ContentPasteSearchTwoToneIcon from '@mui/icons-material/ContentPasteSearchTwoTone'
-import WarningAmberIcon from '@mui/icons-material/WarningAmber'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
+import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone'
+import ContentPasteSearchTwoToneIcon from '@mui/icons-material/ContentPasteSearchTwoTone'
+import DriveFileRenameOutlineTwoToneIcon from '@mui/icons-material/DriveFileRenameOutlineTwoTone'
+import FormatListNumberedTwoToneIcon from '@mui/icons-material/FormatListNumberedTwoTone'
+import GroupsTwoToneIcon from '@mui/icons-material/GroupsTwoTone'
+import WarningAmberIcon from '@mui/icons-material/WarningAmber'
 
 import appContext from '../../context/AppContext'
 import DeleteDialog from '../DeleteDialog'
@@ -148,7 +150,7 @@ const Table = ({generalContract, setInitialValues}) => {
       headerName: 'Cupo',
       align: 'center',
       headerAlign: 'center',
-      width: 80,
+      width: 60,
     },
     {
       field: 'asientos_ocupados',
@@ -162,7 +164,7 @@ const Table = ({generalContract, setInitialValues}) => {
       headerName: 'Acciones',
       align: 'center',
       headerAlign: 'center',
-      width: 260,
+      width: 340,
       sortable: false,
       renderCell: (obj) => (
         <>
@@ -234,6 +236,48 @@ const Table = ({generalContract, setInitialValues}) => {
             </span>
           </Tooltip>
 
+          <Tooltip title="Reporte Contrato General">
+            <span>
+              <Button
+                disableElevation
+                color="inherit"
+                disabled={
+                  obj.row.estado === 'cancelado' ||
+                  obj.row.estado === 'terminado' ||
+                  obj.row.asientos_ocupados === 0
+                }
+                sx={{minWidth: 0}}
+                type="submit"
+                variant="text"
+                onClick={() => navigate(`/dashboard/general-contracts/report/${obj.row.id}`)}
+              >
+                <FormatListNumberedTwoToneIcon sx={{fontSize: 32}} />
+              </Button>
+            </span>
+          </Tooltip>
+
+          <Tooltip title="Reporte Listado de Pasajeros">
+            <span>
+              <Button
+                disableElevation
+                color="inherit"
+                disabled={
+                  obj.row.estado === 'cancelado' ||
+                  obj.row.estado === 'terminado' ||
+                  obj.row.asientos_ocupados === 0
+                }
+                sx={{minWidth: 0}}
+                type="submit"
+                variant="text"
+                onClick={() =>
+                  navigate(`/dashboard/general-contracts/report/${obj.row.id}?onlypassenger=true`)
+                }
+              >
+                <GroupsTwoToneIcon sx={{fontSize: 32}} />
+              </Button>
+            </span>
+          </Tooltip>
+
           <Tooltip title="Editar contrato general">
             <span>
               <Button
@@ -259,6 +303,7 @@ const Table = ({generalContract, setInitialValues}) => {
               </Button>
             </span>
           </Tooltip>
+
           <Tooltip title="Eliminar contrato general">
             <span>
               <Button
@@ -291,7 +336,6 @@ const Table = ({generalContract, setInitialValues}) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          // width: 550,
         }}
       >
         <div>
@@ -326,8 +370,8 @@ const Table = ({generalContract, setInitialValues}) => {
               sx={{marginX: 1}}
               variant="contained"
               onClick={() => {
-                setCode(null) // OJO ACA2
-                setName(null) // OJO ACA2
+                setCode(null)
+                setName(null)
                 setAll('all')
               }}
             >
@@ -361,7 +405,6 @@ const Table = ({generalContract, setInitialValues}) => {
           />
         </div>
       )}
-
       <Modal activeData={activeData} handleClose={handleCloseModal} open={openModal} />
       <DeleteDialog
         handleAction={handleDelete}
