@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import {useContext, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {useSearchParams} from 'react-router-dom'
 import {useSnackbar} from 'notistack'
 
@@ -38,6 +38,12 @@ const useIndividualContractsComponents = () => {
 
   const [searchParams] = useSearchParams()
   const list = searchParams.get('list')
+  const generalContractCode = searchParams.get('code')
+
+  useEffect(() => {
+    if (!generalContractCode) return
+    setCode(generalContractCode)
+  }, [generalContractCode])
 
   const {enqueueSnackbar} = useSnackbar()
 

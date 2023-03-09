@@ -12,9 +12,11 @@ const gerGeneralContractByCode = (code) =>
   getRequest(`/contracts/general/search?cod_contrato=${code}`)
 const gerGeneralContractByInstitution = (name) =>
   getRequest(`/contracts/general/search?name=${name}`)
+const gerGeneralContractExpired = () => getRequest('/contracts/general/expired')
 const createGeneralContract = (responsible) => postRequest('/contracts/general', responsible)
 const editGeneralContract = (responsible) =>
   putRequest(`/contracts/general/${responsible.id}`, responsible)
+const finishGeneralContract = (id) => putRequest(`/contracts/general/expired/${id}`)
 const deleteGeneralContract = (id) => deleteRequest(`/contracts/general/${id}`)
 
 // GET GENERAL CONTRACTS
@@ -75,6 +77,15 @@ export const useGetGeneralContractByInstitution = (name, onSuccess, onError) =>
     select: (data) => data.data,
   })
 
+export const useGetGeneralContractExpired = (onSuccess, onError) =>
+  useQuery(['generalContracts'], () => gerGeneralContractExpired(), {
+    retry: 1,
+    refetchOnWindowFocus: false,
+    onSuccess,
+    onError,
+    select: (data) => data.data,
+  })
+
 // MUTATION POST
 export const usePostGeneralContract = () => {
   const {enqueueSnackbar} = useSnackbar()
@@ -111,6 +122,25 @@ export const usePutGeneralContract = (onError) => {
   const queryClient = useQueryClient()
 
   return useMutation(editGeneralContract, {
+    onSuccess: (res) => {
+      queryClient.invalidateQueries('generalContracts')
+      enqueueSnackbar(res.msg, {
+        variant: 'success',
+        autoHideDuration: 3000,
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'left',
+        },
+      })
+    },
+    onError,
+  })
+}
+export const useFinishGeneralContract = (onError) => {
+  const {enqueueSnackbar} = useSnackbar()
+  const queryClient = useQueryClient()
+
+  return useMutation(finishGeneralContract, {
     onSuccess: (res) => {
       queryClient.invalidateQueries('generalContracts')
       enqueueSnackbar(res.msg, {

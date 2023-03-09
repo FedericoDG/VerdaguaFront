@@ -185,8 +185,8 @@ const Table = ({responsible, setInitialValues}) => {
               value={field}
               onChange={(e) => setField(e.target.value)}
             >
-              <MenuItem value="documento">documento</MenuItem>
               <MenuItem value="apellido">apellido</MenuItem>
+              <MenuItem value="documento">documento</MenuItem>
             </Select>
             <TextField
               name="query"

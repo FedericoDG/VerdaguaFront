@@ -1,7 +1,8 @@
-import Grid from '@mui/material/Grid'
+/* eslint-disable camelcase */
 import Typography from '@mui/material/Typography'
 import {
   Button,
+  Grid,
   Paper,
   Stack,
   Table,
@@ -13,8 +14,8 @@ import {
 } from '@mui/material'
 import {nanoid} from 'nanoid'
 import {useParams, useSearchParams} from 'react-router-dom'
-import {useReactToPrint} from 'react-to-print'
 import {useRef} from 'react'
+import {useReactToPrint} from 'react-to-print'
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone'
 
 import {UseGetGeneralContractById} from '../hooks/useGeneralContracts'

@@ -223,7 +223,7 @@ const Table = ({
               <Button
                 disableElevation
                 color="success"
-                disabled={obj.row.estado !== 'vigente'}
+                disabled={obj.row.estado !== 'vigente' || id_rol > 2}
                 sx={{minWidth: 0}}
                 type="submit"
                 variant="text"

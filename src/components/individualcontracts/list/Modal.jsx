@@ -184,6 +184,87 @@ const Modal = ({activeData, handleClose, open}) => {
           </Table>
         </TableContainer>
 
+        <Typography variant="button">Responsable</Typography>
+        <TableContainer
+          component={Paper}
+          sx={{marginY: 1, position: 'relative', backgroundColor: '#f7f7f7'}}
+        >
+          <Table sx={{minWidth: 650}}>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center" width="15%">
+                  Apellido
+                </TableCell>
+                <TableCell align="center" width="15%">
+                  Nombre
+                </TableCell>
+                <TableCell align="center" width="20%">
+                  DNI
+                </TableCell>
+                <TableCell align="center" width="20%">
+                  Teléfono
+                </TableCell>
+                <TableCell align="center" width="30%">
+                  Email
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                <TableCell align="center" component="th" scope="row">
+                  {activeData.pasajero.responsable.apellido}
+                </TableCell>
+                <TableCell align="center">{activeData.pasajero.responsable.nombre}</TableCell>
+                <TableCell align="center">{activeData.pasajero.responsable.documento}</TableCell>
+                <TableCell align="center">{activeData.pasajero.responsable.telefono}</TableCell>
+                <TableCell align="center">{activeData.pasajero.responsable.email}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <TableContainer
+          component={Paper}
+          sx={{marginY: 1, position: 'relative', backgroundColor: '#f7f7f7'}}
+        >
+          <Table sx={{minWidth: 650}}>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center" width="15%">
+                  Fecha de nac.
+                </TableCell>
+                <TableCell align="center" width="15%">
+                  Dirección
+                </TableCell>
+                <TableCell align="center" width="20%">
+                  Ciudad
+                </TableCell>
+                <TableCell align="center" width="20%">
+                  Provincia
+                </TableCell>
+                <TableCell align="center" width="30%">
+                  Código Postal
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                {activeData.pasajero.responsable.fecha_nac && (
+                  <TableCell align="center" component="th" scope="row">
+                    {formatDate(activeData.pasajero.responsable.fecha_nac)}
+                  </TableCell>
+                )}
+                <TableCell align="center">{activeData.pasajero.responsable.direccion}</TableCell>
+                <TableCell align="center">{activeData.pasajero.responsable.ciudad}</TableCell>
+                <TableCell align="center">{activeData.pasajero.responsable.provincia}</TableCell>
+                <TableCell align="center">
+                  {activeData.pasajero.responsable.codigo_postal}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+
         {isFetching ? (
           <Spinner />
         ) : (

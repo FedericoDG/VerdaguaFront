@@ -41,6 +41,7 @@ const SharesTable = ({
   const {id} = contratoGeneral
 
   const daysToNextShare = Number(settings.dias_diferencia_cuotas)
+  const daysToSecondPayment = Number(settings.dias_diferencia_primer_segundo_pago)
   const charge = Number(settings.porcentaje_recargo_segundo_vencimiento)
   const advancePaymentPercentage = Number(settings.porcentaje_senia)
   const advancePayment = (valor * advancePaymentPercentage) / 100
@@ -62,10 +63,11 @@ const SharesTable = ({
   ]
 
   for (let index = 0; index < cuotas; index++) {
+    const first = date.plus({days: daysToNextShare * (index + 1)})
     const partial = {
       numero: index + 1,
-      fecha_primer_vencimiento: date.plus({days: daysToNextShare * (index + 1)}).toJSDate(),
-      fecha_segundo_vencimiento: date.plus({days: daysToNextShare * (index + 2)}).toJSDate(),
+      fecha_primer_vencimiento: first.toJSDate(),
+      fecha_segundo_vencimiento: first.plus({days: daysToSecondPayment}).toJSDate(),
       valor_primer_vencimiento: share,
       valor_segundo_vencimiento: share + (share * charge) / 100,
       estado: 'pendiente',

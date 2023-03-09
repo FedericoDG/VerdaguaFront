@@ -1,17 +1,25 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-nested-ternary */
 import {Grid, Paper, Typography} from '@mui/material'
-import {useEffect, useRef, useState} from 'react'
-import {useSearchParams} from 'react-router-dom'
+import {useContext, useEffect, useRef, useState} from 'react'
+import {Navigate, useSearchParams} from 'react-router-dom'
 
 import {useGetIndividualContractsCodes, useGetInstallments} from '../hooks/useIndividualContracts'
+import appContext from '../context/AppContext'
+import Bill from '../components/payments/Bild'
 import Dashboard from '../components/Dashboard'
+import GeneratePayment from '../components/payments/GeneratePayment'
 import InstallmentsTable from '../components/payments/InstallmentsTable'
 import SeachPassengerForm from '../components/payments/SeachPassengerForm'
 import Spinner from '../components/Spinner'
-import GeneratePayment from '../components/payments/GeneratePayment'
-import Bill from '../components/payments/Bild'
 
 const Payments = () => {
+  const {
+    user: {id_rol},
+  } = useContext(appContext)
+
+  if (id_rol > 2) return <Navigate replace to="/dashboard/passengers" />
+
   const [initialValues, setInitialValues] = useState({
     contratoIndividual: {id: '', label: ''},
   })

@@ -15,11 +15,11 @@ const Settings = () => {
     user: {id_rol},
   } = useContext(appContext)
 
-  if (id_rol > 1) return <Navigate replace to="/dashboard/" />
+  if (id_rol > 1) return <Navigate replace to="/dashboard/passengers" />
 
   const {enqueueSnackbar} = useSnackbar()
 
-  const onSuccess = (res) => {
+  const onSuccess = () => {
     enqueueSnackbar('Parámetros recuperados', {
       variant: 'success',
       autoHideDuration: 3000,

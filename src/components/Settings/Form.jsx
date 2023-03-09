@@ -60,6 +60,12 @@ const SettingsForm = ({settings}) => {
               <ErrorMessage component={FormError} name="dias_diferencia_cuotas" />
               <CustomTextField
                 autoComplete="off"
+                label="Días de diferencia entre primer y segundo vencimiento"
+                name="dias_diferencia_primer_segundo_pago"
+              />
+              <ErrorMessage component={FormError} name="dias_diferencia_primer_segundo_pago" />
+              <CustomTextField
+                autoComplete="off"
                 label="Porcentaje de recargo por segundo vencimiento"
                 name="porcentaje_recargo_segundo_vencimiento"
               />

@@ -193,7 +193,8 @@ const Table = ({generalContract, setInitialValues}) => {
                 color="success"
                 disabled={
                   obj.row.estado !== 'vigente' ||
-                  obj.row.asientos_totales === obj.row.asientos_ocupados
+                  obj.row.asientos_totales === obj.row.asientos_ocupados ||
+                  id_rol > 2
                 }
                 sx={{minWidth: 0}}
                 type="submit"

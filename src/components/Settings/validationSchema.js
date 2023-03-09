@@ -21,6 +21,11 @@ const validationSchema = Yup.object({
     .min(1, 'Mínimo 1 dígito')
     .max(2, 'Máximo 2 dígitos')
     .required('Días de diferencia entre primera y segunda cuota es requerido.'),
+  dias_diferencia_primer_segundo_pago: Yup.string()
+    .matches(/^[0-9]+$/, 'Sólo se aceptan números')
+    .min(1, 'Mínimo 1 dígito')
+    .max(2, 'Máximo 2 dígitos')
+    .required('Días de diferencia entre primer y segundo vencimiento es requerido.'),
   porcentaje_recargo_segundo_vencimiento: Yup.string()
     .matches(/^[0-9]+$/, 'Sólo se aceptan números')
     .min(1, 'Mínimo 1 dígito')

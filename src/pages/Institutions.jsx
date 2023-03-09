@@ -1,14 +1,22 @@
+/* eslint-disable camelcase */
 import {Grid, Paper, Typography} from '@mui/material'
-import {useSearchParams} from 'react-router-dom'
-import {useState} from 'react'
+import {Navigate, useSearchParams} from 'react-router-dom'
+import {useContext, useState} from 'react'
 
 import {useGetInstitutionById} from '../hooks/useInstitutions'
+import appContext from '../context/AppContext'
 import Dashboard from '../components/Dashboard'
 import Form from '../components/institutions/Form'
 import Table from '../components/institutions/Table'
 import Spinner from '../components/Spinner'
 
 const Institutions = () => {
+  const {
+    user: {id_rol},
+  } = useContext(appContext)
+
+  if (id_rol > 2) return <Navigate replace to="/dashboard/passengers" />
+
   const [initialValues, setInitialValues] = useState({
     nombre: '',
     direccion: '',

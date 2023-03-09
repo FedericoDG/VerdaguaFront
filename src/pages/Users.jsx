@@ -18,7 +18,7 @@ const Users = () => {
     user: {id_rol},
   } = useContext(appContext)
 
-  if (id_rol > 1) return <Navigate replace to="/dashboard/" />
+  if (id_rol > 1) return <Navigate replace to="/dashboard/passengers" />
 
   const [initialValues, setInitialValues] = useState({
     nombre: '',
