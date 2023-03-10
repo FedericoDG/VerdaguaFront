@@ -39,6 +39,7 @@ const Report = () => {
   })
 
   if (isFetching) return <Spinner height="100vh" />
+
   if (!data) return null
 
   const {generalContract} = data

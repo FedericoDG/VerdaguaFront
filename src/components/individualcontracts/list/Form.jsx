@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {Button, Chip, Grid, Stack, Typography} from '@mui/material'
 import {ErrorMessage, Form, Formik} from 'formik'
 import {useContext, useEffect} from 'react'
@@ -19,7 +20,15 @@ const IndividualContractsForm = ({
   setInitialValues,
   setShowEditState,
 }) => {
-  const {top, handleScroll} = useContext(appContext)
+  const {
+    top,
+    handleScroll,
+    user: {id_rol},
+  } = useContext(appContext)
+
+  if (id_rol > 1) {
+    estados.splice(2, 1)
+  }
 
   const {putIndividualContract, resetValues} = useIndividualContractsComponents()
 
