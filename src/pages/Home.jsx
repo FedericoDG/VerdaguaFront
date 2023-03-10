@@ -62,8 +62,6 @@ const Home = () => {
 
   const {mutate: finishContract} = useFinishGeneralContract(onErrorPut)
 
-  if (!data || isFetching) return <Spinner />
-
   return (
     <Dashboard>
       <Grid item xs={12}>
@@ -71,7 +69,11 @@ const Home = () => {
           <Typography sx={{marginBottom: 1}} variant="h6">
             Próximos viajes
           </Typography>
-          <Table check action={action} generalContracts={data.toExpire} />
+          {!data || isFetching ? (
+            <Spinner height={165} />
+          ) : (
+            <Table check action={action} generalContracts={data.toExpire} />
+          )}
         </Paper>
       </Grid>
       <Grid item xs={12}>
@@ -79,7 +81,11 @@ const Home = () => {
           <Typography sx={{marginBottom: 1}} variant="h6">
             Viajes realizados
           </Typography>
-          <Table action={finishContract} check={false} generalContracts={data.expired} />
+          {!data || isFetching ? (
+            <Spinner height={165} />
+          ) : (
+            <Table action={finishContract} check={false} generalContracts={data.expired} />
+          )}
         </Paper>
       </Grid>
     </Dashboard>
