@@ -243,9 +243,10 @@ const Table = ({generalContract, setInitialValues}) => {
                 disableElevation
                 color="inherit"
                 disabled={
-                  obj.row.estado === 'cancelado' ||
-                  obj.row.estado === 'terminado' ||
-                  obj.row.asientos_ocupados === 0
+                  (obj.row.estado === 'cancelado' ||
+                    obj.row.estado === 'terminado' ||
+                    obj.row.asientos_ocupados === 0) &&
+                  id_rol > 1
                 }
                 sx={{minWidth: 0}}
                 type="submit"
@@ -263,9 +264,10 @@ const Table = ({generalContract, setInitialValues}) => {
                 disableElevation
                 color="inherit"
                 disabled={
-                  obj.row.estado === 'cancelado' ||
-                  obj.row.estado === 'terminado' ||
-                  obj.row.asientos_ocupados === 0
+                  (obj.row.estado === 'cancelado' ||
+                    obj.row.estado === 'terminado' ||
+                    obj.row.asientos_ocupados === 0) &&
+                  id_rol > 1
                 }
                 sx={{minWidth: 0}}
                 type="submit"

@@ -12,8 +12,6 @@ import useIndividualContractsComponents from '../../../hooks/useIndividualContra
 import validationSchema from './validationSchema'
 import Sheet from './Sheet'
 
-const estados = [{id: 'vigente'}, {id: 'pagado'}, {id: 'terminado'}, {id: 'cancelado'}]
-
 const IndividualContractsForm = ({
   initialValues,
   individualContract,
@@ -25,6 +23,8 @@ const IndividualContractsForm = ({
     handleScroll,
     user: {id_rol},
   } = useContext(appContext)
+
+  const estados = [{id: 'vigente'}, {id: 'pagado'}, {id: 'terminado'}, {id: 'cancelado'}]
 
   if (id_rol > 1) {
     estados.splice(2, 1)

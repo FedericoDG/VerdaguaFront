@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import Typography from '@mui/material/Typography'
 import {
@@ -14,17 +15,21 @@ import {
 } from '@mui/material'
 import {nanoid} from 'nanoid'
 import {useParams, useSearchParams} from 'react-router-dom'
-import {useRef} from 'react'
+import {useContext, useRef} from 'react'
 import {useReactToPrint} from 'react-to-print'
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone'
 
 import {UseGetGeneralContractById} from '../hooks/useGeneralContracts'
+import appContext from '../context/AppContext'
 import Dashboard from '../components/Dashboard'
 import formatCurrency from '../utils/formatCurrency'
 import formatDate from '../utils/formatDate'
 import Spinner from '../components/Spinner'
 
 const Report = () => {
+  const {
+    user: {id_rol},
+  } = useContext(appContext)
   const {id} = useParams()
 
   const [searchParams] = useSearchParams()
@@ -40,7 +45,7 @@ const Report = () => {
 
   if (isFetching) return <Spinner height="100vh" />
 
-  if (!data) return null
+  if (!data) return <h1>NO ENCONTRADO/ACCESO RESTRIGIDO</h1>
 
   const {generalContract} = data
 
@@ -67,6 +72,9 @@ const Report = () => {
           }}
         >
           <Grid container justifyContent="space-between" p={1}>
+            <Typography variant="body2">
+              <span style={{fontWeight: '500'}}>Código:</span> {generalContract.cod_contrato}
+            </Typography>
             <Typography variant="body2">
               <span style={{fontWeight: '500'}}>Código:</span> {generalContract.cod_contrato}
             </Typography>
@@ -108,6 +116,7 @@ const Report = () => {
               <TableHead style={{backgroundColor: '#dddddd'}}>
                 <TableRow>
                   {onlypassenger !== 'true' && <TableCell align="left">Código</TableCell>}
+                  {id_rol < 2 && <TableCell align="left">Estado</TableCell>}
                   <TableCell align="left">Nombre</TableCell>
                   {onlypassenger === 'true' && <TableCell align="center">Fecha Nac.</TableCell>}
                   <TableCell align="center">DNI</TableCell>
@@ -130,13 +139,19 @@ const Report = () => {
               </TableHead>
               <TableBody>
                 {generalContract.contratos_individuales.map((el) => {
-                  if (el.estado === 'cancelado' || el.estado === 'terminado') return null
+                  if ((el.estado === 'cancelado' || el.estado === 'terminado') && id_rol > 1)
+                    return null
 
                   return (
                     <TableRow key={nanoid()}>
                       {onlypassenger !== 'true' && (
                         <TableCell align="left">
                           <Typography variant="caption">{el.cod_contrato}</Typography>
+                        </TableCell>
+                      )}
+                      {id_rol < 2 && (
+                        <TableCell align="left">
+                          <Typography variant="caption">{el.estado}</Typography>
                         </TableCell>
                       )}
                       <TableCell align="left">
