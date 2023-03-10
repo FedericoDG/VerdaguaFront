@@ -163,6 +163,9 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
               {`Concepto: ${splitInfo[0].toString()}.`}
             </Typography>
             <Typography sx={{fontSize: 16}} variant="body1">
+              {`Pasajero: ${initialValues2.pasajero}.`}
+            </Typography>
+            <Typography sx={{fontSize: 16}} variant="body1">
               {`${splitInfo[1].toString()} ${splitInfo[2].toString()}.`}
             </Typography>
             <Typography sx={{fontSize: 16}} variant="body1">

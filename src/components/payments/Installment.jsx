@@ -39,6 +39,8 @@ const InstallmentCard = ({
     )}. Contrato: ${installment.contrato_individual.cod_contrato}.`
   }
 
+  const pasajero = `${installment.contrato_individual.pasajero.apellido}, ${installment.contrato_individual.pasajero.apellido}. DNI: ${installment.contrato_individual.pasajero.documento}`
+
   return (
     <Paper
       component="div"
@@ -133,6 +135,7 @@ const InstallmentCard = ({
                 destinatario: `${installment.contrato_individual.pasajero.responsable.nombre} ${installment.contrato_individual.pasajero.responsable.apellido}`,
                 DNI: `${installment.contrato_individual.pasajero.responsable.documento}`,
                 domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.ciudad})`,
+                pasajero,
               }))
             }
             if (today < firstExpiration) {
@@ -155,6 +158,7 @@ const InstallmentCard = ({
                 destinatario: `${installment.contrato_individual.pasajero.responsable.nombre} ${installment.contrato_individual.pasajero.responsable.apellido}`,
                 DNI: `${installment.contrato_individual.pasajero.responsable.documento}`,
                 domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.ciudad})`,
+                pasajero,
               }))
             }
           }}

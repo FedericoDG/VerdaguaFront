@@ -106,7 +106,7 @@ const Report = () => {
             <Table size="small">
               <TableHead style={{backgroundColor: '#dddddd'}}>
                 <TableRow>
-                  {onlypassenger !== 'true' && <TableCell align="left">Fecha Nac.</TableCell>}
+                  {onlypassenger !== 'true' && <TableCell align="left">Código</TableCell>}
                   <TableCell align="left">Nombre</TableCell>
                   {onlypassenger === 'true' && <TableCell align="center">Fecha Nac.</TableCell>}
                   <TableCell align="center">DNI</TableCell>

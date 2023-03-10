@@ -11,7 +11,13 @@ import usePassengersComponents from '../../hooks/usePassengersComponents'
 
 import validationSchema from './validationSchema'
 
-const PassengersForm = ({initialValues, setInitialValues, passenger, responsibleDocuments}) => {
+const PassengersForm = ({
+  initialValues,
+  setInitialValues,
+  passenger,
+  responsibleDocuments,
+  setSearchParams,
+}) => {
   const {postPassenger, putPassenger, resetValues} = usePassengersComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
@@ -28,6 +34,7 @@ const PassengersForm = ({initialValues, setInitialValues, passenger, responsible
       postPassenger({...valuesToUpperCase, documento_responsable: value.documento_responsable?.id})
     }
     setInitialValues(resetValues)
+    setSearchParams({passenger: ''})
     resetForm()
   }
 

@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 import {Button, Grid, Stack} from '@mui/material'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
-import {useEffect} from 'react'
+import {useContext, useEffect} from 'react'
 
 import {formatENDate} from '../../utils/formatDate'
+import appContext from '../../context/AppContext'
 import CustomAutocomplete from '../form/CustomAutocomplete'
 import CustomDatePicker from '../form/CustomDatePicker'
 import CustomSelect from '../form/CustomSelect'
@@ -23,7 +25,12 @@ const GeneralContractsForm = ({
   initialValues,
   institutionCodes,
   setInitialValues,
+  setSearchParams,
 }) => {
+  const {
+    user: {id_rol},
+  } = useContext(appContext)
+
   const {postGeneralContract, putGeneralContract, resetValues} = useGeneralContractsComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
@@ -41,6 +48,7 @@ const GeneralContractsForm = ({
       postGeneralContract({...valuesToUpperCase, id_institucion: value.institucion.id})
     }
     setInitialValues(resetValues)
+    setSearchParams({id: ''})
     resetForm()
   }
 
@@ -70,6 +78,7 @@ const GeneralContractsForm = ({
               <CustomTextField autoComplete="off" label="Descripción" name="descripcion" />
               <ErrorMessage component={FormError} name="descripcion" />
               <CustomDatePicker
+                disabled={!!initialValues.descripcion && id_rol > 1}
                 inputProps={{
                   min: formatENDate(new Date()),
                 }}
@@ -77,7 +86,7 @@ const GeneralContractsForm = ({
                 name="fecha_viaje"
               />
               <CustomSelect
-                disabled={!initialValues?.id}
+                disabled={!initialValues?.id || (!!initialValues.id && id_rol > 1)}
                 label="Estado"
                 name="estado"
                 options={states}
@@ -86,6 +95,7 @@ const GeneralContractsForm = ({
                 <Grid item paddingRight={1} xs={6}>
                   <CustomTextField
                     autoComplete="off"
+                    disabled={!!initialValues.id && id_rol > 1}
                     label="Valor del contrato"
                     name="valor_contrato"
                   />
@@ -94,6 +104,7 @@ const GeneralContractsForm = ({
                 <Grid item xs={6}>
                   <CustomTextField
                     autoComplete="off"
+                    disabled={!!initialValues.id && id_rol > 1}
                     label="Cupo de pasajeros"
                     name="asientos_totales"
                   />
@@ -106,20 +117,36 @@ const GeneralContractsForm = ({
             <Stack pb={{xs: 1, md: 0}} spacing={1}>
               <Grid container>
                 <Grid item paddingRight={1} xs={4}>
-                  <CustomTextField autoComplete="off" label="Grado" name="grado" />
+                  <CustomTextField
+                    autoComplete="off"
+                    disabled={!!initialValues.id && id_rol > 1}
+                    label="Grado"
+                    name="grado"
+                  />
                   <ErrorMessage component={FormError} name="grado" />
                 </Grid>
                 <Grid item paddingRight={1} xs={4}>
-                  <CustomTextField autoComplete="off" label="División" name="division" />
+                  <CustomTextField
+                    autoComplete="off"
+                    disabled={!!initialValues.id && id_rol > 1}
+                    label="División"
+                    name="division"
+                  />
                   <ErrorMessage component={FormError} name="division" />
                 </Grid>
                 <Grid item xs={4}>
-                  <CustomTextField autoComplete="off" label="Turno" name="turno" />
+                  <CustomTextField
+                    autoComplete="off"
+                    disabled={!!initialValues.id && id_rol > 1}
+                    label="Turno"
+                    name="turno"
+                  />
                   <ErrorMessage component={FormError} name="turno" />
                 </Grid>
               </Grid>
               <Field
                 component={CustomAutocomplete}
+                disabled={!!initialValues.id && id_rol > 1}
                 label="Institución educativa"
                 name="institucion"
                 options={institutionCodes}

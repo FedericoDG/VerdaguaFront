@@ -68,18 +68,18 @@ const Table = ({generalContract, setInitialValues}) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (generalContract?.id) {
+    if (generalContract?.generalContract?.id) {
       setInitialValues({
-        ...generalContract,
-        fecha_viaje: formatENDate(generalContract.fecha_viaje),
+        ...generalContract?.generalContract,
+        fecha_viaje: formatENDate(generalContract?.generalContract.fecha_viaje),
         institucion: {
-          id: generalContract.institucion.id,
-          label: `${generalContract.institucion.nombre} - ${generalContract.institucion.direccion}, ${generalContract.institucion.localidad}`,
+          id: generalContract?.generalContract.institucion.id,
+          label: `${generalContract?.generalContract.institucion.nombre} - ${generalContract?.generalContract.institucion.direccion}, ${generalContract?.generalContract.institucion.localidad}`,
         },
       })
-      setCode(generalContract.cod_contrato)
+      setCode(generalContract?.generalContract.cod_contrato)
     }
-  }, [generalContract])
+  }, [generalContract?.generalContract])
 
   const columns = [
     {

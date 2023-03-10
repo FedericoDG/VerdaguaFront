@@ -5,13 +5,7 @@ const installments = [
   {id: 4, name: '4 cuotas'},
   {id: 5, name: '5 cuotas'},
   {id: 6, name: '6 cuotas'},
-  {id: 7, name: '7 cuotas'},
-  {id: 8, name: '8 cuotas'},
-  {id: 9, name: '9 cuotas'},
-  {id: 10, name: '10 cuotas'},
-  {id: 11, name: '11 cuotas'},
-  {id: 12, name: '12 cuotas'},
-  {id: 13, name: 'LIBERADO'},
+  {id: 7, name: 'LIBERADO'},
 ]
 
 export default installments

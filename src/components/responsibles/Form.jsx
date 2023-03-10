@@ -10,7 +10,7 @@ import useResponsiblesComponents from '../../hooks/useResponsiblesComponents'
 
 import validationSchema from './validationSchema'
 
-const ResponsiblesForm = ({responsible, initialValues, setInitialValues}) => {
+const ResponsiblesForm = ({responsible, initialValues, setInitialValues, setSearchParams}) => {
   const {postResponsible, putResponsible, resetValues} = useResponsiblesComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
@@ -31,6 +31,7 @@ const ResponsiblesForm = ({responsible, initialValues, setInitialValues}) => {
       postResponsible(valuesToUpperCase)
     }
     setInitialValues(resetValues)
+    setSearchParams({id: ''})
     resetForm()
   }
 

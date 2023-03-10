@@ -24,7 +24,7 @@ const Institutions = () => {
     localidad: '',
   })
 
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const id = searchParams.get('id')
 
   const {data: institution} = useGetInstitutionById(id)
@@ -49,6 +49,7 @@ const Institutions = () => {
               initialValues={initialValues}
               institution={institution}
               setInitialValues={setInitialValues}
+              setSearchParams={setSearchParams}
             />
           )}
         </Paper>

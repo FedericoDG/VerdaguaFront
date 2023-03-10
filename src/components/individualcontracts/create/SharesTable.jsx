@@ -125,7 +125,7 @@ const SharesTable = ({
           Crear Contrato Individual
         </Typography>
       </Box>
-      {cuotas > 12 ? (
+      {cuotas > 6 ? (
         <Typography align="center" color="error" variant="h2">
           PASAJERO LIBERADO
         </Typography>
@@ -185,7 +185,7 @@ const SharesTable = ({
               <Button
                 ref={sendButton}
                 color="primary"
-                disabled={cuotas > 12}
+                disabled={cuotas > 6}
                 startIcon={<LocalPrintshopTwoToneIcon />}
                 sx={{paddingY: '12px', m: '16px auto', width: 300}}
                 type="reset"

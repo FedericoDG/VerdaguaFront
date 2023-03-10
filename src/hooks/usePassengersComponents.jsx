@@ -47,7 +47,7 @@ const usePassengersComponents = () => {
       code = 'warning'
     }
 
-    enqueueSnackbar(`Responsables recuperados: ${res.length}`, {
+    enqueueSnackbar(`Pasajeros recuperados: ${res.length}`, {
       variant: code,
       autoHideDuration: 3000,
       anchorOrigin: {

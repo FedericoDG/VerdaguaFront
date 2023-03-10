@@ -201,7 +201,7 @@ const Modal = ({activeData, handleClose, open}) => {
                             <TableCell align="center">
                               <Button
                                 onClick={() =>
-                                  navigate(`/dashboard/individual-contracts-list?id=${el.id}`)
+                                  navigate(`/dashboard/individual-contracts?id=${el.id}`)
                                 }
                               >
                                 <Typography variant="caption">Ir a contrato individual</Typography>

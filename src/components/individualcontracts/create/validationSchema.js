@@ -12,7 +12,9 @@ const validationSchemaGeneralContract = Yup.object({
 })
 
 export const validationSchemaValue = Yup.object({
-  valor: Yup.string().required('El valor es requerido.'),
+  valor: Yup.string()
+    .test('Is positive?', 'El valor debe ser mayor a 0', (value) => value > 0)
+    .required('El valor es requerido.'),
   cuotas: Yup.string().required('La cantidad de cuotas es requerida.'),
 })
 

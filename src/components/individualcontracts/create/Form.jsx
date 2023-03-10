@@ -290,7 +290,9 @@ const IndividualContractsForm = ({
                     variant="outlined"
                     onClick={() => handleScroll(sendButton)}
                   >
-                    Generar plan de pagos
+                    {generalContract.asientos_totales === generalContract.asientos_ocupados
+                      ? 'No hay lugar disponible (Viaje completo)'
+                      : 'Generar plan de pagos'}
                   </Button>
                 </Grid>
                 <Grid item xs={6}>

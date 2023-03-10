@@ -22,7 +22,7 @@ const Responsibles = () => {
     info: '',
   })
 
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const id = searchParams.get('id')
 
   const {data: responsible} = UseGetResponsibleById(id)
@@ -44,6 +44,7 @@ const Responsibles = () => {
             initialValues={initialValues}
             responsible={responsible}
             setInitialValues={setInitialValues}
+            setSearchParams={setSearchParams}
           />
         </Paper>
       </Grid>

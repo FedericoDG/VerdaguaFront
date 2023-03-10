@@ -23,7 +23,7 @@ const GeneralContracts = () => {
     estado: 'vigente',
   })
 
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const id = searchParams.get('id')
 
   const {data: generalContract} = UseGetGeneralContractById(id)
@@ -48,10 +48,11 @@ const GeneralContracts = () => {
             <Spinner height={251} />
           ) : (
             <Form
-              generalContract={generalContract}
+              generalContract={generalContract?.generalContract}
               initialValues={initialValues}
               institutionCodes={institutionCodes}
               setInitialValues={setInitialValues}
+              setSearchParams={setSearchParams}
             />
           )}
         </Paper>

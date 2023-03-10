@@ -19,7 +19,7 @@ const Passengers = () => {
     documento_responsable: '',
   })
 
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const id = searchParams.get('passenger')
 
   const {data: responsibleDocuments} = useGetResponsibleDocuments()
@@ -47,6 +47,7 @@ const Passengers = () => {
               passenger={passenger}
               responsibleDocuments={responsibleDocuments}
               setInitialValues={setInitialValues}
+              setSearchParams={setSearchParams}
             />
           )}
         </Paper>

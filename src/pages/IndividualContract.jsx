@@ -16,7 +16,7 @@ const IndividualContracts = () => {
   const step03 = useRef()
 
   const [searchParams, setSearchParams] = useSearchParams()
-  const id = searchParams.get('id')
+  // const id = searchParams.get('id')
 
   return (
     <Dashboard>
@@ -43,10 +43,10 @@ const IndividualContracts = () => {
           ) : (
             <Form
               generalContractCodes={generalContractCodes}
-              id={id}
+              // id={id}
               initialValues={initialValues}
               passengerCodes={passengerCodes}
-              setCode={setCode}
+              // setCode={setCode}
               setInitialValues={setInitialValues}
               setSearchParams={setSearchParams}
               step02={step02}
