@@ -17,7 +17,7 @@ import {DateTime} from 'luxon'
 import {nanoid} from 'nanoid'
 import {useNavigate} from 'react-router-dom'
 import {useQueryClient} from 'react-query'
-import {useRef, useState} from 'react'
+import {useRef} from 'react'
 import {useSnackbar} from 'notistack'
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone'
 import ReactToPrint from 'react-to-print'
@@ -35,8 +35,6 @@ const SharesTable = ({
   sendButton,
   handleCancel,
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
-
   const componentRef = useRef()
 
   const codigo = `${contratoGeneral.label.substring(0, 7)}/${pasajero.label.substring(0, 8)}`
@@ -105,11 +103,9 @@ const SharesTable = ({
     }
   }
 
-  const {mutate: postIndividualContract} = usePostIndividualContract(onSuccess)
+  const {mutate: postIndividualContract, isLoading} = usePostIndividualContract(onSuccess)
 
   const handleSubmit = () => {
-    setIsLoading(true)
-
     const body = {
       id_contrato_general: contratoGeneral.id,
       id_pasajero: pasajero.id,
