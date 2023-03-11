@@ -76,9 +76,6 @@ const Report = () => {
               <span style={{fontWeight: '500'}}>Código:</span> {generalContract.cod_contrato}
             </Typography>
             <Typography variant="body2">
-              <span style={{fontWeight: '500'}}>Código:</span> {generalContract.cod_contrato}
-            </Typography>
-            <Typography variant="body2">
               <span style={{fontWeight: '500'}}>Destino:</span> {generalContract.descripcion}
             </Typography>
             <Typography variant="body2">
