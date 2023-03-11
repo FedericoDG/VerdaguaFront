@@ -103,7 +103,7 @@ const SharesTable = ({
     }
   }
 
-  const {mutate: postIndividualContract} = usePostIndividualContract(onSuccess)
+  const {mutate: postIndividualContract, isLoading} = usePostIndividualContract(onSuccess)
 
   const handleSubmit = () => {
     const body = {
@@ -201,6 +201,7 @@ const SharesTable = ({
           <Button
             ref={sendButton}
             color="primary"
+            disabled={isLoading}
             sx={{paddingY: '12px', m: '16px auto', width: 300}}
             type="reset"
             variant="contained"
