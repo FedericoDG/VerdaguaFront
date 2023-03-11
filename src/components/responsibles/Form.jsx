@@ -11,7 +11,7 @@ import useResponsiblesComponents from '../../hooks/useResponsiblesComponents'
 import validationSchema from './validationSchema'
 
 const ResponsiblesForm = ({responsible, initialValues, setInitialValues, setSearchParams}) => {
-  const {postResponsible, putResponsible, resetValues} = useResponsiblesComponents()
+  const {postResponsible, putResponsible, resetValues, isLoading} = useResponsiblesComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
     const valuesToUpperCase = {
@@ -109,6 +109,7 @@ const ResponsiblesForm = ({responsible, initialValues, setInitialValues, setSear
               disableElevation
               fullWidth
               color="primary"
+              disabled={isLoading}
               m={2}
               sx={{paddingY: '12px'}}
               type="submit"

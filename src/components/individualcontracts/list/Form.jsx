@@ -30,7 +30,7 @@ const IndividualContractsForm = ({
     estados.splice(2, 1)
   }
 
-  const {putIndividualContract, resetValues} = useIndividualContractsComponents()
+  const {putIndividualContract, resetValues, isLoading} = useIndividualContractsComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
     putIndividualContract(value)
@@ -124,6 +124,7 @@ const IndividualContractsForm = ({
                 disableElevation
                 fullWidth
                 color="primary"
+                disabled={isLoading}
                 m={2}
                 sx={{paddingY: '12px'}}
                 type="submit"

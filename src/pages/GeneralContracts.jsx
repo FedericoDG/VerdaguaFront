@@ -45,7 +45,7 @@ const GeneralContracts = () => {
           </Typography>
 
           {!institutionCodes || (id && !generalContract) ? (
-            <Spinner height={251} />
+            <Spinner height={315} />
           ) : (
             <Form
               generalContract={generalContract?.generalContract}

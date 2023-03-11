@@ -31,7 +31,8 @@ const GeneralContractsForm = ({
     user: {id_rol},
   } = useContext(appContext)
 
-  const {postGeneralContract, putGeneralContract, resetValues} = useGeneralContractsComponents()
+  const {postGeneralContract, putGeneralContract, resetValues, isLoading} =
+    useGeneralContractsComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
     const valuesToUpperCase = {
@@ -172,6 +173,7 @@ const GeneralContractsForm = ({
               disableElevation
               fullWidth
               color="primary"
+              disabled={isLoading}
               m={2}
               sx={{paddingY: '12px'}}
               type="submit"

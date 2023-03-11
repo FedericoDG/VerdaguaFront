@@ -29,8 +29,8 @@ const Users = () => {
   })
 
   const {data: users, isError: isErrorUsers, error: errorUsers} = useGetUsers()
-  const {mutate: postUser} = usePostUser()
-  const {mutate: putUser} = usePutUser()
+  const {mutate: postUser, isLoading: isLoadingPost} = usePostUser()
+  const {mutate: putUser, isLoading: isLoadingPut} = usePutUser()
   const {mutate: deleteUser} = useDeleteUser()
   const {data: roles, isError: isErroRoles, error: errorRoles} = useGetRoles()
 
@@ -56,6 +56,7 @@ const Users = () => {
           ) : (
             <UsersForm
               initialValues={initialValues}
+              isLoading={isLoadingPost || isLoadingPut}
               postUser={postUser}
               putUser={putUser}
               roles={roles}

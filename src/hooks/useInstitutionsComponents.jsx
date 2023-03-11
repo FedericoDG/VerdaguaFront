@@ -76,8 +76,8 @@ const useInstitutionsComponents = () => {
     onSuccess,
     onError
   )
-  const {mutate: postInstitution} = usePostInstitution()
-  const {mutate: putInstitution} = usePutInstitution()
+  const {mutate: postInstitution, isLoading: isLoadingPost} = usePostInstitution()
+  const {mutate: putInstitution, isLoading: isLoadingPut} = usePutInstitution()
   const {mutate: deleteInstitution} = useDeleteInstitution()
 
   const handleDelete = (id) => {
@@ -100,6 +100,7 @@ const useInstitutionsComponents = () => {
     allData,
     bottom,
     dataArray: [...allData, ...dataByname],
+    isLoading: isLoadingPost || isLoadingPut,
     dataByname,
     field,
     handleCloseDeleteDialog,

@@ -7,7 +7,7 @@ import FormError from '../form/FormError'
 
 import validationSchema from './validationSchema'
 
-const UsersForm = ({initialValues, setInitialValues, roles, postUser, putUser}) => {
+const UsersForm = ({initialValues, setInitialValues, roles, postUser, putUser, isLoading}) => {
   const resetValues = {
     nombre: '',
     apellido: '',
@@ -60,6 +60,7 @@ const UsersForm = ({initialValues, setInitialValues, roles, postUser, putUser}) 
               disableElevation
               fullWidth
               color="primary"
+              disabled={isLoading}
               m={2}
               sx={{paddingY: '12px'}}
               type="submit"

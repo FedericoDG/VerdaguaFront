@@ -8,7 +8,7 @@ import FormError from '../form/FormError'
 import validationSchema from './validationSchema'
 
 const SettingsForm = ({settings}) => {
-  const {mutate: putSettings} = usePutSettings()
+  const {mutate: putSettings, isLoading} = usePutSettings()
 
   const handleFormSubmit = async (value) => {
     putSettings(value)
@@ -85,6 +85,7 @@ const SettingsForm = ({settings}) => {
               disableElevation
               fullWidth
               color="primary"
+              disabled={isLoading}
               m={2}
               sx={{paddingY: '12px'}}
               type="submit"
@@ -93,11 +94,6 @@ const SettingsForm = ({settings}) => {
               Editar
             </Button>
           </Grid>
-          {/*  <Grid item xs={6}>
-            <Button fullWidth color="error" sx={{paddingY: '12px'}} type="reset" variant="outlined">
-              Cancelar
-            </Button>
-          </Grid> */}
         </Grid>
       </Form>
     </Formik>

@@ -37,7 +37,7 @@ const Recalc = ({
 }) => {
   const {top, handleScroll} = useContext(appContext)
 
-  const {resetValues, newImplements} = useIndividualContractsComponents()
+  const {resetValues, newImplements, isLoading} = useIndividualContractsComponents()
   const {recalculated, setRecalculated, newContractValue, setNewContractValue} =
     useListIndividualContract()
 
@@ -220,7 +220,7 @@ const Recalc = ({
       <Box display="flex" sx={{margin: '0 auto'}}>
         <Button
           color="success"
-          disabled={!newContractValue}
+          disabled={!newContractValue || isLoading}
           startIcon={<TaskAltSharpIcon />}
           sx={{paddingY: '12px'}}
           type="reset"

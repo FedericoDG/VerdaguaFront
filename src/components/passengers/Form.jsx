@@ -18,7 +18,7 @@ const PassengersForm = ({
   responsibleDocuments,
   setSearchParams,
 }) => {
-  const {postPassenger, putPassenger, resetValues} = usePassengersComponents()
+  const {postPassenger, putPassenger, resetValues, isLoading} = usePassengersComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
     const valuesToUpperCase = {
@@ -112,6 +112,7 @@ const PassengersForm = ({
               disableElevation
               fullWidth
               color="primary"
+              disabled={isLoading}
               m={2}
               sx={{paddingY: '12px'}}
               type="submit"

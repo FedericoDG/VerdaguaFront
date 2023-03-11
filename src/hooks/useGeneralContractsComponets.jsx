@@ -141,8 +141,8 @@ const useGeneralContractsComponents = () => {
     setOpenDialogForValidContracts(true)
   }
 
-  const {mutate: postGeneralContract} = usePostGeneralContract()
-  const {mutate: putGeneralContract} = usePutGeneralContract(onErrorPut)
+  const {mutate: postGeneralContract, isLoading: isLoadingPost} = usePostGeneralContract()
+  const {mutate: putGeneralContract, isLoading: isLoadingPut} = usePutGeneralContract(onErrorPut)
   const {mutate: deleteGeneralContract} = useDeleteGenralContract()
 
   const handleDelete = (id) => {
@@ -171,6 +171,7 @@ const useGeneralContractsComponents = () => {
     activeData,
     allData,
     dataArray: [...allData, ...dataByCode, ...dataByName],
+    isLoading: isLoadingPost || isLoadingPut,
     dataByCode,
     field,
     handleCloseDeleteDialog,

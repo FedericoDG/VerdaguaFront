@@ -9,7 +9,7 @@ import useInstitutionsComponents from '../../hooks/useInstitutionsComponents'
 import validationSchema from './validationSchema'
 
 const InstitutionForm = ({initialValues, institution, setInitialValues, setSearchParams}) => {
-  const {postInstitution, putInstitution, resetValues} = useInstitutionsComponents()
+  const {postInstitution, putInstitution, resetValues, isLoading} = useInstitutionsComponents()
 
   const handleFormSubmit = async (value, {resetForm}) => {
     const valuesToUpperCase = {
@@ -69,6 +69,7 @@ const InstitutionForm = ({initialValues, institution, setInitialValues, setSearc
               disableElevation
               fullWidth
               color="primary"
+              disabled={isLoading}
               m={2}
               sx={{paddingY: '12px'}}
               type="submit"

@@ -85,8 +85,8 @@ const usePassengersComponents = () => {
     onSuccess,
     onError
   )
-  const {mutate: postPassenger} = usePostPassenger()
-  const {mutate: putPassenger} = usePutPassenger()
+  const {mutate: postPassenger, isLoading: isLoadingPost} = usePostPassenger()
+  const {mutate: putPassenger, isLoading: isLoadingPut} = usePutPassenger()
   const {mutate: deletePassenger} = useDeletePassenger()
 
   const handleDelete = (id) => {
@@ -113,6 +113,7 @@ const usePassengersComponents = () => {
   return {
     activeData,
     dataArray: [...allData, ...dataByDocument, ...dataByLastname],
+    isLoading: isLoadingPost || isLoadingPut,
     bottom,
     dataByDocument,
     dataByLastname,

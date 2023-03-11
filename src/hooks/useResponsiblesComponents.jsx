@@ -90,8 +90,8 @@ const useResponsiblesComponents = () => {
     onSuccess,
     onError
   )
-  const {mutate: postResponsible} = usePostResponsible()
-  const {mutate: putResponsible} = usePutResponsible()
+  const {mutate: postResponsible, isLoading: isLoadingPost} = usePostResponsible()
+  const {mutate: putResponsible, isLoading: isLoadingPut} = usePutResponsible()
   const {mutate: deleteResponsible} = useDeleteResponsible()
 
   const handleDelete = (id) => {
@@ -119,6 +119,7 @@ const useResponsiblesComponents = () => {
     activeData,
     bottom,
     dataArray: [...allData, ...dataByDocument, ...dataByLastname],
+    isLoading: isLoadingPost || isLoadingPut,
     field,
     handleCloseDeleteDialog,
     handleCloseModal,

@@ -104,8 +104,8 @@ const useIndividualContractsComponents = () => {
     onSuccess,
     onError
   )
-  const {mutate: newImplements} = useNewImplements()
-  const {mutate: putIndividualContract} = usePutIndividualContract()
+  const {mutate: newImplements, isLoading: isLoadingImplements} = useNewImplements()
+  const {mutate: putIndividualContract, isLoading: isLoadingPut} = usePutIndividualContract()
   const {mutate: deleteIndividualContract} = useDeleteIndividualContract()
 
   const handleDelete = (id) => {
@@ -141,6 +141,7 @@ const useIndividualContractsComponents = () => {
     activeData,
     allData,
     dataArray: [...allData, ...dataByCode, ...dataByDocument, ...dataByLastname, ...dataByList],
+    isLoading: isLoadingImplements || isLoadingPut,
     dataByCode,
     field,
     handleCloseDeleteDialog,

@@ -41,7 +41,7 @@ const Settings = () => {
     })
   }
 
-  const {data: settings, isLoading} = useGetSettings(onSuccess, onError)
+  const {data: settings, isFetching} = useGetSettings(onSuccess, onError)
 
   return (
     <Dashboard>
@@ -56,7 +56,7 @@ const Settings = () => {
           <Typography sx={{marginBottom: 1}} variant="h6">
             Parámetros del sitio
           </Typography>
-          {!settings || isLoading ? <Spinner height={187} /> : <Form settings={settings} />}
+          {!settings || isFetching ? <Spinner height={313} /> : <Form settings={settings} />}
         </Paper>
       </Grid>
     </Dashboard>

@@ -54,7 +54,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
     }, 3000)
   }
 
-  const {mutate: createPay} = useCreatePay(onSuccess)
+  const {mutate: createPay, isLoading} = useCreatePay(onSuccess)
 
   const today = new Date()
 
@@ -278,7 +278,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
         <Grid>
           <Button
             color="primary"
-            disabled={disabled}
+            disabled={disabled || isLoading}
             sx={{paddingY: '12px', m: '16px auto', width: 300}}
             type="button"
             variant="contained"
