@@ -39,7 +39,7 @@ const InstallmentCard = ({
     )}. Contrato: ${installment.contrato_individual.cod_contrato}.`
   }
 
-  const pasajero = `${installment.contrato_individual.pasajero.apellido}, ${installment.contrato_individual.pasajero.apellido}. DNI: ${installment.contrato_individual.pasajero.documento}`
+  const pasajero = `${installment.contrato_individual.pasajero.apellido}, ${installment.contrato_individual.pasajero.nombre}. DNI: ${installment.contrato_individual.pasajero.documento}`
 
   return (
     <Paper
