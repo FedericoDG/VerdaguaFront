@@ -46,7 +46,7 @@ const Recalc = ({
     setNewContractValue(res.newContractValue)
   }
 
-  const {mutate: recalculate} = useRecalculate(onSuccess)
+  const {mutate: recalculate, isLoading: isLoadingRecalculate} = useRecalculate(onSuccess)
 
   const handleFormSubmit = async ({nuevo_valor}) => {
     recalculate({id: initialValues.id, nuevo_valor})
@@ -108,7 +108,7 @@ const Recalc = ({
                 disableElevation
                 fullWidth
                 color="primary"
-                disabled={noPaysRemaning}
+                disabled={noPaysRemaning || isLoadingRecalculate}
                 m={2}
                 sx={{paddingY: '12px'}}
                 type="submit"

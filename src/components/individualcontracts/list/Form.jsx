@@ -24,10 +24,10 @@ const IndividualContractsForm = ({
     user: {id_rol},
   } = useContext(appContext)
 
-  const estados = [{id: 'vigente'}, {id: 'pagado'}, {id: 'terminado'}, {id: 'cancelado'}]
+  let estados = [{id: 'vigente'}, {id: 'pagado'}, {id: 'terminado'}, {id: 'cancelado'}]
 
   if (id_rol > 1) {
-    estados.splice(2, 1)
+    estados = [{id: 'vigente'}, {id: 'pagado'}, {id: 'cancelado'}]
   }
 
   const {putIndividualContract, resetValues, isLoading} = useIndividualContractsComponents()
@@ -97,8 +97,6 @@ const IndividualContractsForm = ({
               <Stack direction="row" pb={{xs: 1, md: 0}} spacing={1}>
                 <CustomTextField disabled autoComplete="off" label="Código" name="cod_contrato" />
                 <ErrorMessage component={FormError} name="cod_contrato" />
-                <CustomSelect label="Estado" name="estado" options={estados.map((el) => el)} />
-                <ErrorMessage component={FormError} name="estado" />
                 <CustomTextField disabled autoComplete="off" label="Valor" name="valor_contrato" />
                 <ErrorMessage component={FormError} name="valor_contrato" />
                 <CustomTextField
@@ -115,6 +113,8 @@ const IndividualContractsForm = ({
                   name="recargos_pagos_segundo_vencimiento"
                 />
                 <ErrorMessage component={FormError} name="recargos_pagos_segundo_vencimiento" />
+                <CustomSelect label="Estado" name="estado" options={estados.map((el) => el)} />
+                <ErrorMessage component={FormError} name="estado" />
               </Stack>
             </Grid>
           </Grid>
