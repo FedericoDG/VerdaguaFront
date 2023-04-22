@@ -20,7 +20,7 @@ const InstallmentsTable = ({
         Seleccionar cuota a pagar
       </Typography>
     </Box>
-    {!installments && isFetchingInstallments && <Spinner height={250} />}
+    {(!installments || isFetchingInstallments) && <Spinner height={160} />}
     <Grid container justifyContent="space-between">
       {installments &&
         installments.map((installment, idx) => (
