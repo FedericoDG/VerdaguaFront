@@ -31,7 +31,7 @@ const Modal = ({activeData, handleClose, open, setActiveData}) => {
 
   const {mutate: unblockInstallment} = useUnblockInstallment()
 
-  if (!activeData?.id || !installments) return null
+  if (!activeData?.id) return null
 
   return (
     <Dialog fullWidth maxWidth="lg" open={open} onClose={handleClose}>
@@ -270,9 +270,9 @@ const Modal = ({activeData, handleClose, open, setActiveData}) => {
         </TableContainer>
 
         {isFetching ? (
-          <Spinner />
+          <Spinner height={75} />
         ) : (
-          installments.length > 0 && (
+          installments?.length > 0 && (
             <>
               <Typography variant="button">Cuotas</Typography>
               <TableContainer sx={{backgroundColor: '#f7f7f7'}}>
