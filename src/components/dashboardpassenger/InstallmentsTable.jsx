@@ -1,11 +1,14 @@
+/* eslint-disable no-nested-ternary */
 import {Alert, AlertTitle, Box, Grid, Typography} from '@mui/material'
 import {nanoid} from 'nanoid'
 import {useEffect, useState} from 'react'
 import {useSearchParams} from 'react-router-dom'
 
+import Spinner from '../Spinner'
+
 import InstallmentCard from './Installment'
 
-const InstallmentsTable = ({installments, description}) => {
+const InstallmentsTable = ({installments, description, isLoading}) => {
   const findOne = installments?.findIndex((el) => el.estado === 'pendiente')
   const [checked] = useState(null)
 
@@ -27,7 +30,10 @@ const InstallmentsTable = ({installments, description}) => {
       {success && (
         <Alert severity="success">
           <AlertTitle>Pago Aceptado</AlertTitle>
-          <strong>MercadoPago aceptó tu pago.</strong>
+          <strong>
+            MercadoPago aceptó tu pago. Si ves el estado de tu cuota como PROCESANDO, por favor
+            espera unos minutos.
+          </strong>
         </Alert>
       )}
       {pending && (
@@ -46,7 +52,9 @@ const InstallmentsTable = ({installments, description}) => {
           </strong>
         </Alert>
       )}
-      {installments.length === 0 ? (
+      {isLoading ? (
+        <Spinner />
+      ) : installments.length === 0 ? (
         <Box alignItems="center" display="flex" my={2}>
           <Typography mx={2} variant="h6">
             PASAJERO LIBERADO, NO HAY CUOTAS

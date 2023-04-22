@@ -4,8 +4,8 @@ import {ErrorMessage, Formik, Form, useFormikContext} from 'formik'
 import {useContext, useEffect, useState} from 'react'
 
 import appContext from '../../context/AppContext'
-import CustomTextField from '../form/CustomTextField'
 import CustomSelect from '../form/CustomSelect'
+import CustomTextField from '../form/CustomTextField'
 import FormError from '../form/FormError'
 
 import {validationSchema2} from './validationSchema'
@@ -43,7 +43,7 @@ const GeneratePayment = ({initialValues2, setInitialValues2, setShowBill, form2R
   const [disableCharge, setDisableCharge] = useState(false)
 
   const handleFormSubmit = (obj) => {
-    setInitialValues2(obj)
+    setInitialValues2((prev) => ({...prev, ...obj}))
     setShowBill(true)
     handleScroll(bottom)
   }

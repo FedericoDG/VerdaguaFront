@@ -30,6 +30,8 @@ const UsersForm = ({initialValues, setInitialValues, roles, postUser, putUser, i
     <Formik
       enableReinitialize
       initialValues={initialValues}
+      validateOnBlur={false}
+      validateOnChange={false}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >

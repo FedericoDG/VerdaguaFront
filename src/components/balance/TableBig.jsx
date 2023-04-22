@@ -1,6 +1,7 @@
+/* eslint-disable no-shadow */
 /* eslint-disable camelcase */
 /* eslint-disable no-nested-ternary */
-import {Chip, Paper, Typography} from '@mui/material'
+import {Button, Chip, MenuItem, Paper, Select, Stack, Typography} from '@mui/material'
 import {
   DataGrid,
   esES,
@@ -10,10 +11,13 @@ import {
   GridToolbarFilterButton,
 } from '@mui/x-data-grid'
 import {useContext, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
+import ArticleTwoToneIcon from '@mui/icons-material/ArticleTwoTone'
 
 import appContext from '../../context/AppContext'
 import formatDate from '../../utils/formatDate'
 import Spinner from '../Spinner'
+import useGetUsers from '../../hooks/useUsers'
 
 import MercadopagoDescription from './MercadopagoDescription'
 
@@ -27,13 +31,22 @@ const CustomToolbar = () => (
 
 const calculaAlto = (largo) => 165 + 40 * Math.min(largo, 10)
 
-const TableBig = ({data, isFetching}) => {
-  const {
-    user: {id_rol},
-  } = useContext(appContext)
+const TableBig = ({data, initialValues, isFetching}) => {
+  const {user} = useContext(appContext)
 
   const [open, setOpen] = useState(false)
   const [order, setOrder] = useState(null)
+  const [field, setField] = useState(user.id)
+
+  const navigate = useNavigate()
+
+  const {data: users} = useGetUsers()
+
+  const handleSubmit = () => {
+    navigate(
+      `/dashboard/balance/report?from=${initialValues.desde}&to=${initialValues.hasta}&iduser=${field}`
+    )
+  }
 
   const columns = [
     {
@@ -131,7 +144,7 @@ const TableBig = ({data, isFetching}) => {
     },
   ]
 
-  if (id_rol === 1) {
+  if (user.id_rol === 1) {
     columns.push({
       field: 'usuario.apellido',
       headerName: 'Usuario',
@@ -149,6 +162,37 @@ const TableBig = ({data, isFetching}) => {
 
   return (
     <>
+      {!users ? (
+        <Spinner />
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <Stack alignItems="center" direction="row" display="flex" justifyContent="flex-end">
+            <Select
+              name="field"
+              size="small"
+              sx={{mx: 2, paddingY: '4px', width: 300}}
+              value={field}
+              onChange={(e) => setField(e.target.value)}
+            >
+              {users.map((user) => (
+                <MenuItem key={user.id} value={user.id}>
+                  {user.apellido}, {user.nombre}
+                </MenuItem>
+              ))}
+            </Select>
+            <Button
+              disableElevation
+              color="secondary"
+              startIcon={<ArticleTwoToneIcon />}
+              sx={{paddingY: '12px', width: 300, mx: 2}}
+              type="submit"
+              variant="contained"
+            >
+              Generar informe
+            </Button>
+          </Stack>
+        </form>
+      )}
       <Paper
         component="div"
         elevation={0}

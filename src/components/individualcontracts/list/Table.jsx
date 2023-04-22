@@ -392,6 +392,7 @@ const Table = ({
         handleClose={handleCloseDeleteDialog}
         id={activeData?.id}
         open={openDeleteDialog}
+        setActiveData={setActiveData}
       />
     </>
   )

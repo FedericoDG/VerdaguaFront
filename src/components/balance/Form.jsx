@@ -8,10 +8,10 @@ import FormError from '../form/FormError'
 
 import validationSchema from './validationSchema'
 
-const ChargeForm = ({all, initialValues, refetch, setInitialValues, setAll}) => {
+const ChargeForm = ({all, initialValues, refetch, setInitialValues, setAll, idUser}) => {
   const handleFormSubmit = async ({desde, hasta, info}) => {
-    setAll({desde, hasta, info})
-    setInitialValues({desde, hasta, info})
+    setAll({desde, hasta, info, idUser})
+    setInitialValues({desde, hasta, info, idUser})
     if (all) refetch()
   }
 

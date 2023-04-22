@@ -9,10 +9,7 @@ const validationSchema = Yup.object({
 })
 
 export const validationSchema2 = Yup.object({
-  cuota: Yup.object().shape({
-    id: Yup.string().required('La cuota es requerida.'),
-    estado: Yup.string().required('La cuota es requerida.'),
-  }),
+  cuotas: Yup.array(),
   movimiento: Yup.object().shape({
     importe: Yup.string().required('El movimiento es requerido.'),
     tipo: Yup.string().required('El movimiento es requerido.'),

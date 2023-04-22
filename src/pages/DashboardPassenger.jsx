@@ -12,8 +12,9 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material'
-import {useContext} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone'
 
 import {
   useGetIndividualContractByDocument,
@@ -26,13 +27,20 @@ import formatCurrency from '../utils/formatCurrency'
 import InstallmentsTable from '../components/dashboardpassenger/InstallmentsTable'
 import logo from '../assets/logo.png'
 import Spinner from '../components/Spinner'
+import usePostMercadopago from '../hooks/UseMercadopago'
 
 const DashboardPassenger = () => {
   const {user, dispatch} = useContext(appContext)
 
+  const [initPoint, setInitPoint] = useState(null)
+
+  const onSuccess = (res) => {
+    setInitPoint(res.data.body.init_point)
+  }
+
   const {data: contratoIndividual = []} = useGetIndividualContractByDocument(user.documento)
 
-  const {data: installments = []} = useGetInstallments(contratoIndividual[0]?.id)
+  const {data: installments = [], isLoading} = useGetInstallments(contratoIndividual[0]?.id)
 
   const navigate = useNavigate()
 
@@ -40,6 +48,36 @@ const DashboardPassenger = () => {
     navigate('/')
     dispatch(logoutAction())
   }
+
+  const {mutate: postMercadopago} = usePostMercadopago(onSuccess)
+
+  useEffect(() => {
+    const unitPrice =
+      Number(contratoIndividual[0]?.valor_contrato) - Number(contratoIndividual[0]?.pagos)
+
+    if (isLoading || installments.length === 0 || unitPrice < 1) return
+
+    const items = []
+
+    const item = {
+      id: JSON.stringify(
+        installments?.filter((el) => el.estado === 'pendiente')?.map((el) => el.id)
+      ),
+      quantity: 1,
+      unit_price: unitPrice,
+      title: `Pago de todas las cuotas restantes - Verdagua Viajes`,
+      description: 'ni idea',
+      currency_id: 'ARS',
+    }
+
+    items.push(item)
+
+    postMercadopago({
+      items,
+      id_contrato_individual: contratoIndividual[0]?.id,
+      installments: installments.length - 1,
+    })
+  }, [installments, contratoIndividual])
 
   if (!contratoIndividual || contratoIndividual.length === 0 || !installments)
     return <Spinner height="100vh" />
@@ -142,6 +180,28 @@ const DashboardPassenger = () => {
                     )}
                   </Typography>
                 </Stack>
+                <Stack alignItems="center" direction="row" display="flex" justifyContent="center">
+                  <a href={initPoint} rel="noopener noreferrer">
+                    <Button
+                      color="success"
+                      disabled={
+                        Number(contratoIndividual[0]?.valor_contrato) -
+                          Number(contratoIndividual[0]?.pagos) <
+                          1 || !initPoint
+                      }
+                      startIcon={<LocalAtmTwoToneIcon />}
+                      sx={{paddingY: '18px', my: 2, width: 300}}
+                      type="button"
+                      variant="contained"
+                    >
+                      Pagar saldo:{' '}
+                      {formatCurrency(
+                        Number(contratoIndividual[0]?.valor_contrato) -
+                          Number(contratoIndividual[0]?.pagos)
+                      )}
+                    </Button>
+                  </a>
+                </Stack>
               </Stack>
             </Paper>
           </Grid>
@@ -150,6 +210,7 @@ const DashboardPassenger = () => {
               <InstallmentsTable
                 description={`Contrato Individual: ${contratoIndividual[0].cod_contrato}`}
                 installments={installments}
+                isLoading={isLoading}
               />
             </Paper>
           </Grid>

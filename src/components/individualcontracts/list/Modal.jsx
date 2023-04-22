@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-shadow */
 import {
   Dialog,
@@ -17,15 +18,18 @@ import {
 import {nanoid} from 'nanoid'
 import {useNavigate} from 'react-router-dom'
 
-import formatDate from '../../../utils/formatDate'
-import formatCurrency from '../../../utils/formatCurrency'
 import {useGetInstallments} from '../../../hooks/useIndividualContracts'
+import {useUnblockInstallment} from '../../../hooks/useInstallments'
+import formatCurrency from '../../../utils/formatCurrency'
+import formatDate from '../../../utils/formatDate'
 import Spinner from '../../Spinner'
 
-const Modal = ({activeData, handleClose, open}) => {
+const Modal = ({activeData, handleClose, open, setActiveData}) => {
   const navigate = useNavigate()
 
   const {data: installments, isFetching} = useGetInstallments(activeData?.id)
+
+  const {mutate: unblockInstallment} = useUnblockInstallment()
 
   if (!activeData?.id || !installments) return null
 
@@ -281,6 +285,7 @@ const Modal = ({activeData, handleClose, open}) => {
                       <TableCell align="center">Fecha 1er. Venc.</TableCell>
                       <TableCell align="center">Valor 2do. Venc.</TableCell>
                       <TableCell align="center">Fecha 2do. Venc.</TableCell>
+                      <TableCell align="center">Forma PAGO</TableCell>
                       <TableCell align="center">Fecha PAGO</TableCell>
                     </TableRow>
                   </TableHead>
@@ -289,7 +294,13 @@ const Modal = ({activeData, handleClose, open}) => {
                       <TableRow
                         sx={{
                           '&:last-child td, &:last-child th': {border: 0},
-                          backgroundColor: `${row.estado === 'pagada' ? '#bebebe' : '#dadada'}`,
+                          backgroundColor: `${
+                            row.estado === 'pagada'
+                              ? '#bebebe'
+                              : row.estado === 'en-proceso'
+                              ? '#d4a1a1'
+                              : '#dadada'
+                          }`,
                         }}
                       >
                         <TableCell align="center" component="th" scope="row" sx={{}}>
@@ -309,9 +320,28 @@ const Modal = ({activeData, handleClose, open}) => {
                           {formatDate(row.fecha_segundo_vencimiento)}
                         </TableCell>
                         {row.estado === 'pagada' ? (
-                          <TableCell align="center">{formatDate(row.updated_at)}</TableCell>
+                          <>
+                            <TableCell align="center">{row?.movimiento?.forma_pago}</TableCell>
+                            <TableCell align="center">{formatDate(row.updated_at)}</TableCell>
+                          </>
+                        ) : row.estado === 'en-proceso' ? (
+                          <TableCell align="center">
+                            <Button
+                              onClick={() => {
+                                unblockInstallment(row.id)
+                                // remove()
+                                // handleClose()
+                                // setActiveData({})
+                              }}
+                            >
+                              <Typography variant="caption">desbloquear</Typography>
+                            </Button>{' '}
+                          </TableCell>
                         ) : (
-                          <TableCell align="center">---</TableCell>
+                          <>
+                            <TableCell align="center">- - -</TableCell>
+                            <TableCell align="center">- - -</TableCell>
+                          </>
                         )}
                       </TableRow>
                     </TableBody>

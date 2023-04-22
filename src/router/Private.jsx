@@ -13,6 +13,7 @@ import Responsibles from '../pages/Responsibles'
 import Users from '../pages/Users'
 import Settings from '../pages/Settings'
 import Report from '../pages/Report'
+import BalanceReport from '../pages/ReportBalance'
 
 // const GeneralContracts = lazy(() => import('../pages/GeneralContracts'))
 
@@ -31,6 +32,7 @@ const Private = () => (
     <Route element={<Users />} path="/users" />
     <Route element={<Settings />} path="/settings" />
     <Route element={<Report />} path="/general-contracts/report/:id" />
+    <Route element={<BalanceReport />} path="/balance/report" />
   </Routes>
   /*  </Suspense> */
 )

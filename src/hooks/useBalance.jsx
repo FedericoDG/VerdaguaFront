@@ -4,7 +4,10 @@ import {useSnackbar} from 'notistack'
 import {getRequest, postRequest} from '../services/httpRequest'
 
 const getBalance = (dates) =>
-  getRequest(`/balance?from=${dates.desde}&to=${dates.hasta}&info=${dates.info}`)
+  getRequest(
+    `/balance?from=${dates.desde}&to=${dates.hasta}&info=${dates.info}&iduser=${dates.idUser}`
+  )
+
 const createBalance = (balance) => postRequest('/balance/', balance)
 
 // GET BALANCE

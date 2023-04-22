@@ -51,7 +51,7 @@ const InstallmentCard = ({checked, description, flag, installment, installments}
         position: 'relative',
         m: 1,
         maxWidth: 360,
-        opacity: installment.estado === 'pagada' && '0.33',
+        opacity: (installment.estado === 'pagada' || installment.estado === 'en-proceso') && '0.5',
       }}
     >
       {installment.estado === 'pagada' && (
@@ -61,6 +61,15 @@ const InstallmentCard = ({checked, description, flag, installment, installments}
           variant="h2"
         >
           PAGADA
+        </Typography>
+      )}
+      {installment.estado === 'en-proceso' && (
+        <Typography
+          color="#bebc27"
+          sx={{top: 40, left: 10, position: 'absolute', transform: 'rotate(-20deg)', opacity: 0.75}}
+          variant="h3"
+        >
+          PROCESANDO
         </Typography>
       )}
       {checked && (
@@ -123,7 +132,7 @@ const InstallmentCard = ({checked, description, flag, installment, installments}
             size="small"
             variant="contained"
           >
-            Pagar con mercadopago
+            Pagar cuota con mercadopago
           </Button>
         </a>
       </CardActions>

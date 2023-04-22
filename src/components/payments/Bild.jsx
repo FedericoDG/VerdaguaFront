@@ -13,8 +13,8 @@ import formatCurrency from '../../utils/formatCurrency'
 import formatDate from '../../utils/formatDate'
 import logo from '../../assets/logo.png'
 import NumeroALetras from '../../utils/numberToString'
-import useCreatePay from '../../hooks/useInstallments'
 import Spinner from '../Spinner'
+import useCreatePay from '../../hooks/useInstallments'
 
 const Bill = ({hardReset, initialValues, initialValues2}) => {
   const [disabled, setDisabled] = useState(true)
@@ -160,19 +160,16 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
               </Typography>
             </Stack>
             <Typography sx={{fontSize: 16}} variant="body1">
-              {`Concepto: ${splitInfo[0].toString()}.`}
+              {`Concepto: ${splitInfo[0]}.`}
             </Typography>
             <Typography sx={{fontSize: 16}} variant="body1">
               {`Pasajero: ${initialValues2.pasajero}.`}
             </Typography>
             <Typography sx={{fontSize: 16}} variant="body1">
-              {`${splitInfo[1].toString()} ${splitInfo[2].toString()}`}
+              {`Saldo ${formatCurrency(splitInfo[1].split(' ')[2])}.`}
             </Typography>
             <Typography sx={{fontSize: 16}} variant="body1">
-              {splitInfo[3].toString()}
-            </Typography>
-            <Typography sx={{fontSize: 16}} variant="body1">
-              {splitInfo[4]?.toString()}
+              {`Contrato: ${splitInfo[2]}.`}
             </Typography>
           </div>
           <Typography sx={{fontSize: 16, fontWeight: '500'}} variant="body1">

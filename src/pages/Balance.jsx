@@ -1,6 +1,6 @@
 import {Grid, Paper, Typography} from '@mui/material'
 import {DateTime} from 'luxon'
-import {useState} from 'react'
+import {useContext, useState} from 'react'
 import {useSnackbar} from 'notistack'
 
 import {formatENDate} from '../utils/formatDate'
@@ -13,20 +13,26 @@ import TableBig from '../components/balance/TableBig'
 import useGetBalance, {usePostBalance} from '../hooks/useBalance'
 import Spinner from '../components/Spinner'
 import Chart from '../components/balance/Graph'
+import appContext from '../context/AppContext'
 
 const Balance = () => {
+  const {user} = useContext(appContext)
+
   const now = DateTime.now().plus({hours: -3})
 
   const [initialValues, setInitialValues] = useState({
     desde: formatENDate(now),
     hasta: formatENDate(now),
     info: '',
+    idUser: user.id,
   })
+
   const [initialValues2, setInitialValues2] = useState({
     importe: '',
     tipo: 'egreso',
     forma_pago: 'egreso',
     info: '',
+    idUser: user.id,
   })
 
   const [all, setAll] = useState(null)
@@ -101,6 +107,7 @@ const Balance = () => {
 
           <Form
             all={all}
+            idUser={user.id}
             initialValues={initialValues}
             refetch={refetch}
             setAll={setAll}
@@ -132,6 +139,7 @@ const Balance = () => {
 
                 <TableBig
                   data={allData.movements}
+                  initialValues={initialValues}
                   isFetching={isFetching}
                   setInitialValues={setInitialValues}
                 />
