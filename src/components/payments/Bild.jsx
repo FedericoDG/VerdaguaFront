@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/no-unstable-nested-components */
 import {Avatar, Box, Button, Grid, Stack, Typography} from '@mui/material'
-import {useNavigate} from 'react-router-dom'
+import {json, useNavigate} from 'react-router-dom'
 import {useQueryClient} from 'react-query'
 import {useRef, useState} from 'react'
 import {useSnackbar} from 'notistack'
@@ -292,6 +292,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
             {disabled ? 'Imprimir para generar cobro' : 'Generar Cobro'}
           </Button>
         </Grid>
+        <pre>{JSON.stringify(initialValues2, null, 2)}</pre>
       </Grid>
     </>
   )

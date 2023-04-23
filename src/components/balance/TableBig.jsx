@@ -182,13 +182,13 @@ const TableBig = ({data, initialValues, isFetching}) => {
             </Select>
             <Button
               disableElevation
-              color="secondary"
+              color="primary"
               startIcon={<ArticleTwoToneIcon />}
-              sx={{paddingY: '12px', width: 300, mx: 2}}
+              sx={{paddingY: '12px', width: 300, ml: 2}}
               type="submit"
               variant="contained"
             >
-              Generar informe
+              Generar Reporte
             </Button>
           </Stack>
         </form>

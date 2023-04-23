@@ -249,11 +249,13 @@ const Payments = () => {
                               movimiento: {
                                 ...prev.movimiento,
                                 importe: total,
-                                info: `Pago de seña. Saldo ${
+                                info: `Pago de seña. Saldo ${Math.max(
+                                  0,
                                   initialValues2.valor_contrato -
-                                  initialValues2.pagos_hechos -
-                                  total
-                                }. Contrato: ${initialValues2.cod_contrato}.`,
+                                    initialValues2.pagos_hechos -
+                                    total +
+                                    recargo
+                                )}. Contrato: ${initialValues2.cod_contrato}.`,
                               },
                             }))
                           } else if (cart.length === 2) {
@@ -269,11 +271,13 @@ const Payments = () => {
                               movimiento: {
                                 ...prev.movimiento,
                                 importe: total,
-                                info: `Pago de seña y cuota n° ${cart[1].numero}. Saldo ${
+                                info: `Pago de seña y cuota n° ${cart[1].numero}. Saldo ${Math.max(
+                                  0,
                                   initialValues2.valor_contrato -
-                                  initialValues2.pagos_hechos -
-                                  total
-                                }. Contrato: ${initialValues2.cod_contrato}.`,
+                                    initialValues2.pagos_hechos -
+                                    total +
+                                    recargo
+                                )}. Contrato: ${initialValues2.cod_contrato}.`,
                               },
                             }))
                           } else {
@@ -296,11 +300,13 @@ const Payments = () => {
                                 importe: total,
                                 info: `Pago de seña y cuotas n° ${cuotas.join(
                                   ', '
-                                )} y ${ultimaCuota}. Saldo ${
+                                )} y ${ultimaCuota}. Saldo ${Math.max(
+                                  0,
                                   initialValues2.valor_contrato -
-                                  initialValues2.pagos_hechos -
-                                  total
-                                }. Contrato: ${initialValues2.cod_contrato}.`,
+                                    initialValues2.pagos_hechos -
+                                    total +
+                                    recargo
+                                )}. Contrato: ${initialValues2.cod_contrato}.`,
                               },
                             }))
                           }
@@ -317,9 +323,13 @@ const Payments = () => {
                             movimiento: {
                               ...prev.movimiento,
                               importe: total,
-                              info: `Pago de cuota n° ${cart[0].numero}. Saldo ${
-                                initialValues2.valor_contrato - initialValues2.pagos_hechos - total
-                              }. Contrato: ${initialValues2.cod_contrato}.`,
+                              info: `Pago de cuota n° ${cart[0].numero}. Saldo ${Math.max(
+                                0,
+                                initialValues2.valor_contrato -
+                                  initialValues2.pagos_hechos -
+                                  total +
+                                  recargo
+                              )}. Contrato: ${initialValues2.cod_contrato}.`,
                             },
                           }))
                         } else {
@@ -340,9 +350,13 @@ const Payments = () => {
                               importe: total,
                               info: `Pago de cuotas n° ${cuotas.join(
                                 ', '
-                              )} y ${ultimaCuota}. Saldo ${
-                                initialValues2.valor_contrato - initialValues2.pagos_hechos - total
-                              }. Contrato: ${initialValues2.cod_contrato}.`,
+                              )} y ${ultimaCuota}. Saldo ${Math.max(
+                                0,
+                                initialValues2.valor_contrato -
+                                  initialValues2.pagos_hechos -
+                                  total +
+                                  recargo
+                              )}. Contrato: ${initialValues2.cod_contrato}.`,
                             },
                           }))
                         }

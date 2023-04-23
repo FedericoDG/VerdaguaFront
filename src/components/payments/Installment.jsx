@@ -117,22 +117,22 @@ const InstallmentCard = ({installment, setInitialValues2, installments, setCart,
           size="small"
           onClick={() => {
             if (today >= firstExpiration) {
-              if (cart.find((el) => el.id === installment.id)) {
+              /* if (cart.find((el) => el.id === installment.id)) {
                 setCart((prev) => prev.filter((el) => el.id !== installment.id))
-              } else {
-                setCart((prev) => [
-                  ...prev,
-                  {
-                    id: installment.id,
-                    numero: installment.numero,
-                    estado: 'pagada',
-                    valor: Number(installment.valor_primer_vencimiento),
-                    recargo:
-                      Number(installment.valor_segundo_vencimiento) -
-                      Number(installment.valor_primer_vencimiento),
-                  },
-                ])
-              }
+              } else { */
+              setCart((prev) => [
+                ...prev,
+                {
+                  id: installment.id,
+                  numero: installment.numero,
+                  estado: 'pagada',
+                  valor: Number(installment.valor_primer_vencimiento),
+                  recargo:
+                    Number(installment.valor_segundo_vencimiento) -
+                    Number(installment.valor_primer_vencimiento),
+                },
+              ])
+              /* } */
 
               setInitialValues2((prev) => ({
                 ...prev,
@@ -145,20 +145,20 @@ const InstallmentCard = ({installment, setInitialValues2, installments, setCart,
               }))
             }
             if (today < firstExpiration) {
-              if (cart.find((el) => el.id === installment.id)) {
+              /* if (cart.find((el) => el.id === installment.id)) {
                 setCart((prev) => prev.filter((el) => el.id !== installment.id))
-              } else {
-                setCart((prev) => [
-                  ...prev,
-                  {
-                    id: installment.id,
-                    numero: installment.numero,
-                    estado: 'pagada',
-                    valor: Number(installment.valor_primer_vencimiento),
-                    recargo: 0,
-                  },
-                ])
-              }
+              } else { */
+              setCart((prev) => [
+                ...prev,
+                {
+                  id: installment.id,
+                  numero: installment.numero,
+                  estado: 'pagada',
+                  valor: Number(installment.valor_primer_vencimiento),
+                  recargo: 0,
+                },
+              ])
+              /* } */
 
               setInitialValues2((prev) => ({
                 ...prev,
