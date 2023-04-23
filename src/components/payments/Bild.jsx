@@ -292,7 +292,6 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
             {disabled ? 'Imprimir para generar cobro' : 'Generar Cobro'}
           </Button>
         </Grid>
-        <pre>{JSON.stringify(initialValues2, null, 2)}</pre>
       </Grid>
     </>
   )
