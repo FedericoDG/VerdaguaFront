@@ -289,7 +289,7 @@ const Bill = ({hardReset, initialValues, initialValues2}) => {
               createPay(body)
             }}
           >
-            {disabled ? 'Imprima para generar cobro' : 'Generar Cobro'}
+            {disabled ? 'Imprimir para generar cobro' : 'Generar Cobro'}
           </Button>
         </Grid>
       </Grid>

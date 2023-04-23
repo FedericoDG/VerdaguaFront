@@ -1,3 +1,6 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable no-shadow */
 import {Button, CardActions, CardContent, Typography, Grid, Paper} from '@mui/material'
 import {DateTime} from 'luxon'
@@ -136,7 +139,7 @@ const InstallmentCard = ({installment, setInitialValues2, installments, setCart,
                 cuotas: cart,
                 destinatario: `${installment.contrato_individual.pasajero.responsable.nombre} ${installment.contrato_individual.pasajero.responsable.apellido}`,
                 DNI: `${installment.contrato_individual.pasajero.responsable.documento}`,
-                domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.ciudad})`,
+                domicilio: `${installment.contrato_individual.pasajero.responsable.direccion}, ${installment.contrato_individual.pasajero.responsable.ciudad} (${installment.contrato_individual.pasajero.responsable.provincia})`,
                 cod_contrato: installment.contrato_individual.cod_contrato,
                 pasajero,
               }))
@@ -169,7 +172,11 @@ const InstallmentCard = ({installment, setInitialValues2, installments, setCart,
             }
           }}
         >
-          {cart.find((el) => el.id === installment.id) ? 'cuota agregada' : 'Agregar'}
+          {cart.find((el) => el.id === installment.id)
+            ? 'Cuota Agregada'
+            : installment.estado === 'pagada'
+            ? '.'
+            : 'Agregar'}
         </Button>
       </CardActions>
     </Paper>
