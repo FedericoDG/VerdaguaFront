@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/no-unstable-nested-components */
 import {Avatar, Box, Button, Grid, Stack, Typography} from '@mui/material'
-import {json, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {useQueryClient} from 'react-query'
+import {useReactToPrint} from 'react-to-print'
 import {useRef, useState} from 'react'
 import {useSnackbar} from 'notistack'
 import LocalPrintshopTwoToneIcon from '@mui/icons-material/LocalPrintshopTwoTone'
-import {useReactToPrint} from 'react-to-print'
 
 import {useGetTicket} from '../../hooks/useSettings'
 import formatCurrency from '../../utils/formatCurrency'
