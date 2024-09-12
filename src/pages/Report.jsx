@@ -48,6 +48,9 @@ const Report = () => {
   if (!data) return <h1>NO ENCONTRADO/ACCESO RESTRIGIDO</h1>
 
   const {generalContract} = data
+  const {contratos_individuales} = generalContract
+
+  const withMedicObs = contratos_individuales.filter((el) => el.pasajero.obs_medicas)
 
   return (
     <Dashboard>
@@ -230,6 +233,40 @@ const Report = () => {
                 {formatCurrency(data.totales.deuda)}
               </Typography>
             </Stack>
+          )}
+          {withMedicObs.length > 0 && (
+            <TableContainer style={{marginTop: '64px'}}>
+              <Table size="small">
+                <TableHead style={{backgroundColor: '#dddddd'}}>
+                  <TableRow>
+                    <TableCell align="left" width="20%">
+                      Nombre
+                    </TableCell>
+                    <TableCell align="center" width="15%">
+                      DNI
+                    </TableCell>
+                    <TableCell align="left">Observaciones médicas</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {withMedicObs.map((el) => (
+                    <TableRow key={nanoid()}>
+                      <TableCell align="left">
+                        <Typography variant="caption">
+                          {el.pasajero.apellido}, {el.pasajero.nombre}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography variant="caption">{el.pasajero.documento}</Typography>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Typography variant="caption">{el.pasajero.obs_medicas}</Typography>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           )}
         </div>
       </Paper>

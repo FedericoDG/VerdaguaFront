@@ -59,6 +59,7 @@ const DashboardPassenger = () => {
 
     const items = []
 
+    console.log(`Pago total - Contrato: ${contratoIndividual[0].cod_contrato}`)
     const item = {
       id: JSON.stringify(
         installments?.filter((el) => el.estado === 'pendiente')?.map((el) => el.id)
@@ -66,7 +67,7 @@ const DashboardPassenger = () => {
       quantity: 1,
       unit_price: unitPrice,
       title: `Pago de todas las cuotas restantes - Verdagua Viajes`,
-      description: 'ni idea',
+      description: `${contratoIndividual[0].cod_contrato} - $${unitPrice}`, // Updated
       currency_id: 'ARS',
     }
 
