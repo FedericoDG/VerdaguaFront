@@ -59,7 +59,6 @@ const DashboardPassenger = () => {
 
     const items = []
 
-    console.log(`Pago total - Contrato: ${contratoIndividual[0].cod_contrato}`)
     const item = {
       id: JSON.stringify(
         installments?.filter((el) => el.estado === 'pendiente')?.map((el) => el.id)
